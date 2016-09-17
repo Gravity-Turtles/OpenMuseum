@@ -14,12 +14,12 @@ module.exports = {
     filename: "index_bundle.js"
   },
   module: {
-  //   preLoaders: [
-  //     { test: /\.jsx?$/,
-  //       exclude: /node_modules/,
-  //       loader: 'eslint-loader'
-  //     },
-  // ],
+    preLoaders: [
+      { test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader'
+      },
+  ],
     loaders: [
       { test: /\.jsx?$/, 
         exclude: /node_modules/, 
