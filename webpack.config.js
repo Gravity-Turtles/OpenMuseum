@@ -1,5 +1,5 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   template: __dirname + '/client/index.html',
   filename: 'index.html',
   inject: 'body'
@@ -7,19 +7,28 @@ var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 
 module.exports = {
   entry: [
-    './client/index.js'
+    './client/index.jsx'
   ],
   output: {
     path: __dirname + '/dist',
     filename: "index_bundle.js"
   },
   module: {
+    preLoaders: [
+      { test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader'
+      },
+  ],
     loaders: [
-      {test: /\.js$/, 
+      { test: /\.jsx?$/, 
         exclude: /node_modules/, 
         loader: "babel-loader"
       }
     ]
   },
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },  
   plugins: [HTMLWebpackPluginConfig]
 };
