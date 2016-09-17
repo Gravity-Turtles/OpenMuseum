@@ -1,13 +1,19 @@
-import React from 'react';
-import { Component } from 'react';
+import React, { Component } from 'react';
+import { Link } from 'react-router';
 
 export default class App extends Component {
   render() {
     return (
       <main>
-        <h1>
-            Open Museum!!
-        </h1>
+        <div>Search bar here</div>
+        <hr/>
+        <div>{this.props.children}</div>
+        <hr/>
+        <div>
+          <Link to="/"> Home </Link>
+          <Link to="/lists"> | Search Near Me | </Link>
+          <Link to="/new"> Add New Artwork </Link>
+        </div>
       </main>
     );
   }

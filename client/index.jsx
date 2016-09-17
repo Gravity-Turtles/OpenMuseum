@@ -15,6 +15,7 @@ const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
 // Populate store prop below once reducers are defined
 ReactDOM.render(
+  // <Provider store={createStoreWithMiddleware(reducers)}> // after pupulate reducers
   <Provider>
     <Router history={browserHistory} routes={Routes} />
   </Provider>,
