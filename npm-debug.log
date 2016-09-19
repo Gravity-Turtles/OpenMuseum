@@ -1,0 +1,43 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'run',
+1 verbose cli   'production' ]
+2 info using npm@2.15.9
+3 info using node@v4.5.0
+4 verbose run-script [ 'preproduction', 'production', 'postproduction' ]
+5 info preproduction open_museum@1.0.0
+6 info production open_museum@1.0.0
+7 verbose unsafe-perm in lifecycle true
+8 info open_museum@1.0.0 Failed to exec production script
+9 verbose stack Error: open_museum@1.0.0 production: `webpack -p`
+9 verbose stack spawn ENOENT
+9 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:17:16)
+9 verbose stack     at emitTwo (events.js:87:13)
+9 verbose stack     at ChildProcess.emit (events.js:172:7)
+9 verbose stack     at maybeClose (internal/child_process.js:829:16)
+9 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
+10 verbose pkgid open_museum@1.0.0
+11 verbose cwd /Users/matthewyun/Documents/MakerSquare Notes/OpenMuseum
+12 error Darwin 14.5.0
+13 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "production"
+14 error node v4.5.0
+15 error npm  v2.15.9
+16 error file sh
+17 error code ELIFECYCLE
+18 error errno ENOENT
+19 error syscall spawn
+20 error open_museum@1.0.0 production: `webpack -p`
+20 error spawn ENOENT
+21 error Failed at the open_museum@1.0.0 production script 'webpack -p'.
+21 error This is most likely a problem with the open_museum package,
+21 error not with npm itself.
+21 error Tell the author that this fails on your system:
+21 error     webpack -p
+21 error You can get information on how to open an issue for this project with:
+21 error     npm bugs open_museum
+21 error Or if that isn't available, you can get their info via:
+21 error
+21 error     npm owner ls open_museum
+21 error There is likely additional logging output above.
+22 verbose exit [ 1, true ]
