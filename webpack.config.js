@@ -30,5 +30,9 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx']
   },  
-  plugins: [HTMLWebpackPluginConfig]
+  plugins: [HTMLWebpackPluginConfig],
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './'
+  }
 };
