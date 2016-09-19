@@ -3,7 +3,7 @@ var User = mongoose.model('User');
 var Art = mongoose.model('Art');
 
 
-//******** uncmoment out this section when adding authentication ******//
+//******** uncomment out this section when adding authentication ******//
 module.exports.profileRead = function(req, res) {
 
 //********* Every secured page will have to go through this check **********//
@@ -26,11 +26,14 @@ module.exports.profileRead = function(req, res) {
 //****** Insert New Art *******//
 
 module.exports.insertArt = function(req, res) {
-  console.log('insertArt running')
+  console.log('insertArt running')  
+  console.log(req)
+  console.log(req.body)
+  // console.log(req.data)
     var art = new Art();
 
-    // art.title = req.body.title;    
-    art.title = 'test777';    
+    art.title = req.body.title;    
+    // art.title = 'test777';    
     art.location = req.body.location;
     art.date = req.body.date;
     art.description = req.body.description;
@@ -43,3 +46,22 @@ module.exports.insertArt = function(req, res) {
       res.sendStatus(201);
     });  
 };
+
+
+//****** Query DB for nearby art *******//
+module.exports.findArt = function(req, res) {
+  console.log('findArt query initiated')
+  // var art = mongoose.model('Art', openDB);
+  // var Person = mongoose.model('Person', yourSchema);
+  console.log('---the art: ',Art);
+  // art.find({location: req.body.location}, 'location', function(err, data) {
+  Art.find({location: 'nearby'}, 'location', function(err, data) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('findArt Data',data);
+      res.status(200).send(data);
+    }
+  });
+};
+
