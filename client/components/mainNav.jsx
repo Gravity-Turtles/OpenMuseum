@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-class App extends Component {
+class MainNav extends Component {
 
   componentWillMount() {
     this.props.getLocation();
@@ -21,4 +21,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default MainNav;

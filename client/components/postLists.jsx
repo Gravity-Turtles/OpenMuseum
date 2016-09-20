@@ -13,3 +13,36 @@ export default class PostLists extends Component {
     );
   }
 }
+
+
+// import React, { Component } from 'react';
+// import { Link } from 'react-router';
+
+// export default class PostLists extends Component {
+
+//   renderPost(post, i) {
+//     return (
+//       <div key={i}>
+//         <p>
+//           <strong>{post.title}</strong>
+//           {post.description}
+//         </p>
+//       </div>
+//     );
+//   }
+
+//   render() {
+//     if (!this.props.posts.length === 0) {
+//       return <div>loading</div>
+//     }
+//     return (
+//       <main>
+//         <h1>ArtMap</h1>
+//         <div>
+//           {this.props.posts[0].map(this.renderPost)}
+//         </div>
+        
+//       </main>
+//     );
+//   }
+// }
