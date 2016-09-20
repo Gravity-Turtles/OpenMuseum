@@ -6,9 +6,12 @@ import Thunk from 'redux-thunk';
 // import the root reducer
 import rootReducer from './reducers/index';
 
-import location from './data/location';
-import posts from './data/posts';
-import comments from './data/comments';
+// import location from './data/location';
+// import posts from './data/posts';
+// import comments from './data/comments';
+const location = {};
+const posts = [];
+const comments = [];
 
 // create an object for the default data
 const defaultState = {
