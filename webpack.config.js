@@ -1,3 +1,4 @@
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   template: __dirname + '/client/index.html',
@@ -24,11 +25,21 @@ module.exports = {
       { test: /\.jsx?$/, 
         exclude: /node_modules/, 
         loader: "babel-loader"
+      },
+    // CSS
+      { 
+        test: /\.s?css$/, 
+        include: path.join(__dirname, 'client'),
+        loaders: ["style", "css", "sass"]
       }
     ]
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
   },  
-  plugins: [HTMLWebpackPluginConfig]
+  plugins: [HTMLWebpackPluginConfig],
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './'
+  }
 };

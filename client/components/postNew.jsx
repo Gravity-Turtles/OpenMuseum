@@ -9,7 +9,7 @@ class PostNew extends Component {
       location: {
       	latitude: 40.746727,
       	longitude:	-73.987885
-      }	
+      },	
       title: '',
       description: ''
     };
