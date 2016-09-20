@@ -1,0 +1,14 @@
+#wrapper {
+  width: 50%;
+  margin: 100px auto;
+}
+
+h1, h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.theme {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}

@@ -1,26 +1,20 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as actionCreators from '../actions/actionCreators';
+import MainNav from './mainNav';
 
-export default class App extends Component {
-
-  componentWillMount() {
-    
-  }
-
-
-  render() {
-    return (
-      <main>
-        <div>Search bar here</div>
-        <hr/>
-        <div>{this.props.children}</div>
-        <hr/>
-        <div>
-          <Link to="/"> Home </Link>
-          <Link to="/lists"> | Search Near Me | </Link>
-          <Link to="/new"> Add New Artwork </Link>
-        </div>
-      </main>
-    );
+function mapStateToProps(state) {
+  return {
+    location: state.location,
+    posts: state.posts,
+    comments: state.comments
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actionCreators, dispatch);
+}
+
+const App = connect(mapStateToProps, mapDispatchToProps)(MainNav);
+
+export default App;
