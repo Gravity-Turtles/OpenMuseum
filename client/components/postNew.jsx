@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 
 class PostNew extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      artName: '',
+      location: {
+      	latitude: 40.746727,
+      	longitude:	-73.987885
+      }	
+      title: '',
       description: ''
     };
 
@@ -15,7 +20,7 @@ class PostNew extends Component {
   }
 
   onArtChange(event){
-  	this.setState({artName: event.target.value});
+  	this.setState({title: event.target.value});
   }
   
   onDescriptionChange(event){
@@ -23,10 +28,17 @@ class PostNew extends Component {
   }
 
   onFormSubmit(event){
-  	console.log("in onFormSubmit!!! with state: ", this.state)
+  	
   	event.preventDefault();
-  		//let {artName, description} = this.state;
-  		 //scary destructuring
+  	let payload = this.state;
+  	console.log("in onFormSubmit!!! with state: ", this.state, "and payload: ", payload);
+  	
+  	axios.post('/api/art', payload)
+    .then(function(response){
+    console.log('saved successfully')
+  });  	
+
+
   }
 
   render() {
@@ -34,7 +46,7 @@ class PostNew extends Component {
       <main>
         <h1>Post Page</h1>
         <form onSubmit={this.onFormSubmit}>
-          <input type="text" placeholder="Name of Artwork" value={this.state.artName} onChange={this.onArtChange}/>
+          <input type="text" placeholder="Title of Artwork" value={this.state.title} onChange={this.onArtChange}/>
             <br></br>
         	<textarea type="text" placeholder="Description" value={this.state.description} onChange={this.onDescriptionChange}/>
         	<input type="submit"/>
