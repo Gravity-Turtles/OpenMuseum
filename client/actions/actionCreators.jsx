@@ -1,4 +1,13 @@
 // get Location
+import axios from 'axios';
+
+export function fetchPosts() {
+  const request = axios.post('/api/art');
+  return {
+    type: 'FETCH_POSTS',
+    payload: request
+  };
+}
 
 export function getLocation() {
   const location = {};
