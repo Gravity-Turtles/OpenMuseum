@@ -1,6 +1,12 @@
-export default function() {
-  return {
-    latitude: 40.7128,
-    longitude: 74.0059
+export default function(state = [], action) {
+   switch(action.type) {
+    case "GET_LOCATION" :
+      console.log("Got the location");
+      console.log(action.location);
+      return [
+       
+      ]
+    default:
+      return state;
   }
 }
