@@ -2,7 +2,7 @@
   "name": "open_museum",
   "version": "1.0.0",
   "description": "Turn the city into a museum.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "webpack-dev-server",
     "production": "webpack -p"
