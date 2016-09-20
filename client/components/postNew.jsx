@@ -13,7 +13,9 @@ class PostNew extends Component {
       },	
       title: '',
       description: '',
-      files: ''
+      files: '',
+      image: ''
+
     };
 
     this.onArtChange = this.onArtChange.bind(this);
@@ -35,11 +37,14 @@ class PostNew extends Component {
   	this.setState({image: event.target.value})
   }
 
+<<<<<<< 1f6569929b2707af34c6aad5bed7254feb805264
   onDrop(files){
       console.log('Received DropZone files: ', files);
       this.setState({files: files})
     }
 
+=======
+>>>>>>> adding pics to form
   onFormSubmit(event){
   	
   	event.preventDefault();
