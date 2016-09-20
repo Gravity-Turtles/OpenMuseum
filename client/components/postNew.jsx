@@ -72,7 +72,7 @@ class PostNew extends Component {
         	<br></br>
         	 <Dropzone value={this.state.files} onDrop={this.onDrop}>
               <div>Try dropping some files here, or click to select files to upload.</div>
-            </Dropzone>x
+            </Dropzone>
         	<input type="submit"/>
         </form>
       </main>
