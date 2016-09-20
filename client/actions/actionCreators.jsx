@@ -6,6 +6,7 @@ export function getLocation(index) {
   function success(position) {
     location.latitude  = position.coords.latitude;
     location.longitude = position.coords.longitude;
+    console.log(location.latitude, location.longitude);
   };
 
   function error() {

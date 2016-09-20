@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 
 export default class FrontPage extends Component {
+
+  componentWillMount() {
+    this.props.getLocation();
+  }
+
   render() {
     return (
       <main>
