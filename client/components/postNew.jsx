@@ -11,12 +11,14 @@ class PostNew extends Component {
       	longitude:	-73.987885
       },	
       title: '',
-      description: ''
+      description: '',
+      image: ''
     };
 
     this.onArtChange = this.onArtChange.bind(this);
     this.onDescriptionChange = this.onDescriptionChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.onImageChange = this.onImageChange.bind(this);
   }
 
   onArtChange(event){
@@ -25,6 +27,10 @@ class PostNew extends Component {
   
   onDescriptionChange(event){
   	this.setState({description: event.target.value})
+  }
+
+  onImageChange(event){
+  	this.setState({image: event.target.value})
   }
 
   onFormSubmit(event){
@@ -49,6 +55,7 @@ class PostNew extends Component {
           <input type="text" placeholder="Title of Artwork" value={this.state.title} onChange={this.onArtChange}/>
             <br></br>
         	<textarea type="text" placeholder="Description" value={this.state.description} onChange={this.onDescriptionChange}/>
+        	<input type="file" value={this.state.image} onChange={this.onImageChange} />
         	<input type="submit"/>
         </form>
       </main>
