@@ -27,8 +27,8 @@ module.exports.profileRead = function(req, res) {
 
 module.exports.insertArt = function(req, res) {
   console.log('insertArt running')  
-  console.log(req)
-  console.log(req.body)
+  // console.log(req)
+  // console.log(req.body)
   // console.log(req.data)
     var art = new Art();
 
@@ -53,9 +53,9 @@ module.exports.findArt = function(req, res) {
   console.log('findArt query initiated')
   // var art = mongoose.model('Art', openDB);
   // var Person = mongoose.model('Person', yourSchema);
-  console.log('---the art: ',Art);
+  // console.log('---the art: ',Art);
   // art.find({location: req.body.location}, 'location', function(err, data) {
-  Art.find({location: 'nearby'}, 'location', function(err, data) {
+  Art.find({}, function(err, data) {
     if (err) {
       console.log(err);
     } else {

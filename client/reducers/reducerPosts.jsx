@@ -1,6 +1,14 @@
-function posts(state = [], action) {
-  // console.log(state,action);
-  return state;
+export default function(state = [], action) {
+  switch(action.type) {
+    case "FETCH_POSTS" :
+      console.log("Got the POSTS");
+      console.log("postDATA is", action.posts);
+      return [
+       
+      ]
+    default:
+      return state;
+  }
 }
 
-export default posts;
+
