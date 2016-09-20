@@ -25,9 +25,11 @@ const Art = mongoose.model('Art');
 
 //****** Insert New Art *******//
 
-module.exports.insertArt = function(req, res) {  
-  console.log('insertArt running')
-  console.log(req.body)
+module.exports.insertArt = function(req, res) {
+  console.log('insertArt running')  
+  // console.log(req)
+  // console.log(req.body)
+  // console.log(req.data)
     var art = new Art();
 
     art.title = req.body.title;    
@@ -50,11 +52,11 @@ module.exports.insertArt = function(req, res) {
 //****** Query DB for nearby art *******//
 module.exports.findArt = function(req, res) {
   console.log('findArt query initiated')
-  // const art = mongoose.model('Art', openDB);
-  // const Person = mongoose.model('Person', yourSchema);
-  console.log('---the art: ',Art);
+  // var art = mongoose.model('Art', openDB);
+  // var Person = mongoose.model('Person', yourSchema);
+  // console.log('---the art: ',Art);
   // art.find({location: req.body.location}, 'location', function(err, data) {
-  Art.find({location: 'nearby'}, 'location', function(err, data) {
+  Art.find({}, function(err, data) {
     if (err) {
       console.log(err);
     } else {
