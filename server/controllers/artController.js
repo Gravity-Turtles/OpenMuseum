@@ -1,45 +1,44 @@
-var mongoose = require('mongoose');
-var User = mongoose.model('User');
-var Art = mongoose.model('Art');
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
+const Art = mongoose.model('Art');
 
 
 //******** uncomment out this section when adding authentication ******//
-module.exports.profileRead = function(req, res) {
+// module.exports.profileRead = function(req, res) {
 
 //********* Every secured page will have to go through this check **********//
 
 //**** need to add some error handling for if payloadId provided but not found
-  if (!req.payload._id) {
-    res.status(401).json({
-      "message" : "UnauthorizedError: private profile"
-    });
-  } else {
-    User
-      .findById(req.payload._id)
-      .exec(function(err, user) {
-        res.status(200).json(user);
-      });
-  }
+//   if (!req.payload._id) {
+//     res.status(401).json({
+//       "message" : "UnauthorizedError: private profile"
+//     });
+//   } else {
+//     User
+//       .findById(req.payload._id)
+//       .exec(function(err, user) {
+//         res.status(200).json(user);
+//       });
+//   }
 
-};
+// };
 
 //****** Insert New Art *******//
 
-module.exports.insertArt = function(req, res) {
-  console.log('insertArt running')  
-  console.log(req)
+module.exports.insertArt = function(req, res) {  
+  console.log('insertArt running')
   console.log(req.body)
-  // console.log(req.data)
     var art = new Art();
 
     art.title = req.body.title;    
-    // art.title = 'test777';    
-    art.location = req.body.location;
+    // art.title = 'test777';        
     art.date = req.body.date;
     art.description = req.body.description;
     art.categories = req.body.categories;
     art.image = req.body.image;
     // art.user = req.body.user; //probably find from querying db on token
+
+    art.setLocation(req.body.location);
 
     art.save(function(err) {
       console.log(err);      
@@ -51,8 +50,8 @@ module.exports.insertArt = function(req, res) {
 //****** Query DB for nearby art *******//
 module.exports.findArt = function(req, res) {
   console.log('findArt query initiated')
-  // var art = mongoose.model('Art', openDB);
-  // var Person = mongoose.model('Person', yourSchema);
+  // const art = mongoose.model('Art', openDB);
+  // const Person = mongoose.model('Person', yourSchema);
   console.log('---the art: ',Art);
   // art.find({location: req.body.location}, 'location', function(err, data) {
   Art.find({location: 'nearby'}, 'location', function(err, data) {

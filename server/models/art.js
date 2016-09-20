@@ -2,7 +2,8 @@ var mongoose = require( 'mongoose' );
 
 var artSchema = new mongoose.Schema({
   title: String,
-  location: String,  
+  locLat: Number,
+  locLong: Number,  
   date: Date,
   description: String,    
   categories: Array,
@@ -13,6 +14,9 @@ var artSchema = new mongoose.Schema({
   user: String
 });
 
-
+artSchema.methods.setLocation = function(locObj){
+  this.locLat = locObj.latitude;
+  this.locLong = locObj.longitude;
+}
 
 mongoose.model('Art', artSchema);
