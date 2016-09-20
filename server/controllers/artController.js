@@ -31,7 +31,6 @@ module.exports.insertArt = function(req, res) {
   // console.log(req.body)
   // console.log(req.data)
     var art = new Art();
-
     art.title = req.body.title;    
     // art.title = 'test777';        
     art.date = req.body.date;
