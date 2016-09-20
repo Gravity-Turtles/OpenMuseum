@@ -56,6 +56,7 @@ class PostNew extends Component {
             <br></br>
         	<textarea type="text" placeholder="Description" value={this.state.description} onChange={this.onDescriptionChange}/>
         	<input type="file" value={this.state.image} onChange={this.onImageChange} />
+        	<br></br>
         	<input type="submit"/>
         </form>
       </main>
