@@ -1,8 +1,18 @@
 // get Location
 
 export function getLocation(index) {
+  const location = {};
+  navigator.geolocation.getCurrentPosition(success, error);
+  function success(position) {
+    location.latitude  = position.coords.latitude;
+    location.longitude = position.coords.longitude;
+  };
+
+  function error() {
+    console.log("Unable to retrieve your location");
+  };
   return {
-    type: 'INCREMENT_LIKES',
-    index
+    type: 'GET_LOCATION',
+    location
   }
 }
