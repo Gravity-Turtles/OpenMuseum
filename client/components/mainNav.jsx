@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-class App extends Component {
+class MainNav extends Component {
 
   componentWillMount() {
     this.props.getLocation();
@@ -13,7 +13,7 @@ class App extends Component {
         {React.cloneElement(this.props.children, this.props)}
         <nav>
           <Link to="/"> Home </Link>
-          <Link to="/posts" onClick={this.props.fetchPosts}> | Search Near Me | </Link>
+          <Link to="/posts" onClick={this.props.fetchPosts.bind(null, this.props.location[0])}> | Search Near Me | </Link>
           <Link to="/posts/new"> Add New Artwork </Link>
         </nav>
       </main>
@@ -21,4 +21,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default MainNav;
