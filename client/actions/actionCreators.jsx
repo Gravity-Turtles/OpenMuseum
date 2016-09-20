@@ -1,12 +1,16 @@
 // get Location
 import axios from 'axios';
 
-export function fetchPosts() {
-  const request = axios.post('/api/art');
-  return {
-    type: 'FETCH_POSTS',
-    payload: request
-  };
+export function fetchPosts(location) {
+  console.log("Here", location);
+  const request = axios.post('/api/findArt', location);
+
+  return (dispatch) => {
+    request.then(({data}) => {
+      console.log("Post=======", data)
+      dispatch({type: 'FETCH_POSTS', posts: data})
+    }).catch(console.log("no DATA"));
+  }
 }
 
 export function getLocation() {
