@@ -13,24 +13,41 @@ export function fetchPosts(location) {
   }
 }
 
+function getLocPromise() {
+  return new Promise(function(resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+}
 export function getLocation() {
-  const location = {};
-  navigator.geolocation.getCurrentPosition(success, error);
-  function success(position) {
-    location.latitude  = position.coords.latitude;
-    location.longitude = position.coords.longitude;
-    console.log(location.latitude, location.longitude);
-  };
-
-  function error() {
-    console.log("Unable to retrieve your location");
-  };
-  return {
-    type: 'GET_LOCATION',
-    location
+  const loc = getLocPromise();
+  return (dispatch) => {
+    loc.then((position) => {
+      const location = {};
+      console.log("Post=======", position)
+      location.latitude  = position.coords.latitude;
+      location.longitude = position.coords.longitude;
+      dispatch({type: 'GET_LOCATION', location})
+    }).catch(console.log("no DATA"));
   }
 }
 
+// export function getLocation() {
+//   const location = {};
+//   navigator.geolocation.getCurrentPosition(success, error);
+//   function success(position) {
+//     location.latitude  = position.coords.latitude;
+//     location.longitude = position.coords.longitude;
+//     console.log(location.latitude, location.longitude);
+//   };
+
+//   function error() {
+//     console.log("Unable to retrieve your location");
+//   };
+//   return {
+//     type: 'GET_LOCATION',
+//     location
+//   }
+// }
 
 // export function getLocation() {
 //   let gotLoc = false;
