@@ -70,7 +70,7 @@ class PostNew extends Component {
           <input type="text" placeholder="Title of Artwork" value={this.state.title} onChange={this.onArtChange}/>
             <br></br>
         	<textarea type="text" placeholder="Description" value={this.state.description} onChange={this.onDescriptionChange}/>
-        	<br></br>
+        	<br></br> 
         	 <Dropzone value={this.state.files} onDrop={this.onDrop}>
               <div>Try dropping some files here, or click to select files to upload.</div>
             </Dropzone>
@@ -80,6 +80,7 @@ class PostNew extends Component {
                 <h2>Uploading {this.state.files.length} files...</h2>
                 <div>{this.state.files.map((file) => <img src={file.preview} /> )}</div>
                 </div> : null}
+
         </form>
       </main>
     );
