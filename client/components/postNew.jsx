@@ -13,7 +13,7 @@ class PostNew extends Component {
       },	
       title: '',
       description: '',
-      files: '',
+      files: [],
       image: ''
 
     };
@@ -37,14 +37,16 @@ class PostNew extends Component {
   	this.setState({image: event.target.value})
   }
 
-<<<<<<< 1f6569929b2707af34c6aad5bed7254feb805264
-  onDrop(files){
-      console.log('Received DropZone files: ', files);
-      this.setState({files: files})
+  onDrop(file){
+    console.log('Received DropZone files: ', file);
+    var slicedArray = this.state.files.slice()
+	console.log("slicedArray", slicedArray)
+	slicedArray.push(file[0])
+	
+	this.setState({ files: slicedArray })
+	console.log("after drop, current state.files: ", this.state.files, 'after push slicedArray', slicedArray);
     }
 
-=======
->>>>>>> adding pics to form
   onFormSubmit(event){
   	
   	event.preventDefault();
@@ -68,12 +70,16 @@ class PostNew extends Component {
           <input type="text" placeholder="Title of Artwork" value={this.state.title} onChange={this.onArtChange}/>
             <br></br>
         	<textarea type="text" placeholder="Description" value={this.state.description} onChange={this.onDescriptionChange}/>
-        	<input type="file" value={this.state.image} onChange={this.onImageChange} />
         	<br></br>
         	 <Dropzone value={this.state.files} onDrop={this.onDrop}>
               <div>Try dropping some files here, or click to select files to upload.</div>
             </Dropzone>
-        	<input type="submit"/>
+            <input type="submit"/>
+            <br></br>
+            {this.state.files.length > 0 ? <div>
+                <h2>Uploading {this.state.files.length} files...</h2>
+                <div>{this.state.files.map((file) => <img src={file.preview} /> )}</div>
+                </div> : null}
         </form>
       </main>
     );
@@ -84,6 +90,3 @@ class PostNew extends Component {
 }
 
 export default PostNew;
-// Contacts.defaultProps = {
-
-// };
