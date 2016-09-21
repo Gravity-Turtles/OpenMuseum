@@ -30,18 +30,21 @@ class PostNew extends Component {
   }
   
   onDescriptionChange(event){
-  	var arrayvar = this.state.files.slice()
-	arrayvar.push(event.target.value)
-	this.setState({ files: arrayvar })
+  	this.setState({description: event.target.value})
   }
 
   onImageChange(event){
   	this.setState({image: event.target.value})
   }
 
-  onDrop(files){
-      console.log('Received DropZone files: ', files);
-      this.setState({files: files})
+  onDrop(file){
+    console.log('Received DropZone files: ', file);
+    var slicedArray = this.state.files.slice()
+	console.log("slicedArray", slicedArray)
+	slicedArray.push(file[0])
+	
+	this.setState({ files: slicedArray })
+	console.log("after drop, current state.files: ", this.state.files, 'after push slicedArray', slicedArray);
     }
 
   onFormSubmit(event){
