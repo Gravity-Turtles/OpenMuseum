@@ -51,6 +51,6 @@ export class Map extends React.Component {
         zoom: zoom
       })
       this.map = new maps.Map(node, mapConfig);
+    }
   }
-
-
+};
