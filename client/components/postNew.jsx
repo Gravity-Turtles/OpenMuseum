@@ -37,14 +37,11 @@ class PostNew extends Component {
   	this.setState({image: event.target.value})
   }
 
-<<<<<<< 1f6569929b2707af34c6aad5bed7254feb805264
   onDrop(files){
       console.log('Received DropZone files: ', files);
       this.setState({files: files})
     }
 
-=======
->>>>>>> adding pics to form
   onFormSubmit(event){
   	
   	event.preventDefault();
@@ -73,7 +70,12 @@ class PostNew extends Component {
         	 <Dropzone value={this.state.files} onDrop={this.onDrop}>
               <div>Try dropping some files here, or click to select files to upload.</div>
             </Dropzone>
-        	<input type="submit"/>
+            <input type="submit"/>
+            {this.state.files ? <div>
+           
+            <div><img src={this.state.files.preview} /></div>
+            </div> : null}
+        	
         </form>
       </main>
     );
@@ -84,6 +86,3 @@ class PostNew extends Component {
 }
 
 export default PostNew;
-// Contacts.defaultProps = {
-
-// };
