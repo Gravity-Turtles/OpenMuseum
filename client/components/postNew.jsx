@@ -13,7 +13,7 @@ class PostNew extends Component {
       },	
       title: '',
       description: '',
-      files: '',
+      files: [],
       image: ''
 
     };
@@ -30,7 +30,9 @@ class PostNew extends Component {
   }
   
   onDescriptionChange(event){
-  	this.setState({description: event.target.value})
+  	var arrayvar = this.state.files.slice()
+	arrayvar.push(event.target.value)
+	this.setState({ files: arrayvar })
   }
 
   onImageChange(event){
@@ -65,16 +67,16 @@ class PostNew extends Component {
           <input type="text" placeholder="Title of Artwork" value={this.state.title} onChange={this.onArtChange}/>
             <br></br>
         	<textarea type="text" placeholder="Description" value={this.state.description} onChange={this.onDescriptionChange}/>
-        	<input type="file" value={this.state.image} onChange={this.onImageChange} />
         	<br></br>
         	 <Dropzone value={this.state.files} onDrop={this.onDrop}>
               <div>Try dropping some files here, or click to select files to upload.</div>
             </Dropzone>
             <input type="submit"/>
-            {this.state.files ? <div>
-           
-            <div><img src={this.state.files.preview} /></div>
-            </div> : null}
+            <br></br>
+            {this.state.files.length > 0 ? <div>
+                <h2>Uploading {this.state.files.length} files...</h2>
+                <div>{this.state.files.map((file) => <img src={file.preview} /> )}</div>
+                </div> : null}
         	
         </form>
       </main>
