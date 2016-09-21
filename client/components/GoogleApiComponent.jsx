@@ -6,6 +6,8 @@
 
 // GoogleApiComponent...
 
+import React, { Component } from 'react';
+
 export class Container extends React.Component {
   render() {
     // set map to occupy 50% of height/width of page

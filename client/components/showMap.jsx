@@ -24,7 +24,7 @@ Let's build the basic Map component:
 //   }
 // }
 // basic component ends
-
+import React, { Component } from 'react';
 
 export class Map extends React.Component {
   componentDidUpdate(prevProps, prevState) {
@@ -42,15 +42,33 @@ export class Map extends React.Component {
       const mapRef = this.refs.map;
       const node = ReactDOM.findDOMNode(mapRef);
 
-      let zoom = 4;
-      let lat = 40.74627;
-      let lng = -73.98825;
+      let {initialCenter, zoom} = this.props;
+      const {lat, lng} = this.state.currentLocation;
+      this.state = {
+        lat: lat,
+        lng: lng
+      }
       const center = new maps.LatLng(lat, lng);
       const mapConfig = Object.assign({}, {
         center: center,
         zoom: zoom
       })
       this.map = new maps.Map(node, mapConfig);
+    }
+  }
+
+  Map.propTypes = {
+    google: React.PropTypes.object,
+    zoom: React.PropTypes.number,
+    initialCenter: React.PropTypes.object
+  }
+  Map.defaultProps = {
+    zoom: 4,
+    // MKS/Grind Broadway, by default
+    // might change this to 6th Ave & Houston
+    initialCenter: {
+      lat: 40.74627,
+      lng: -73.98825
     }
   }
 };
