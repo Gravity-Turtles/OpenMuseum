@@ -9,7 +9,7 @@ Initial individual setup
 
 [Be sure to include any dependencies that need to be installed on a dev machine]
   npm install
-  Then, restart your test environment with:
+  Then, restart your test environment using this command:
     npm run start
 
 [include any configuration info that needs to be set on a dev machine]
