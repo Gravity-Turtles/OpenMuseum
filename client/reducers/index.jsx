@@ -5,6 +5,10 @@ import location from './reducerLocation';
 import posts from './reducerPosts';
 import comments from './reducerComments';
 
-const rootReducer = combineReducers({location, posts, comments, routing: routerReducer});
+const rootReducer = combineReducers({
+  location, 
+  posts, 
+  comments, 
+  routing: routerReducer});
 
 export default rootReducer;
