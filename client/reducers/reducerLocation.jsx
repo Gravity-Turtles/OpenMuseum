@@ -3,9 +3,7 @@ export default function(state = {}, action) {
     case "GET_LOCATION" :
       console.log("Got the location");
       console.log(action.location);
-      return [
-       ...state, action.location
-      ];
+      return action.location;
     default:
       return state;
   }
