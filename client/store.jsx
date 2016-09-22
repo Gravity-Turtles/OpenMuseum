@@ -1,7 +1,7 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import { syncHistoryWithStore} from 'react-router-redux';
 import { browserHistory } from 'react-router';
-import Thunk from 'redux-thunk';
+import thunk from 'redux-thunk';
 
 // import the root reducer
 import rootReducer from './reducers/index';
@@ -9,18 +9,21 @@ import rootReducer from './reducers/index';
 // import location from './data/location';
 // import posts from './data/posts';
 // import comments from './data/comments';
-const location = {};
-const posts = [];
-const comments = [];
+// const location = {};
+// const posts = null;
+// const comments = null;
 
 // create an object for the default data
-const defaultState = {
-  location,
-  posts,
-  comments
-};
+// const defaultState = {
+//   location,
+//   posts,
+//   comments
+// };
 
-const store = createStore(rootReducer, defaultState, applyMiddleware(Thunk));
+const store = createStore(rootReducer, compose(
+    applyMiddleware(thunk),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  ));
 
 export const history = syncHistoryWithStore(browserHistory, store);
 

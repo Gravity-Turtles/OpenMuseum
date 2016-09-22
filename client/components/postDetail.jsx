@@ -4,7 +4,7 @@ export default class PostDetail extends Component {
   render() {
     return (
       <main>
-        <h1>Art 1</h1>
+        <h1>{this.props.params.id}</h1>
         <div>Image here</div>
         <div>Detail here</div>
         <div>comments here</div>
