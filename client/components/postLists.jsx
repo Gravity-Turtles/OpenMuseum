@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import GoogleMap from './googleMap';
 
 export default class PostLists extends Component {
 
@@ -19,10 +20,26 @@ export default class PostLists extends Component {
     });
   }
 
+  renderMap() {
+    if (!this.props.location.latitude) {
+      return (
+        <div> loading...</div>
+      );
+    }
+    return (
+      <div style={{height:'100%'}}>
+        <GoogleMap lat={this.props.location.latitude} lng={this.props.location.longitude}/>
+      </div>
+    );
+  }
+
+
   render() {
     return (
       <main>
-        <h1>ArtMap</h1>
+        <div style={{width:'100%', height:'300px'}}>
+          {this.renderMap()}
+        </div>
         <div>
           {this.renderPost()}
         </div>
