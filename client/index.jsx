@@ -22,14 +22,13 @@ const router = (
     <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={FrontPage} />
-        <Route path="posts/new" component={PostNew} />
+        <Route path="new" component={PostNew} />
         <Route path="posts" component={PostLists} />
         <Route path="posts/:id" component={PostDetail} />
       </Route>
     </Router>
   </Provider>
 )
-
 
 render(router, document.getElementById('root'));
 

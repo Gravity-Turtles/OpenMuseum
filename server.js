@@ -1,25 +1,35 @@
 //********** MODULES **********//
-var express = require("express");
-var path = require('path');
-var bodyParser = require("body-parser");
-var cors = require("cors");
+const express = require("express");
+const path = require('path');
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const multer  = require('multer');
+const upload = multer({ dest: './uploads/'});
 
 //********** CONFIGURATION **********//
 // Bring in the data model
 require('./server/models/db.js');
 // Set API router
-var apiRouter = require("./server/routes/api.js");
+const apiRouter = require("./server/routes/api.js");
 //set port
-var port = process.env.PORT || 8888; 
+const port = process.env.PORT || 8888; 
 
 // Initialize the server 
-var app = express();
+const app = express();
 // Add middleware 
 app.use(cors());
 app.use(bodyParser.json());
+// app.use(upload.array('files'));
+
 
 //Set static file location
-app.use("/", express.static(__dirname + "/dist/"));
+app.use(express.static(__dirname + '/dist'))
+
+//for
+app.get('*', function (request, response){
+  response.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
+})
+
 
 //API Routes:
 app.use("/api", apiRouter);

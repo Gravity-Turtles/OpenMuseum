@@ -13,8 +13,8 @@ class MainNav extends Component {
         {React.cloneElement(this.props.children, this.props)}
         <nav>
           <Link to="/"> Home </Link>
-          <Link to="/posts" onClick={this.props.fetchPosts.bind(null, this.props.location)}> | Search Near Me | </Link>
-          <Link to="/posts/new"> Add New Artwork </Link>
+          <Link to="/posts" onClick={this.props.fetchPosts.bind(null, this.props.location[0])}> | Search Near Me | </Link>
+          <Link to="/new"> Add New Artwork </Link>
         </nav>
       </main>
     );
