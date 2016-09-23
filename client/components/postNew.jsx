@@ -66,7 +66,7 @@ class PostNew extends Component {
       <main>
         <h1>Post Page</h1>
         <br></br>
-        <form onSubmit={this.onFormSubmit} enctype="multipart/form-data">
+        <form onSubmit={this.onFormSubmit} encType="multipart/form-data">
           <input type="text" placeholder="Title of Artwork" value={this.state.title} onChange={this.onArtChange}/>
             <br></br>
         	<textarea type="text" placeholder="Description" value={this.state.description} onChange={this.onDescriptionChange}/>
