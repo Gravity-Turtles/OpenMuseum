@@ -7,14 +7,27 @@ class MainNav extends Component {
     this.props.getLocation();
   }
 
+  showSearchBtn() {
+    if (this.props.cityName === '. . .') {
+      return (<div> ( . . . ) </div>);
+    }
+    return (
+      <Link to="/posts" onClick={this.props.fetchPosts.bind(null, this.props.location)}>
+       ( Search Near Me ) 
+      </Link>
+    );
+  }
+
   render() {
     return (
       <main>
         {React.cloneElement(this.props.children, this.props)}
         <nav>
-          <Link to="/"> Home </Link>
-          <Link to="/posts" onClick={this.props.fetchPosts.bind(null, this.props.location[0])}> | Search Near Me | </Link>
-          <Link to="/new"> Add New Artwork </Link>
+          <Link to="/" style={{"float": "left"}}> ( Home ) </Link>
+          <div style={{"float": "left"}}>
+            {this.showSearchBtn()}
+          </div>
+          <Link to="/new" style={{"float": "left"}}> ( Add New Artwork ) </Link>
         </nav>
       </main>
     );

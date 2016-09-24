@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 export function fetchPosts(location) {
-  console.log("Here", location);
+  console.log("inside ActionCreater fetchPosts", location);
   const request = axios.post('/api/findArt', location);
 
   return (dispatch) => {
@@ -40,8 +40,24 @@ export function getCityName(location) {
   return (dispatch) => {
     request.then(({data}) => {
       console.log("CITYNAME=======", data)
+      let count, country, state, city;
+      if (data.results[0]) {
+        let address = data.results[0].formatted_address ;
+        let value = address.split(",");
+
+        count = value.length;
+        country = value[count - 1];
+        state = value[count - 2];
+        city = value[count - 3].slice(1);
+        console.log("city name is: " + city);
+      }
+      else  {
+        console.log("address not found");
+      }
+
+
       
-      dispatch({type: 'GET_CITYNAME', cityName: data})
+      dispatch({type: 'GET_CITYNAME', cityName: city})
     }).catch(console.log("no DATA at getCityName"));
   }    
 }

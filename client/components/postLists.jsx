@@ -10,7 +10,7 @@ export default class PostLists extends Component {
     }
     return this.props.posts.map((post) => {
       return ( 
-        <div key={post.title}>
+        <div key={post._id}>
           <Link to={"posts/" + post._id}>
             <strong>{post.title}</strong>
             {post.description} {post.locLat} {post.locLong}
@@ -26,11 +26,19 @@ export default class PostLists extends Component {
         <div> loading...</div>
       );
     }
-    return (
-      <div style={{height:'100%'}}>
-        <GoogleMap lat={this.props.location.latitude} lng={this.props.location.longitude} {...this.props}/>
-      </div>
-    );
+    console.log("length of posts", this.props.posts.length);
+    if (this.props.posts.length) {
+      console.log("something around you");
+      return (
+        <div style={{height:'100%'}}>
+          <GoogleMap lat={this.props.location.latitude} lng={this.props.location.longitude} {...this.props}/>
+        </div>
+      );
+    } else {
+      console.log("nothing around you");
+      this.props.fetchPosts(this.props.location); // double check when you refresh
+      return (<div> Nothing around you. </div>);
+    }
   }
 
 
