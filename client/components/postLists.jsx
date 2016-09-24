@@ -28,7 +28,7 @@ export default class PostLists extends Component {
     }
     return (
       <div style={{height:'100%'}}>
-        <GoogleMap lat={this.props.location.latitude} lng={this.props.location.longitude}/>
+        <GoogleMap lat={this.props.location.latitude} lng={this.props.location.longitude} {...this.props}/>
       </div>
     );
   }

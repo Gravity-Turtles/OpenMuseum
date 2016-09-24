@@ -31,7 +31,10 @@ module.exports = {
         test: /\.s?css$/, 
         include: path.join(__dirname, 'client'),
         loaders: ["style", "css", "sass"]
-      }
+      },
+      { 
+        test: /\.(png|jpg)$/, 
+        loader: 'url-loader?limit=8192' }
     ]
   },
   resolve: {
