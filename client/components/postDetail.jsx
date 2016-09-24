@@ -9,7 +9,7 @@ export default class PostDetail extends Component {
       <main>
         <div style={{width:'100%', height:'300px'}}>
           <div style={{height:'100%'}}>
-            <GoogleMap lat={this.props.posts[i].locLat} lng={this.props.posts[i].locLong}/>
+            <GoogleMap lat={this.props.posts[i].locLat} lng={this.props.posts[i].locLong} location={this.props.location}/>
           </div>
         </div>
         <h1>{this.props.posts[i].title}</h1>
