@@ -36,10 +36,10 @@ module.exports = {
         test: /\.(png|jpg)$/, 
         loader: 'url-loader?limit=8192' }
     ]
-  },
+  },  
   resolve: {
     extensions: ['', '.js', '.jsx']
-  },  
+  },    
   plugins: [HTMLWebpackPluginConfig],
   devServer: {
     historyApiFallback: true,

@@ -1,8 +1,14 @@
 const mongoose = require('mongoose');
+const Grid = require('gridfs-stream');
+const fs = require('fs');
 const User = mongoose.model('User');
 const Art = mongoose.model('Art');
 
-
+Grid.mongo = mongoose.mongo;
+mongoose.connection.on('open', function() {
+  console.log('open');
+  var gfs = Grid(mongoose.connection);
+});
 //******** uncomment out this section when adding authentication ******//
 // module.exports.profileRead = function(req, res) {
 
@@ -27,9 +33,15 @@ const Art = mongoose.model('Art');
 
 module.exports.insertArt = function(req, res) {
   console.log('insertArt running')  
-  // console.log(req)
+  // console.log(req.file)
+  // console.log(req.files)
   // console.log(req.body)
-  // console.log(req.data)
+  // console.log(req.body.files)
+  console.log(req.body)
+  console.log(req.data)
+  console.log(req.body.title)
+  console.log(req.body.location)
+
     var art = new Art();
     art.title = req.body.title;    
     // art.title = 'test777';        
@@ -39,22 +51,40 @@ module.exports.insertArt = function(req, res) {
     art.image = req.body.image;
     // art.user = req.body.user; //probably find from querying db on token
 
-    art.setLocation(req.body.location);
+    // art.setLocation(req.body.location);
 
-    art.save(function(err) {
-      console.log(err);      
-      res.sendStatus(201);
-    });  
+//STREAM
+      // streaming to gridfs
+    //filename to store in mongodb
+
+    // var writestream = gfs.createWriteStream({
+    //     filename: 'mongo_file.txt'
+    // });
+    // fs.createReadStream('/home/etech/sourcefile.txt').pipe(writestream);
+ 
+    // writestream.on('close', function (file) {
+    //     // do something with `file`
+    //     console.log(file.filename + 'Written To DB');
+    // });
+
+
+//STREAM
+
+
+    // art.save(function(err) {
+    //   console.log(err);      
+    //   res.sendStatus(201);
+    // });  
 };
 
 
 //****** Query DB for nearby art *******//
 module.exports.findArt = function(req, res) {
-  console.log('findArt query initiated')
-  // var art = mongoose.model('Art', openDB);
-  // var Person = mongoose.model('Person', yourSchema);
-  // console.log('---the art: ',Art);
-  // art.find({location: req.body.location}, 'location', function(err, data) {
+  console.log('findArt query initiated')  
+/* Enable the line below for production and comment out the other line further below */
+  // Art.find({location: req.body.location}, 'location', function(err, data) {
+/* Enable the line below for testing and comment out the line above */
+  // Art.find({location: 'nearby'}, 'location', function(err, data) {
   Art.find({}, function(err, data) {
     if (err) {
       console.log(err);
