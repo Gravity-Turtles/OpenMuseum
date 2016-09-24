@@ -92,17 +92,37 @@ module.exports.findArt = function(req, res) {
       // console.log('findArt Data',data);
      
       const range = 0.006;
-      let latMin = req.body.latitude - range;
-      let latMax = req.body.latitude + range;
       let lngMin = req.body.longitude - range;
       let lngMax = req.body.longitude + range;
+      let latMin = req.body.latitude - range;
+      let latMax = req.body.latitude + range;
 
       let result = data.filter((spot) => 
           (spot.locLong >= lngMin && spot.locLong <= lngMax) &&
           (spot.locLat >= latMin && spot.locLat <= latMax)
       );
 
-      // console.log("filterd Data", result);     
+      // sort by distance from me
+      const widthFromMe = function(num) {
+        let me = Math.abs(req.body.longitude);
+        let there = Math.abs(num);
+        return Math.abs(there - me);
+      }
+      const heightFromMe = function(num) {
+        let me = Math.abs(req.body.latitude);
+        let there = Math.abs(num);
+        return Math.abs(there - me);
+      }
+      const distanceFromMe = function(lng, lat) {
+        return Math.sqrt(Math.pow(widthFromMe(lng), 2) + Math.pow(heightFromMe(lat), 2))
+      }
+      const compareDistance = function(a, b) {
+        return distanceFromMe(a.locLong, a.locLat) - distanceFromMe(b.locLong, b.locLat);
+      }
+      result.sort(compareDistance);
+      // end of sort by distance from me
+
+  
       res.status(200).send(result);
     }
   });
