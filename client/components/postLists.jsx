@@ -37,19 +37,14 @@ export default class PostLists extends Component {
   render() {
     return (
       <main>
-
+        <div style={{width:'100%', height:'300px'}}>
+          {this.renderMap()}
+        </div>
         <div>
           {this.renderPost()}
         </div>
         
-
-        <div id="map"></div>
-        <div>list here</div>
-        <div><Link to="/posts/id">Art 1</Link></div>
-        <div><Link to="/posts/id">Art 2</Link></div>
-
       </main>
-
     );
   }
 }
