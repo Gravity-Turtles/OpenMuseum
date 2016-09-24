@@ -29,11 +29,12 @@ export default class googleMap extends Component {
     });
     // markers for the art posts nearby 
     // this.markers = [];
-    this.addMarker = function(location, title) {
+    this.addMarker = function(location, title, i) {
       let marker = new google.maps.Marker({
         position: location,
         map: this.map,
         animation: google.maps.Animation.DROP,
+        label: "" + i,
         title: title
       });
       // this.markers.push(marker);
@@ -44,7 +45,7 @@ export default class googleMap extends Component {
         let location = {lat: post.locLat, lng: post.locLong};
         console.log("posts locations");
         let title = post.title; 
-        this.addMarker(location, title);
+        this.addMarker(location, title, i + 1);
       }
     }
   }

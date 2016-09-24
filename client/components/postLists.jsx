@@ -10,12 +10,12 @@ export default class PostLists extends Component {
     }
     return this.props.posts.map((post) => {
       return ( 
-        <div key={post._id}>
+        <li key={post._id}>
           <Link to={"posts/" + post._id}>
             <strong>{post.title}</strong>
             {post.description} {post.locLat} {post.locLong}
           </Link>
-        </div>
+        </li>
       );
     });
   }
@@ -48,9 +48,9 @@ export default class PostLists extends Component {
         <div style={{width:'100%', height:'300px'}}>
           {this.renderMap()}
         </div>
-        <div>
+        <ol>
           {this.renderPost()}
-        </div>
+        </ol>
         
       </main>
     );

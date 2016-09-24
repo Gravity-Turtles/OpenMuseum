@@ -27,7 +27,6 @@ app.use(express.static(__dirname + '/dist'))
 
 //for
 app.get('*', function (request, response){
-  console.log("reqqq", request);
   response.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
 })
 
