@@ -1,26 +1,14 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 export default class FrontPage extends Component {
 
   renderCityName() {
-    this.address;
-    console.log(this.props);
-    this.GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + this.props.location.latitude + '%2C' + this.props.location.longitude + '&key=AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo';
-    axios.get(this.GEOCODING)
-    .then(({data}) => {
-      if (!this.address) {
-        return "loading";
-      } else {
-        console.log("HERE",this.address);
-        return "here";
-      }
-    })
-    .catch("no City address info");
-    
+    console.log(this.props.location.latitude);
+    if (this.props.location.latitude) {
+      console.log(this.props.location.latitude);
+      this.props.getCityName(this.props.location);
+    } 
   }
-
-
 
   render() {
     return (

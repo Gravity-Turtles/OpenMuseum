@@ -30,3 +30,19 @@ export function getLocation() {
     }).catch(console.log("no DATA at getLocation"));
   }
 }
+
+export function getCityName(location) {
+
+  console.log("getCityNameCalled");
+  const GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + location.latitude + '%2C' + location.longitude + '&key=AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo';
+  const request = axios.get(GEOCODING);
+
+  return (dispatch) => {
+    request.then(({data}) => {
+      console.log("CITYNAME=======", data)
+      
+      dispatch({type: 'GET_CITYNAME', cityName: data})
+    }).catch(console.log("no DATA at getCityName"));
+  }    
+}
+
