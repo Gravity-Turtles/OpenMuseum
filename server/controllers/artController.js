@@ -51,7 +51,7 @@ module.exports.insertArt = function(req, res) {
     art.image = req.body.image;
     // art.user = req.body.user; //probably find from querying db on token
 
-    // art.setLocation(req.body.location);
+    art.setLocation(req.body.location);
 
 //STREAM
       // streaming to gridfs
@@ -71,16 +71,16 @@ module.exports.insertArt = function(req, res) {
 //STREAM
 
 
-    // art.save(function(err) {
-    //   console.log(err);      
-    //   res.sendStatus(201);
-    // });  
+    art.save(function(err) {
+      console.log(err);      
+      res.sendStatus(201);
+    });  
 };
 
 
 //****** Query DB for nearby art *******//
 module.exports.findArt = function(req, res) {
-  console.log('findArt query initiated')  
+  console.log("req.body in findArt", req.body);  
 /* Enable the line below for production and comment out the other line further below */
   // Art.find({location: req.body.location}, 'location', function(err, data) {
 /* Enable the line below for testing and comment out the line above */
@@ -89,9 +89,41 @@ module.exports.findArt = function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      console.log('findArt Data',data);
-      
-      res.status(200).send(data);
+      // console.log('findArt Data',data);
+     
+      const range = 0.006;
+      let lngMin = req.body.longitude - range;
+      let lngMax = req.body.longitude + range;
+      let latMin = req.body.latitude - range;
+      let latMax = req.body.latitude + range;
+
+      let result = data.filter((spot) => 
+          (spot.locLong >= lngMin && spot.locLong <= lngMax) &&
+          (spot.locLat >= latMin && spot.locLat <= latMax)
+      );
+
+      // sort by distance from me
+      const widthFromMe = function(num) {
+        let me = Math.abs(req.body.longitude);
+        let there = Math.abs(num);
+        return Math.abs(there - me);
+      }
+      const heightFromMe = function(num) {
+        let me = Math.abs(req.body.latitude);
+        let there = Math.abs(num);
+        return Math.abs(there - me);
+      }
+      const distanceFromMe = function(lng, lat) {
+        return Math.sqrt(Math.pow(widthFromMe(lng), 2) + Math.pow(heightFromMe(lat), 2))
+      }
+      const compareDistance = function(a, b) {
+        return distanceFromMe(a.locLong, a.locLat) - distanceFromMe(b.locLong, b.locLat);
+      }
+      result.sort(compareDistance);
+      // end of sort by distance from me
+
+  
+      res.status(200).send(result);
     }
   });
 };
