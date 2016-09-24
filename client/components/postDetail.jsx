@@ -4,7 +4,7 @@ import GoogleMap from './googleMap';
 export default class PostDetail extends Component {
   render() {
     const i = this.props.posts.findIndex((post) => post._id === this.props.params.id);
-    console.log(i);
+    console.log("post index", i);
     return (
       <main>
         <div style={{width:'100%', height:'300px'}}>
