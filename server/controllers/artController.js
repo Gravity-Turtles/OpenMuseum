@@ -33,14 +33,8 @@ mongoose.connection.on('open', function() {
 
 module.exports.insertArt = function(req, res) {
   console.log('insertArt running')  
-  // console.log(req.file)
-  // console.log(req.files)
-  // console.log(req.body)
-  // console.log(req.body.files)
   console.log(req.body)
-  console.log(req.data)
-  console.log(req.body.title)
-  console.log(req.body.location)
+
 
     var art = new Art();
     art.title = req.body.title;    
@@ -71,10 +65,10 @@ module.exports.insertArt = function(req, res) {
 //STREAM
 
 
-    // art.save(function(err) {
-    //   console.log(err);      
-    //   res.sendStatus(201);
-    // });  
+    art.save(function(err) {
+      console.log(err);      
+      res.sendStatus(201);
+    });  
 };
 
 

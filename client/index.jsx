@@ -11,6 +11,8 @@ import PostLists from './components/postLists';
 import PostDetail from './components/postDetail';
 import PostNew from './components/postNew';
 
+import Test from './containers/test';
+
 // import react router dependencies
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
@@ -25,6 +27,9 @@ const router = (
         <Route path="new" component={PostNew} />
         <Route path="posts" component={PostLists} />
         <Route path="posts/:id" component={PostDetail} />
+
+        <Route path="test" component={Test} /> 
+      
       </Route>
     </Router>
   </Provider>
