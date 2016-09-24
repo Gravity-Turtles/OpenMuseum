@@ -9,7 +9,7 @@ export function fetchPosts(location) {
     request.then(({data}) => {
       console.log("Post=======", data)
       dispatch({type: 'FETCH_POSTS', posts: data})
-    }).catch(console.log("no DATA"));
+    }).catch(console.log("no DATA at fetchPosts"));
   }
 }
 
@@ -23,10 +23,10 @@ export function getLocation() {
   return (dispatch) => {
     loc.then((position) => {
       const location = {};
-      console.log("Post=======", position)
+      console.log("Location=======", position)
       location.latitude  = position.coords.latitude;
       location.longitude = position.coords.longitude;
       dispatch({type: 'GET_LOCATION', location})
-    }).catch(console.log("no DATA"));
+    }).catch(console.log("no DATA at getLocation"));
   }
 }

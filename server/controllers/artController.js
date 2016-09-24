@@ -59,7 +59,7 @@ module.exports.findArt = function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      console.log('findArt Data',data);
+      // console.log('findArt Data',data);
       
       res.status(200).send(data);
     }
