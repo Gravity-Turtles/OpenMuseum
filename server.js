@@ -19,8 +19,13 @@ const app = express();
 // Add middleware 
 app.use(cors());
 app.use(bodyParser.json());
-// app.use(upload.array('files'));
 
+app.use(upload.single('files'));
+// app.use(upload.any(), function(req,res,next){
+//     console.log('ANYTHING')
+//     console.log(req.files)
+//     next();
+// });
 
 //Set static file location
 app.use(express.static(__dirname + '/dist'))
