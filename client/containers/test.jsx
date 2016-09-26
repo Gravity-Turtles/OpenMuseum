@@ -2,13 +2,58 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form';
+import Dropzone from 'react-dropzone';
 
 import { createPost } from '../actions/actionCreators';
+
+// Dropzone.options.uploadWidget = {
+//   paramName: 'file',
+//   maxFilesize: 2, // MB
+//   maxFiles: 1,
+//   dictDefaultMessage: 'Drag an image here to upload, or click to select one',
+//   acceptedFiles: 'image/*'
+// };
+
+const renderDropzoneInput = (field) => {
+  const files = field.input.value;
+  return (
+    <div>
+      <Dropzone      
+        name= "file"
+        onDrop={( filesToUpload, e ) => field.input.onChange(filesToUpload)}
+      >
+        <div>Try dropping some files here, or click to select files to upload.</div>
+      </Dropzone>
+      {field.meta.touched &&
+        field.meta.error &&
+        <span className="error">{field.meta.error}</span>}
+      {files && Array.isArray(files) && (
+        <ul>
+          { files.map((file, i) => <li key={i}>{file.name}</li>) }
+        </ul>
+      )}
+    </div>
+  );
+}
 
 class Test extends Component{
   
   onSubmit(props) {
-    this.props.createPost(props)
+    console.log('onSubmit=================')
+    console.log(props)
+
+    var body = new FormData();
+      Object.keys(props).forEach(( key ) => {
+        body.append(key, props[ key ]);        
+    });
+
+
+    // console.info('POSTTTTTTTT', body, props);  
+    // body.append('testkey','testval') 
+    console.log(body)
+
+
+    this.props.createPost(body)
       .then(() => {
         console.log('SUCCESSFULLY POSTED')
         // blog post has been created, navigate the user to the index
@@ -21,10 +66,9 @@ class Test extends Component{
     }
 
     render(){      
-        const { handleSubmit } = this.props;                        
-        
+        const { handleSubmit } = this.props;                                
         return (
-          <form onSubmit = {handleSubmit(this.onSubmit.bind(this))}>
+          <form onSubmit = {handleSubmit(this.onSubmit.bind(this))} enctype="multipart/form-data">
             <h3>Create A New Post</h3>
             <div>
               <label htmlFor="title">Title</label>
@@ -61,11 +105,22 @@ class Test extends Component{
               </div>
             </div>    
 
+            <div>
+              <label htmlFor="images">Files</label>
+              <Field
+                name="files"                
+                component={renderDropzoneInput}
+              />
+            </div>
             <button type="submit" className="btn btn-primary">Submit</button>
             
           </form>
+
         )
     }
+
+
+
 }
 
 function mapStateToProps({ location }){

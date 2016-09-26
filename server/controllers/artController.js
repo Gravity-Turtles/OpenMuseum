@@ -33,7 +33,9 @@ mongoose.connection.on('open', function() {
 
 module.exports.insertArt = function(req, res) {
   console.log('insertArt running')  
-  console.log(req.body)
+  console.log(req.file)
+  console.log(req.files)
+  console.log(req)
 
 
     var art = new Art();
