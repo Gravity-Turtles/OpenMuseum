@@ -3,6 +3,9 @@ const Grid = require('gridfs-stream');
 const fs = require('fs');
 const User = mongoose.model('User');
 const Art = mongoose.model('Art');
+const googleMapsClient = require('@google/maps').createClient({
+  key: 'AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo'
+});
 
 Grid.mongo = mongoose.mongo;
 mongoose.connection.on('open', function() {
