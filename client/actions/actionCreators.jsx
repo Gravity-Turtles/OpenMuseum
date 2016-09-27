@@ -104,44 +104,27 @@ export function createPost2(files){
 export function createPost3(props) {
   console.log('createPost3!')  
   console.log(props)
+  
+  const title = props.title || 'undefined';
+  const categories = props.categories || 'undefined';
+  const description = props.description || 'undefined';
 
-  // request
-  //   .post('/api/art')
-  //   // .field('title', '')
-  //   // .field('user[email]', 'tobi@learnboost.com')
-  //   .attach('image', props.files[0])
-  //   .end(function(err,res){
-  //     if(err) console.log(err)
-  //       else console.log(res)
-  //   
+  var req = request.post('api/art');
 
-  var req = request.post('api/arts');
+  if(props.files){
+    props.files.forEach((file)=> {
+        req.attach(file.name, file);
+    });
+  }
 
-  props.files.forEach((file)=> {
-    console.log('FOR EACH');
-    console.log(file)
-    console.log('super agent for Each');    
-      req.attach(file.name, file);
-  });
-
-  console.log('request object');
-  console.log(req)
   req
-    .field('title', props.title)
-    .field('categories', props.categories)
-    .field('description', props.description)
-    .end(function(){
-      console.log('sent')
+    .field('title', title)
+    .field('categories', categories)
+    .field('description', description)
+    .end(function(err,res){
+      if(err) console.log(err)
+        else console.log(res)
     })
-
-
-
-// request.post('api/art')
-// .field('title', props.title)
-// .end(function(){
-//   console.log('sent');
-// })
-
 
 
 }

@@ -4,9 +4,19 @@ const path = require('path');
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const multer  = require('multer');
-const upload = multer({ dest: './uploads/'});
 
 //********** CONFIGURATION **********//
+//multer config
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '.jpg') //Appending .jpg
+  }
+})
+const upload = multer({ storage: storage });
+
 // Bring in the data model
 require('./server/models/db.js');
 // Set API router
@@ -20,29 +30,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// app.use(upload.single('files'),function(req,res,next){
-//     console.log('FILES');
-//     console.log(req);
-//     console.log(req.body)    
-//     console.log(req.files)
-//     console.log(req.file)
-//     next();
-// });
-
-// app.use(function(req,res,next){
-//     // console.log('HELLO')
-//     // console.log(req)
-//     // console.log(req.body)
-//     // console.log(req.files)
-//     next();
-// })
-app.use(upload.any(), function(req,res,next){
-    console.log('ANYTHING')
-    // console.log(req)
-    console.log(req.body)
-    console.log(req.files)    
-    next();
-});
+app.use(upload.any())
 
 //Set static file location
 app.use(express.static(__dirname + '/dist'))
@@ -51,7 +39,6 @@ app.use(express.static(__dirname + '/dist'))
 app.get('*', function (request, response){
   response.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
 })
-
 
 //API Routes:
 app.use("/api", apiRouter);
