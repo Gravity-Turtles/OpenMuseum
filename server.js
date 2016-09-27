@@ -20,12 +20,29 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use(upload.single('files'));
-// app.use(upload.any(), function(req,res,next){
-//     console.log('ANYTHING')
+// app.use(upload.single('files'),function(req,res,next){
+//     console.log('FILES');
+//     console.log(req);
+//     console.log(req.body)    
 //     console.log(req.files)
+//     console.log(req.file)
 //     next();
 // });
+
+// app.use(function(req,res,next){
+//     // console.log('HELLO')
+//     // console.log(req)
+//     // console.log(req.body)
+//     // console.log(req.files)
+//     next();
+// })
+app.use(upload.any(), function(req,res,next){
+    console.log('ANYTHING')
+    // console.log(req)
+    console.log(req.body)
+    console.log(req.files)    
+    next();
+});
 
 //Set static file location
 app.use(express.static(__dirname + '/dist'))

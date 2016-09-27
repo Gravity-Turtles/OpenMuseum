@@ -12,6 +12,8 @@ import PostDetail from './components/postDetail';
 import PostNew from './components/postNew';
 
 import Test from './containers/test';
+import Test2 from './containers/test2';
+import Test3 from './containers/test3';
 
 // import react router dependencies
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
@@ -29,6 +31,8 @@ const router = (
         <Route path="posts/:id" component={PostDetail} />
 
         <Route path="test" component={Test} /> 
+        <Route path="test2" component={Test2} /> 
+        <Route path="test3" component={Test3} /> 
       
       </Route>
     </Router>

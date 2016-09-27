@@ -4,7 +4,10 @@ import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 import Dropzone from 'react-dropzone';
 
+import request from 'superagent';
+
 import { createPost } from '../actions/actionCreators';
+import { createPost3 } from '../actions/actionCreators';
 
 // Dropzone.options.uploadWidget = {
 //   paramName: 'file',
@@ -14,13 +17,21 @@ import { createPost } from '../actions/actionCreators';
 //   acceptedFiles: 'image/*'
 // };
 
-const renderDropzoneInput = (field) => {
+  // onDrop: function(files){
+  //     var req = request.post('/upload');
+  //     files.forEach((file)=> {
+  //         req.attach(file.name, file);
+  //     });
+  //     req.end(callback);
+  // }
+
+const renderDropzoneInput = (field) => {  
   const files = field.input.value;
   return (
     <div>
       <Dropzone      
         name= "file"
-        onDrop={( filesToUpload, e ) => field.input.onChange(filesToUpload)}
+        onDrop={( filesToUpload, e ) => field.input.onChange(filesToUpload)}        
       >
         <div>Try dropping some files here, or click to select files to upload.</div>
       </Dropzone>
@@ -37,38 +48,45 @@ const renderDropzoneInput = (field) => {
 }
 
 class Test extends Component{
-  
+  constructor(props) {
+    super(props);
+    this.state = {
+
+    };
+  }
+
   onSubmit(props) {
     console.log('onSubmit=================')
     console.log(props)
 
-    var body = new FormData();
-      Object.keys(props).forEach(( key ) => {
-        body.append(key, props[ key ]);        
-    });
+    // var body = new FormData();
+    //   Object.keys(props).forEach(( key ) => {
+    //     body.append(key, props[ key ]);        
+    // });
 
 
     // console.info('POSTTTTTTTT', body, props);  
     // body.append('testkey','testval') 
-    console.log(body)
+    this.props.createPost3(props)
+    // this.props.createPost3(body)
 
+    // this.props.createPost(body)
+    //   .then(() => {
+    //     console.log('SUCCESSFULLY POSTED')
+    //     // blog post has been created, navigate the user to the index
+    //     // We navigate by calling this.context.router.push with the
+    //     // new path to navigate to.
 
-    this.props.createPost(body)
-      .then(() => {
-        console.log('SUCCESSFULLY POSTED')
-        // blog post has been created, navigate the user to the index
-        // We navigate by calling this.context.router.push with the
-        // new path to navigate to.
+    //     // this.context.router.push('/');
 
-        // this.context.router.push('/');
-
-      });
+    //   });
     }
 
-    render(){      
+    render(){
+      console.log(this.state)
         const { handleSubmit } = this.props;                                
         return (
-          <form onSubmit = {handleSubmit(this.onSubmit.bind(this))} enctype="multipart/form-data">
+          <form id = "dropForm" className="dropzone" onSubmit = {handleSubmit(this.onSubmit.bind(this))} encType="multipart/form-data">
             <h3>Create A New Post</h3>
             <div>
               <label htmlFor="title">Title</label>
@@ -108,13 +126,14 @@ class Test extends Component{
             <div>
               <label htmlFor="images">Files</label>
               <Field
-                name="files"                
+                name="files"                            
                 component={renderDropzoneInput}
               />
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
-            
+            <button type="submit" className="btn btn-primary">Submit</button>            
           </form>
+
+
 
         )
     }
@@ -130,7 +149,7 @@ function mapStateToProps({ location }){
 Test = reduxForm({
   form: 'PostsTest'  
   // validate
-},mapStateToProps,{ createPost })(Test);
+},mapStateToProps,{ createPost3 })(Test);
 
 export default Test;
 

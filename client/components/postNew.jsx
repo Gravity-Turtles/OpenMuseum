@@ -130,6 +130,15 @@ class PostNew extends Component {
                 <div>{this.state.files.map((file, i) => <img id="file-input" onClick={this.getGpsInfo} key={i} src={file.preview} /> )}</div>
                 </div> : null }              
         </form>
+
+
+
+        <form enctype="multipart/form-data" action="/api/art" method="post">
+          <input type="file" name="files" />
+          <input type="submit" value="Upload Image" name="submit" />
+        </form>
+
+
       </main>
     );
   }
