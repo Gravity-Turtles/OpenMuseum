@@ -3,27 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 import Dropzone from 'react-dropzone';
-
 import request from 'superagent';
 
-import { createPost } from '../actions/actionCreators';
 import { createPost3 } from '../actions/actionCreators';
-
-// Dropzone.options.uploadWidget = {
-//   paramName: 'file',
-//   maxFilesize: 2, // MB
-//   maxFiles: 1,
-//   dictDefaultMessage: 'Drag an image here to upload, or click to select one',
-//   acceptedFiles: 'image/*'
-// };
-
-  // onDrop: function(files){
-  //     var req = request.post('/upload');
-  //     files.forEach((file)=> {
-  //         req.attach(file.name, file);
-  //     });
-  //     req.end(callback);
-  // }
 
 const renderDropzoneInput = (field) => {  
   const files = field.input.value;
@@ -51,37 +33,12 @@ class Test extends Component{
   constructor(props) {
     super(props);
     this.state = {
-
     };
   }
-
   onSubmit(props) {
-    console.log('onSubmit=================')
-    console.log(props)
-
-    // var body = new FormData();
-    //   Object.keys(props).forEach(( key ) => {
-    //     body.append(key, props[ key ]);        
-    // });
-
-
-    // console.info('POSTTTTTTTT', body, props);  
-    // body.append('testkey','testval') 
     this.props.createPost3(props)
-    // this.props.createPost3(body)
 
-    // this.props.createPost(body)
-    //   .then(() => {
-    //     console.log('SUCCESSFULLY POSTED')
-    //     // blog post has been created, navigate the user to the index
-    //     // We navigate by calling this.context.router.push with the
-    //     // new path to navigate to.
-
-    //     // this.context.router.push('/');
-
-    //   });
-    }
-
+  }
     render(){
       console.log(this.state)
         const { handleSubmit } = this.props;                                
@@ -132,18 +89,15 @@ class Test extends Component{
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>            
           </form>
-
-
-
         )
     }
-
-
-
 }
 
-function mapStateToProps({ location }){
-    return { location };
+function mapStateToProps(state){
+    return { 
+      location: state.location,
+
+     }
 }
 
 Test = reduxForm({

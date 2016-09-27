@@ -7,6 +7,7 @@ import axios from 'axios';
 
 import request from 'superagent';
 import FileInput from 'react'
+import Lightbox from 'react-images';
 
 // FileInput = require('react-file-input');
 
@@ -42,25 +43,14 @@ class Test2 extends Component{
 
     render(){
         // const onDrop = this.props.onDrop;
-        return (
-            <div>
-                <Dropzone ref="dropzone" onDrop={this.onDrop}>
-                    <div>Try dropping some files here, or click to select files to upload.</div>
-                </Dropzone>
-                <button type="button" onClick={this.onOpenClick}>
-                    Open Dropzone
-                </button>
-                {this.state.files.length > 0 ? <div>
-                <h2>Uploading {this.state.files.length} files...</h2>
-                <div>{this.state.files.map((file) => <img src={file.preview} /> )}</div>
-                </div> : null}
-            </div>
-
-        )
+    return (
+      <div>
+        <h1> TEST </h1>
+        <h2> TEST2 </h2>
+        <img src="../uploads/1475008956084.jpg" alt="Smiley face"/>
+      </div>
+      )
     }
-
-
-
 }
 
 function mapStateToProps({ location }){
