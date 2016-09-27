@@ -8,8 +8,8 @@ class PostNew extends Component {
     super(props);
     this.state = {
       location: {
-      	latitude: 40.746727,
-      	longitude:	-73.987885
+      	latitude: 40.745010, 
+      	longitude: 73.990410	
       },	
       title: '',
       description: '',
