@@ -47,6 +47,7 @@ export default class PostDetail extends Component {
     event.preventDefault()
     let payload = this.state;
     console.log("meee payload", payload);
+    this.props.editArt(payload);
 
   }
 

@@ -1,5 +1,7 @@
 // get Location
 import axios from 'axios';
+import superagent from 'superagent';
+//var request = require('superagent')
 
 export function fetchPosts(location) {
   console.log("inside ActionCreater fetchPosts", location);
@@ -60,5 +62,17 @@ export function getCityName(location) {
       dispatch({type: 'GET_CITYNAME', cityName: city})
     }).catch(console.log("no DATA at getCityName"));
   }    
+}
+
+export function editArt(object){
+  console.log("in actions with this object: ", object)
+
+const request = axios.put('/api/findArt', object);
+
+  return (dispatch) => {
+    request.then(({data}) => {
+      console.log("Puuuuuuuuuuuuut response yo=======", data)
+    }).catch(console.log("no DATA at fetchPosts"));
+  }
 }
 
