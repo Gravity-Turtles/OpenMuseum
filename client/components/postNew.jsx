@@ -82,6 +82,15 @@ class PostNew extends Component {
              </div> : null}
 
         </form>
+
+
+
+        <form enctype="multipart/form-data" action="/api/art" method="post">
+          <input type="file" name="files" />
+          <input type="submit" value="Upload Image" name="submit" />
+        </form>
+
+
       </main>
     );
   }
