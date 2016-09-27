@@ -86,20 +86,24 @@ export default class PostDetail extends Component {
             <form>
               <h4>Name</h4>
               <FormGroup>
-              <ControlLabel>Working example with validation</ControlLabel>
               <FormControl
               type="text"
               value={this.state.newName}
-              placeholder="Enter text"
+              placeholder={this.props.posts[i].title}
               onChange={this.handleNameChange}
               />
+
+       
+
+
+
               </FormGroup>
               <h4>Description</h4>
               <FormGroup>
               <FormControl
-              type="text"
+              componentClass="textarea"
               value={this.state.newDescription}
-              placeholder="Enter text"
+              placeholder={this.props.posts[i].description}
               onChange={this.handleDescriptionChange}
               />
               </FormGroup>
