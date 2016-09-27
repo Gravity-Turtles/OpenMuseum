@@ -18,6 +18,7 @@ export default class PostDetail extends Component {
     this.open = this.open.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+    this.onSubmission = this.onSubmission.bind(this);
   }
 
     getInitialState() {
@@ -33,16 +34,17 @@ export default class PostDetail extends Component {
   }
 
    handleNameChange(e) {
-    this.setState({ newName: e.target.newName });
+    this.setState({ newName: e.target.value});
     console.log("mah state: ", this.state);
   }
 
   handleDescriptionChange(e) {
-    this.setState({ newDescription: e.target.newDescription });
+    this.setState({ newDescription: e.target.value });
     console.log("mah state: ", this.state);
   }
 
   onSubmission(){
+    event.preventDefault()
     let payload = this.state;
     console.log("meee payload", payload);
 
