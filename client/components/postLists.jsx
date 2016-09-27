@@ -36,7 +36,6 @@ export default class PostLists extends Component {
       );
     } else {
       console.log("nothing around you");
-      this.props.fetchPosts(this.props.location); // double check when you refresh
       return (<div> Nothing around you. </div>);
     }
   }
@@ -45,7 +44,7 @@ export default class PostLists extends Component {
   render() {
     return (
       <main>
-        <div style={{width:'100%', height:'300px'}}>
+        <div style={{width:'100%', height:'350px'}}>
           {this.renderMap()}
         </div>
         <ol>

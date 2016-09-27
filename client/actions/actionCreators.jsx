@@ -21,10 +21,10 @@ function getLocPromise() {
   });
 }
 export function getLocation() {
-  const loc = getLocPromise();
+  let loc = getLocPromise();
   return (dispatch) => {
     loc.then((position) => {
-      const location = {};
+      let location = {};
       console.log("Location=======", position)
       location.latitude  = position.coords.latitude;
       location.longitude = position.coords.longitude;
@@ -34,10 +34,8 @@ export function getLocation() {
 }
 
 export function getCityName(location) {
-
-  console.log("getCityNameCalled");
-  const GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + location.latitude + '%2C' + location.longitude + '&key=AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo';
-  const request = axios.get(GEOCODING);
+  let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + location.latitude + '%2C' + location.longitude + '&key=AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo';
+  let request = axios.get(GEOCODING);
 
   return (dispatch) => {
     request.then(({data}) => {
@@ -56,9 +54,6 @@ export function getCityName(location) {
       else  {
         console.log("address not found");
       }
-
-
-      
       dispatch({type: 'GET_CITYNAME', cityName: city})
     }).catch(console.log("no DATA at getCityName"));
   }    
@@ -76,3 +71,23 @@ const request = axios.put('/api/Art', object);
   }
 }
 
+export function getGeoFromAddress(address) {
+  let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo';
+  let request = axios.get(GEOCODING);
+
+  return (dispatch) => {
+    request.then(({data}) => {
+      let geoFromAddress = {}
+      console.log("GEO DATA FROM ADDRESS=======", data);
+      if (data.results[0]) {
+        geoFromAddress.latitude = data.results[0].geometry.location.lat;
+        geoFromAddress.longitude = data.results[0].geometry.location.lng;
+        console.log("GEO DATA FROM ADDRESS=======", geoFromAddress);
+      }
+      else  {
+        console.log("Geolocation data not found");
+      }
+      dispatch({type: 'GET_GEO_ADDRESS', geoFromAddress: geoFromAddress})
+    }).catch(console.log("no DATA at getGeoFromAddress"));
+  }    
+}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SearchBox from './searchBox'
 
 export default class FrontPage extends Component {
 
@@ -17,6 +18,7 @@ export default class FrontPage extends Component {
         <h1>OPEN</h1>
         <h1>MUSEUM</h1>
         <h2>{this.renderCityName()}</h2>
+        <SearchBox getGeoFromAddress={this.props.getGeoFromAddress}/>
         <div className="theme">
           <div>graffiti</div>
           <div>mosaic</div>
