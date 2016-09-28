@@ -37,7 +37,7 @@ class renderDropzoneInput extends Component{
       </Dropzone>
       {this.state.images.length > 0 ? <div>
           <h2>Uploading {this.state.images.length} files...</h2>
-          <div id="imageContainer">{this.state.images.map((file) => <img className="imagePreview" src={file[0].preview} /> )}</div>
+          <div id="imageContainer">{this.state.images.map((file) => <img key={file[0].name} className="imagePreview" src={file[0].preview} /> )}</div>
        </div> : null}
     </div>
   );
@@ -45,7 +45,7 @@ class renderDropzoneInput extends Component{
   }
 }
 
-class Test extends Component{
+class PostNew extends Component{
   constructor(props) {
     super(props);
     this.state = {
@@ -117,10 +117,9 @@ function mapStateToProps(state){
      }
 }
 
-Test = reduxForm({
+PostNew = reduxForm({
   form: 'PostsTest'  
   // validate
-},mapStateToProps,{ createPost3 })(Test);
+},mapStateToProps,{ createPost3 })(PostNew);
 
-export default Test;
-
+export default PostNew;

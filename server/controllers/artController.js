@@ -32,6 +32,9 @@ mongoose.connection.on('open', function() {
 //****** Insert New Art *******//
 
 module.exports.insertArt = function(req, res) {
+  console.log('inserArt')
+  console.log(req.body)
+  console.log(req.files)
   const imagePaths = []
   req.files.forEach(function(file){
     imagePaths.push(file.path)
