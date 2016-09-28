@@ -7,9 +7,10 @@ export default class myModal extends Component {
     constructor(props){
      super(props)
     this.state = {
+      oldArt: '',
       showModal: false,
       newName: '',
-      newDescription: '',
+      newDescription: ''
     };
 
     this.getInitialState = this.getInitialState.bind(this)
@@ -38,12 +39,16 @@ export default class myModal extends Component {
   }
 
   handleDescriptionChange(e) {
+    const currentArt = this.props.props.posts.findIndex((post) => post._id === this.props.props.params.id);
+
     this.setState({ newDescription: e.target.value });
+    this.setState({ oldArt: this.props.props.posts[currentArt]})
     console.log("mah state: ", this.state);
   }
 
   onSubmission(){
     event.preventDefault()
+    
     let payload = this.state;
     console.log("meee payload", payload);
     this.props.props.editArt(payload);

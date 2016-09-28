@@ -128,3 +128,27 @@ module.exports.findArt = function(req, res) {
   });
 };
 
+module.exports.editArt = function(req, res){
+console.log("heeeeeeey, i'm in yoooour edit ART!!!!")
+console.log("this is the req.body: ", req.body);
+
+Art.find({ 'title': req.body.oldArt.title }, function (err, docs) {
+ console.log('DOCS', docs);
+
+var newName = req.body.newName;
+var newDescription = req.body.newDescription;
+Art.update({ 'title': req.body.oldArt.title }, { title: newName, description: newDescription}, function(response) {
+    console.log("word, now show me that RESPONSE:", response);
+
+
+});
+})
+}
+// Art.find({title: req.body.oldArt.title})
+//     .select('title description')
+//     .exec(function(res){
+//       console.log("big DATABASE REsPONSE: ", res);
+//     })
+
+
+
