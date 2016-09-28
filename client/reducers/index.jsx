@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
+import { reducer as formReducer } from 'redux-form';
 
 import cityName from './reducerCityName';
 import location from './reducerLocation';
@@ -11,6 +12,8 @@ const rootReducer = combineReducers({
   location, 
   posts, 
   comments, 
-  routing: routerReducer});
+  routing: routerReducer,
+  form: formReducer
+});
 
 export default rootReducer;

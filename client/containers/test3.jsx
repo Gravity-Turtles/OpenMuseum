@@ -7,32 +7,49 @@ import request from 'superagent';
 
 import { createPost3 } from '../actions/actionCreators';
 
-const renderDropzoneInput = (field) => {  
-  const files = field.input.value;
+class renderDropzoneInput extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      images: []
+    };
+  }
+  onSubmit(props) {
+    this.props.createPost3(props)
+
+  }
+  render(){
+    // const { value, onChange } = this.props
+    const field = this.props
+    const files = field.input.value;  
+    
   return (
     <div>
-      <Dropzone      
-        name= "file"
-        onDrop={( filesToUpload, e ) => field.input.onChange(filesToUpload)}        
+      <Dropzone                  
+        onDrop={( filesToUpload, e ) => {
+          this.setState({images: [...this.state.images,filesToUpload]}, function(){            
+            field.input.onChange(this.state.images); //done in callback bc setState doesn't immediately mutate state
+          });               
+        }
+      }
       >
         <div>Try dropping some files here, or click to select files to upload.</div>
       </Dropzone>
-      {field.meta.touched &&
-        field.meta.error &&
-        <span className="error">{field.meta.error}</span>}
-      {files && Array.isArray(files) && (
-        <ul>
-          { files.map((file, i) => <li key={i}>{file.name}</li>) }
-        </ul>
-      )}
+      {this.state.images.length > 0 ? <div>
+          <h2>Uploading {this.state.images.length} files...</h2>
+          <div id="imageContainer">{this.state.images.map((file) => <img className="imagePreview" src={file[0].preview} /> )}</div>
+       </div> : null}
     </div>
   );
+
+  }
 }
 
 class Test extends Component{
   constructor(props) {
     super(props);
     this.state = {
+      file: 'test'
     };
   }
   onSubmit(props) {
@@ -40,7 +57,7 @@ class Test extends Component{
 
   }
     render(){
-      console.log(this.state)
+      
         const { handleSubmit } = this.props;                                
         return (
           <form id = "dropForm" className="dropzone" onSubmit = {handleSubmit(this.onSubmit.bind(this))} encType="multipart/form-data">
@@ -87,7 +104,7 @@ class Test extends Component{
                 component={renderDropzoneInput}
               />
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>            
+            <button type="submit" className="btn btn-primary" id="buttonNew">Submit</button>            
           </form>
         )
     }

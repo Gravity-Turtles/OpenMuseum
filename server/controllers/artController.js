@@ -32,16 +32,14 @@ mongoose.connection.on('open', function() {
 //****** Insert New Art *******//
 
 module.exports.insertArt = function(req, res) {
-  console.log('insertArt running')  
-  // console.log(req.file)
-  // console.log(req.files)
-  // console.log(req.body)
-  // console.log(req.body.files)
+  console.log('inserArt')
   console.log(req.body)
-  console.log(req.data)
-  console.log(req.body.title)
-  console.log(req.body.location)
-
+  console.log(req.files)
+  const imagePaths = []
+  req.files.forEach(function(file){
+    imagePaths.push(file.path)
+  })
+  
     var art = new Art();
     art.title = req.body.title;    
     // art.title = 'test777';        
@@ -49,6 +47,7 @@ module.exports.insertArt = function(req, res) {
     art.description = req.body.description;
     art.categories = req.body.categories;
     art.image = req.body.image;
+    art.images = imagePaths;
     // art.user = req.body.user; //probably find from querying db on token
 
     art.setLocation(req.body.location);
@@ -66,8 +65,6 @@ module.exports.insertArt = function(req, res) {
     //     // do something with `file`
     //     console.log(file.filename + 'Written To DB');
     // });
-
-
 //STREAM
 
 
