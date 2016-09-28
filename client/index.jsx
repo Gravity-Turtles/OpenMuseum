@@ -10,6 +10,7 @@ import FrontPage from './components/frontPage';
 import PostLists from './components/postLists';
 import PostDetail from './components/postDetail';
 import PostNew from './components/postNew';
+import Signup from './components/signup';
 
 // import react router dependencies
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
@@ -19,12 +20,13 @@ import store, { history } from './store';
 
 const router = (
   <Provider store={store}>
-    <Router history={history}>
+    <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={FrontPage} />
         <Route path="new" component={PostNew} />
         <Route path="posts" component={PostLists} />
         <Route path="posts/:id" component={PostDetail} />
+        <Route path="signup" component={Signup} />
       </Route>
     </Router>
   </Provider>
