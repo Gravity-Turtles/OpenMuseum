@@ -3,6 +3,8 @@ import GoogleMap from './googleMap';
 import jquery from 'jquery';
 import { Bootstrap } from 'react-bootstrap';
 import { Button, Modal, showModal, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+import MyModal from './modal';
+
 
 export default class PostDetail extends Component {
     constructor(props){
@@ -69,56 +71,7 @@ export default class PostDetail extends Component {
         <div>{this.props.posts[i].description}</div>
 
       <div>
-
-        <Button
-          bsStyle="primary"
-          bsSize="small"
-          onClick={this.open}
-        >
-          Edit
-        </Button>
-
-        <Modal show={this.state.showModal} onHide={this.close}>
-          <Modal.Header closeButton>
-            <Modal.Title>Edit Art Listing</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            
-            <form>
-              <h4>Name</h4>
-              <FormGroup>
-              <FormControl
-              type="text"
-              value={this.state.newName}
-              placeholder={this.props.posts[i].title}
-              onChange={this.handleNameChange}
-              />
-
-       
-
-
-
-              </FormGroup>
-              <h4>Description</h4>
-              <FormGroup>
-              <FormControl
-              componentClass="textarea"
-              value={this.state.newDescription}
-              placeholder={this.props.posts[i].description}
-              onChange={this.handleDescriptionChange}
-              />
-              </FormGroup>
-            </form>
-
-         
-            
-            
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={this.onSubmission}>Submit</Button>
-            <Button onClick={this.close}>Close</Button>
-          </Modal.Footer>
-        </Modal>
+        <MyModal props={this.props}/>
       </div>
 
       </main>
