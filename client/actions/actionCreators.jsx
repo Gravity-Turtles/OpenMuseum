@@ -113,7 +113,7 @@ export function createPost3(props) {
 
   if(props.files){
     props.files.forEach((file)=> {
-        req.attach(file.name, file);
+        req.attach(file[0].name, file[0]);
     });
   }
 

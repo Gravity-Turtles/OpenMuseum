@@ -37,7 +37,7 @@ class renderDropzoneInput extends Component{
       </Dropzone>
       {this.state.images.length > 0 ? <div>
           <h2>Uploading {this.state.images.length} files...</h2>
-          <div id="imageContainer">{this.state.images.map((file) => <img className="imagePreview" src={file[0].preview} /> )}</div>
+          <div id="imageContainer">{this.state.images.map((file) => <img key={file[0].name} className="imagePreview" src={file[0].preview} /> )}</div>
        </div> : null}
     </div>
   );
@@ -45,17 +45,66 @@ class renderDropzoneInput extends Component{
   }
 }
 
-class Test extends Component{
+class PostNew extends Component{
   constructor(props) {
     super(props);
     this.state = {
       file: 'test'
     };
+    this.getGpsInfo = this.getGpsInfo.bind(this);
   }
   onSubmit(props) {
     this.props.createPost3(props)
 
   }
+
+  getGpsInfo(event){
+  EXIF.getData(event.target, function(){
+    var lat = EXIF.getTag(this, "GPSLatitude").join(".");
+    var lon = EXIF.getTag(this, "GPSLongitude").join(".");
+  console.log('lat inside', lat, 'lon inside', lon);
+
+    // need to get lat/lon refs for correct placement, i.e. +/-
+    // something like the below
+    
+    var latRef = EXIF.getTag(this, "GPSLatitudeRef") || "N";  
+    console.log('latRef', latRef);
+    var lonRef = EXIF.getTag(this, "GPSLongitudeRef") || "W"; 
+
+    console.log('typeof LON', typeof lon);
+    Number(lon);
+    console.log('typeof LON after parseInt', typeof lon);
+
+    console.log('lonRef', lonRef);
+    console.log('lat B4 timed', lat);
+    
+    latRef !== "N" ? lat * -1 : lat;
+
+    // lat = (lat[0] + lat[1]/60 + lat[2]/3600) * (latRef == "N" ? 1 : -1);  
+    console.log('lat divided & timed', lat);
+
+    console.log('LON B4 timed', lon);
+    console.log('lon * -1 = ', lon * -1);
+    lonRef === "W" ? (lon * -1) : lon;
+    console.log('LON timed if negative...', lon);
+    
+    // lon = (lon[0] + lon[1]/60 + lon[2]/3600) * (lonRef == "W" ? -1 : 1); 
+
+  });
+
+  
+  // console.log('exif fn fired', EXIF.getData(event.target, function(){
+  //   // need to handle the trailing zero after lat & lon are joined
+  //   console.log('got EXIF latitude', EXIF.getTag(this, "GPSLatitude").join("."), 'got EXIF longitude', EXIF.getTag(this, "GPSLongitude").join("."));
+  // }));
+
+  /*
+  console.log('exif fn fired', EXIF.getData(event.target, function(){
+    // need to handle the trailing zero after lat & lon are joined
+    console.log('got EXIF latitude', EXIF.getTag(this, "GPSLatitude").join("."), 'got EXIF longitude', EXIF.getTag(this, "GPSLongitude").join("."));
+  }));
+  */
+}
     render(){
       
         const { handleSubmit } = this.props;                                
@@ -117,10 +166,9 @@ function mapStateToProps(state){
      }
 }
 
-Test = reduxForm({
+PostNew = reduxForm({
   form: 'PostsTest'  
   // validate
-},mapStateToProps,{ createPost3 })(Test);
+},mapStateToProps,{ createPost3 })(PostNew);
 
-export default Test;
-
+export default PostNew;
