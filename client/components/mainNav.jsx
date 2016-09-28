@@ -11,6 +11,7 @@ class MainNav extends Component {
     if (this.props.cityName === '. . .') {
       return (<div> ( . . . ) </div>);
     }
+    console.log("yeahhhhh baby show me those props: ", this.props);
     return (
       <Link to="/posts" onClick={this.props.fetchPosts.bind(null, this.props.location)}>
        ( Search Near Me ) 
