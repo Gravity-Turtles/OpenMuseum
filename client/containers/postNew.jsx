@@ -62,6 +62,7 @@ class PostNew extends Component{
   EXIF.getData(event.target, function(){
     var lat = EXIF.getTag(this, "GPSLatitude").join(".");
     var lon = EXIF.getTag(this, "GPSLongitude").join(".");
+
   console.log('lat inside', lat, 'lon inside', lon);
 
     // need to get lat/lon refs for correct placement, i.e. +/-
@@ -91,20 +92,19 @@ class PostNew extends Component{
     // lon = (lon[0] + lon[1]/60 + lon[2]/3600) * (lonRef == "W" ? -1 : 1); 
 
   });
+    
+    // console.log('exif fn fired', EXIF.getData(event.target, function(){
+    //   // need to handle the trailing zero after lat & lon are joined
+    //   console.log('got EXIF latitude', EXIF.getTag(this, "GPSLatitude").join("."), 'got EXIF longitude', EXIF.getTag(this, "GPSLongitude").join("."));
+    // }));
 
-  
-  // console.log('exif fn fired', EXIF.getData(event.target, function(){
-  //   // need to handle the trailing zero after lat & lon are joined
-  //   console.log('got EXIF latitude', EXIF.getTag(this, "GPSLatitude").join("."), 'got EXIF longitude', EXIF.getTag(this, "GPSLongitude").join("."));
-  // }));
-
-  /*
-  console.log('exif fn fired', EXIF.getData(event.target, function(){
-    // need to handle the trailing zero after lat & lon are joined
-    console.log('got EXIF latitude', EXIF.getTag(this, "GPSLatitude").join("."), 'got EXIF longitude', EXIF.getTag(this, "GPSLongitude").join("."));
-  }));
-  */
-}
+    /*
+    console.log('exif fn fired', EXIF.getData(event.target, function(){
+      // need to handle the trailing zero after lat & lon are joined
+      console.log('got EXIF latitude', EXIF.getTag(this, "GPSLatitude").join("."), 'got EXIF longitude', EXIF.getTag(this, "GPSLongitude").join("."));
+    }));
+    */
+  }
     render(){
       
         const { handleSubmit } = this.props;                                

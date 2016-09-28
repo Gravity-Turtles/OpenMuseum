@@ -1,3 +1,4 @@
+"use strict"
 const mongoose = require('mongoose');
 const Grid = require('gridfs-stream');
 const fs = require('fs');
@@ -50,7 +51,7 @@ module.exports.insertArt = function(req, res) {
     art.images = imagePaths;
     // art.user = req.body.user; //probably find from querying db on token
 
-    art.setLocation(req.body.location);
+    // art.setLocation(req.body.location);
 
 //STREAM
       // streaming to gridfs
