@@ -1,5 +1,3 @@
-//basically a copy of test
-
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -9,13 +7,31 @@ import request from 'superagent';
 
 import { createPost3 } from '../actions/actionCreators';
 
-const renderDropzoneInput = (field) => {  
-  const files = field.input.value;
+class renderDropzoneInput extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      images: []
+    };
+  }
+  onSubmit(props) {
+    this.props.createPost3(props)
+
+  }
+  render(){
+    // const { value, onChange } = this.props
+    const field = this.props
+    const files = field.input.value;  
+    
   return (
     <div>
-      <Dropzone      
-        name= "file"
-        onDrop={( filesToUpload, e ) => field.input.onChange(filesToUpload)}        
+      <Dropzone                  
+        onDrop={( filesToUpload, e ) => {
+          this.setState({images: [...this.state.images,filesToUpload]}, function(){            
+            field.input.onChange(this.state.images); //done in callback bc setState doesn't immediately mutate state
+          });               
+        }
+      }
       >
         <div>Try dropping some files here, or click to select files to upload.</div>
       </Dropzone>
@@ -29,12 +45,52 @@ const renderDropzoneInput = (field) => {
       )}
     </div>
   );
+
+  }
 }
+
+
+// const renderDropzoneInput = (field) => {  
+//   const files = field.input.value;  
+//   console.log('renderDropZone')
+//   console.log(field)
+//   var test = [];
+//   return (
+  
+//     <div>
+//       <Dropzone            
+      
+//         onDrop={( filesToUpload, e ) => {
+//           console.log('FILES TO UPLOAD')
+//           console.log(filesToUpload)          
+//           test.push(filesToUpload)           
+//           console.log('test', test);         
+//           field.input.onChange(...filesToUpload);
+//           // console.log(test)          
+//           // console.log(field)
+//         }
+//       }
+
+//       >
+//         <div>Try dropping some files here, or click to select files to upload.</div>
+//       </Dropzone>
+//       {field.meta.touched &&
+//         field.meta.error &&
+//         <span className="error">{field.meta.error}</span>}
+//       {files && Array.isArray(files) && (
+//         <ul>
+//           { files.map((file, i) => <li key={i}>{file.name}</li>) }
+//         </ul>
+//       )}
+//     </div>
+//   );
+// }
 
 class Test extends Component{
   constructor(props) {
     super(props);
     this.state = {
+      file: 'test'
     };
   }
   onSubmit(props) {
@@ -42,7 +98,7 @@ class Test extends Component{
 
   }
     render(){
-      console.log(this.state)
+      
         const { handleSubmit } = this.props;                                
         return (
           <form id = "dropForm" className="dropzone" onSubmit = {handleSubmit(this.onSubmit.bind(this))} encType="multipart/form-data">
@@ -95,8 +151,11 @@ class Test extends Component{
     }
 }
 
-function mapStateToProps({ location }){
-    return { location };
+function mapStateToProps(state){
+    return { 
+      location: state.location,
+
+     }
 }
 
 Test = reduxForm({
