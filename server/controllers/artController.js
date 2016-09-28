@@ -1,3 +1,4 @@
+"use strict";
 const mongoose = require('mongoose');
 const Grid = require('gridfs-stream');
 const fs = require('fs');
