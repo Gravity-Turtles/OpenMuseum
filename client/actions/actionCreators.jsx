@@ -73,6 +73,7 @@ const request = axios.put('/api/findArt', object);
       console.log("Puuuuuuuuuuuuut response yo=======", data)
     }).catch(console.log("no DATA at fetchPosts"));
   }
+}
 
 export function createPost(props){
   console.log('CREATE POSTS RUNNING');
