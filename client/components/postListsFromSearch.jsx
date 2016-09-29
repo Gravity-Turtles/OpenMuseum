@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import GoogleMap from './googleMap';
 
-export default class PostLists extends Component {
+export default class PostListsFromSearch extends Component {
 
   renderPost() {
     if(this.props.posts === undefined) {
@@ -21,22 +21,22 @@ export default class PostLists extends Component {
   }
 
   renderMap() {
-    if (!this.props.location.latitude) {
+    if (!this.props.geoFromSearch.latitude) {
       return (
         <div> loading...</div>
       );
     }
     console.log("length of posts", this.props.posts.length);
     if (this.props.posts.length) {
-      console.log("something around you");
+      console.log("something around your Search");
       return (
         <div style={{height:'100%'}}>
-          <GoogleMap lat={this.props.location.latitude} lng={this.props.location.longitude} {...this.props}/>
+          <GoogleMap lat={this.props.geoFromSearch.latitude} lng={this.props.geoFromSearch.longitude} {...this.props}/>
         </div>
       );
     } else {
-      console.log("nothing around you");
-      return (<div> Nothing around you. </div>);
+      console.log("nothing around your Search");
+      return (<div> Nothing around your Search. </div>);
     }
   }
 
