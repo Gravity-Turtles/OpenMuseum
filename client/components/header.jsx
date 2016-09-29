@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import { connect } from 'react-redux';
-// import { Link } from 'react-router';
+import { Link } from 'react-router';
 
 class Header extends Component {
 
@@ -38,9 +38,11 @@ class Header extends Component {
     return (
       <nav className="navbar navbar-light">
         <ul className="nav navbar-nav">
+        <Link to="/signin">
           <li className="nav-item">
             Sign In
           </li>
+        </Link>
         </ul>
       </nav>
     );
