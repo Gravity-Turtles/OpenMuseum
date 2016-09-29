@@ -27,6 +27,18 @@ class PostDetail extends Component {
         </div>        
         <ImageSlide props={this.props.posts[i]}/>
         <div>{this.props.posts[i].description}</div>
+
+        <Button
+          bsStyle="primary"
+          bsSize="small"
+        >
+          Like
+        </Button>
+        <div>{this.props.posts[i].likes}</div>
+
+
+
+
       <div>
         <MyModal props={this.props}/>
       </div>
