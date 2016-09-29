@@ -2,11 +2,24 @@ const jwt =  require('jwt-simple');
 const config = require('../../config');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
-mongoose.Promise = require("bluebird");
+mongoose.Promise = require('bluebird');
 
 function tokenForUser(user){
+  console.log('in token 4 usr fn: the user obj is:', user);
   const timestamp = new Date().getTime();
   return jwt.encode({ sub: user.id, iat: timestamp }, config.secret);
+}
+
+exports.signin =  function(req, res, next){
+  // User has already had their email and password auth'd
+  // We just need to give them a token
+  
+  console.log('DA req says that req.email is...', req.email);
+  console.log('DA req says that req.password is...', req.password);
+  console.log('DA req says that req.user is...', req.user);
+  // console.log('DA req says that req.user.ID is...', req.user.id);
+  console.log('here in signin');
+  res.send({ token: tokenForUser(req.user) });
 }
 
 exports.signup = function(req, res, next){

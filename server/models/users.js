@@ -1,5 +1,5 @@
 const mongoose = require( 'mongoose' );
-const crypto = require('crypto');
+// const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt-nodejs');
 
@@ -14,9 +14,9 @@ const userSchema = new mongoose.Schema({
     type: String
     // required: true
   },
-  password: String, // necessary, bc of hash below?
-  hash: String,
-  salt: String
+  password: String
+  // hash: String,
+  // salt: String
 });
 
 // SGrider tutorial code starts below...
@@ -40,6 +40,16 @@ userSchema.pre('save', function(next){
     });
   });
 });
+
+
+userSchema.methods.comparePassword = function(candidatePassword, callback){
+  bcrypt.compare(candidatePassword, this.password, function(err, isMatch){
+    if(err) { return callback(err); }
+
+    callback(null, isMatch);
+  });
+}
+
 // SGrider tutorial code ends ^^^
 /*
 userSchema.methods.setPassword = (password) => {
