@@ -5,8 +5,8 @@ import { render } from 'react-dom';
 import css from './style/style.css';
 
 // import components
-import App from './components/app';
-import SignIn from './components/auth/signIn';
+import MainNav from './components/mainNav';
+import Signin from './components/auth/signin';
 import FrontPage from './components/frontPage';
 import PostLists from './components/postLists';
 import PostListsFromSearch from './components/postListsFromSearch';
@@ -23,9 +23,9 @@ import store, { history } from './store';
 const router = (
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={App}>
+      <Route path="/" component={MainNav}>
         <IndexRoute component={FrontPage} />
-        <Route path="signin" component={SignIn} />
+        <Route path="signin" component={Signin} />
         <Route path="new" component={PostNew} />
         <Route path="posts" component={PostLists} />
         <Route path="postsfromsearch" component={PostListsFromSearch} />

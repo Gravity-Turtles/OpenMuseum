@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 // import * as actions from '../../actions';
 
-class SignIn extends Component {
+class Signin extends Component {
   handleFormSubmit({ email, password }) {
     // Need to do something to log user in
     // this.props.signinUser({ email, password });
@@ -20,7 +20,7 @@ class SignIn extends Component {
 
   render() {
     const { handleSubmit, fields: { email, password }} = this.props;
-    console.log("SignIn page props",this.props);
+    console.log("Signin page props",this.props);
 
     return (
       <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
@@ -45,4 +45,4 @@ class SignIn extends Component {
 export default reduxForm({
   form: 'signin',
   fields: ['email', 'password']
-})(SignIn);
+})(Signin);

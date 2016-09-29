@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import SearchBox from './searchBox'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../actions/actionCreators';
 
-export default class FrontPage extends Component {
+class FrontPage extends Component {
 
   renderCityName() {
     console.log('inside renderCityName',this.props.location.latitude);
@@ -28,3 +31,16 @@ export default class FrontPage extends Component {
     );
   }
 }
+
+function mapStateToProps(state){
+    return { 
+      location: state.location,
+      cityName: state.cityName
+     }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actions, dispatch);
+}
+
+export default connect(mapDispatchToProps, mapDispatchToProps)(FrontPage);

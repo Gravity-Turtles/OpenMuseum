@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../actions/actionCreators';
+
 import Header from './header';
 
 class MainNav extends Component {
@@ -12,7 +16,6 @@ class MainNav extends Component {
     if (!this.props.location.latitude) {
       return (<div> ( . . . ) </div>);
     }
-    console.log("yeahhhhh baby show me those props: ", this.props);
     return (
       <Link to="/posts" onClick={this.props.fetchPosts.bind(null, this.props.location)}>
        ( Search Near Me ) 
@@ -24,7 +27,7 @@ class MainNav extends Component {
     return (
       <main>
         <div><Header /></div>
-        {React.cloneElement(this.props.children, this.props)}
+        {this.props.children}
         <nav>
           <Link to="/" style={{"float": "left"}}> ( Home ) </Link>
           <div style={{"float": "left"}}>
@@ -37,4 +40,14 @@ class MainNav extends Component {
   }
 }
 
-export default MainNav;
+function mapStateToProps(state){
+    return { 
+      location: state.location,
+     }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actions, dispatch);
+}
+
+export default connect(mapDispatchToProps, mapDispatchToProps)(MainNav);
