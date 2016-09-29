@@ -7,7 +7,7 @@ import * as actions from '../actions/actionCreators';
 class FrontPage extends Component {
 
   renderCityName() {
-    console.log('inside renderCityName',this.props.location.latitude);
+    console.log('inside renderCityName',this.props);
     if (this.props.location.latitude) {
      this.props.getCityName(this.props.location); 
      return this.props.cityName;  
@@ -16,6 +16,7 @@ class FrontPage extends Component {
   }
 
   render() {
+    console.log('inside render ',this.props)
     return (
       <main>
         <h1>OPEN</h1>
@@ -33,14 +34,14 @@ class FrontPage extends Component {
 }
 
 function mapStateToProps(state){
-    return { 
-      location: state.location,
-      cityName: state.cityName
-     }
+  return { 
+    location: state.location,
+    cityName: state.cityName
+   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(actions, dispatch);
 }
 
-export default connect(mapDispatchToProps, mapDispatchToProps)(FrontPage);
+export default connect(mapStateToProps, mapDispatchToProps)(FrontPage);

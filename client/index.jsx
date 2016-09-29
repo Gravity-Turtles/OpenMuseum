@@ -12,7 +12,7 @@ import PostLists from './components/postLists';
 import PostListsFromSearch from './components/postListsFromSearch';
 import PostDetail from './components/postDetail';
 import PostNew from './containers/postNew';
-import Signup from './components/signup';
+import Signup from './components/auth/signup';
 
 // import react router dependencies
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';

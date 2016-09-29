@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../actions/actionCreators';
 import GoogleMap from './googleMap';
 import jquery from 'jquery';
 import { Bootstrap } from 'react-bootstrap';
 import { Button, Modal, showModal, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import MyModal from './modal';
 
-
-export default class PostDetail extends Component {
+class PostDetail extends Component {
     constructor(props){
      super(props)
     this.state = {
@@ -78,3 +80,18 @@ export default class PostDetail extends Component {
     );
   }
 }
+
+
+function mapStateToProps(state){
+  return { 
+    location: state.location,
+    posts: state.posts
+   };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);
+

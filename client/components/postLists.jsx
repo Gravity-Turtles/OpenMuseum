@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../actions/actionCreators';
 import GoogleMap from './googleMap';
 
-export default class PostLists extends Component {
+class PostLists extends Component {
 
   renderPost() {
     if(this.props.posts === undefined) {
@@ -55,3 +58,16 @@ export default class PostLists extends Component {
     );
   }
 }
+
+function mapStateToProps(state){
+  return { 
+    location: state.location,
+    posts: state.posts
+   };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostLists);
