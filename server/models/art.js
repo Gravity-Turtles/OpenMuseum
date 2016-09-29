@@ -11,6 +11,7 @@ var artSchema = new mongoose.Schema({
     data: Buffer, 
     contentType: String 
   },
+  images: Array,
   user: String
 });
 

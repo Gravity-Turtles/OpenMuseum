@@ -29,3 +29,23 @@ nav {
 .searchBox, .postLists {
   margin-top: 30px;
 }
+/************ POST NEW PAGE  ************/
+#imageContainer{
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  -webkit-flex-flow: row wrap; /* Safari */
+  flex-flow:         row wrap;
+  -webkit-align-items: flex-start; /* Safari */
+  align-items:         flex-start;
+  -webkit-justify-content: space-around; /* Safari */
+  justify-content:         space-around;
+}
+
+.imagePreview {
+  display: inline-block;
+  width: 250px;
+  margin-top: 15px;
+}
+#buttonNew{
+  margin-top: 5px;
+}
