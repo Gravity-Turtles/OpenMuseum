@@ -47,7 +47,7 @@ export default class PostLists extends Component {
         <div style={{width:'100%', height:'350px'}}>
           {this.renderMap()}
         </div>
-        <ol>
+        <ol className="postLists">
           {this.renderPost()}
         </ol>
         

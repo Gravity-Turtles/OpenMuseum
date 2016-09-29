@@ -38,7 +38,7 @@ export default class SearchBar extends Component {
 
   render() {
     return (
-      <form onSubmit={this.onFormSubmit} className="input-group">
+      <form onSubmit={this.onFormSubmit} className="input-group searchBox">
         <input 
           placeholder="address here"
           className="form-control"

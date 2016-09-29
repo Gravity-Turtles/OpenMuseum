@@ -25,3 +25,7 @@ h1, h2 {
 nav {
   margin-top: 30px;
 }
+
+.searchBox, .postLists {
+  margin-top: 30px;
+}

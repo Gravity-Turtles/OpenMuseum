@@ -77,7 +77,7 @@ export function getCityName(location) {
 export function editArt(object){
   console.log("in actions with this object: ", object)
 
-const request = axios.put('/api/Art', object);
+  const request = axios.put('/api/Art', object);
 
   return (dispatch) => {
     request.then(({data}) => {

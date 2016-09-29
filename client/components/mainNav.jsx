@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import Header from './header';
 
 class MainNav extends Component {
 
@@ -8,7 +9,7 @@ class MainNav extends Component {
   }
 
   showSearchBtn() {
-    if (this.props.cityName === '. . .') {
+    if (!this.props.location.latitude) {
       return (<div> ( . . . ) </div>);
     }
     console.log("yeahhhhh baby show me those props: ", this.props);
@@ -22,6 +23,7 @@ class MainNav extends Component {
   render() {
     return (
       <main>
+        <div><Header /></div>
         {React.cloneElement(this.props.children, this.props)}
         <nav>
           <Link to="/" style={{"float": "left"}}> ( Home ) </Link>

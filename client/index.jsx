@@ -6,6 +6,7 @@ import css from './style/style.css';
 
 // import components
 import App from './components/app';
+import SignIn from './components/auth/signIn';
 import FrontPage from './components/frontPage';
 import PostLists from './components/postLists';
 import PostListsFromSearch from './components/postListsFromSearch';
@@ -24,6 +25,7 @@ const router = (
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={FrontPage} />
+        <Route path="signin" component={SignIn} />
         <Route path="new" component={PostNew} />
         <Route path="posts" component={PostLists} />
         <Route path="postsfromsearch" component={PostListsFromSearch} />
