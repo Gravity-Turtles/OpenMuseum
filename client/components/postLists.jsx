@@ -38,7 +38,9 @@ class PostLists extends Component {
         </div>
       );
     } else {
-      console.log("nothing around you");      
+
+      console.log("nothing around you");
+      
       return (<div> Nothing around you. </div>);
     }
   }

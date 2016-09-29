@@ -1,103 +1,58 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Field, reduxForm } from 'redux-form';
-import Dropzone from 'react-dropzone';
-import request from 'superagent';
-
-import { createPost3 } from '../actions/actionCreators';
-
-class renderDropzoneInput extends Component{
+import React, { Component } from 'react';
+import axios from 'axios';
+import Dropzone from'react-dropzone';
+class PostNew extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      images: []
+      location: {
+        latitude: 40.745010, 
+        longitude: 73.990410    
+      },    
+      title: '',
+      description: '',
+      files: [],
+      image: ''
     };
-  }
-  onSubmit(props) {
-    this.props.createPost3(props)
-
-  }
-  render(){
-    // const { value, onChange } = this.props
-    const field = this.props
-    const files = field.input.value;  
-    
-  return (
-    <div>
-      <Dropzone                  
-        onDrop={( filesToUpload, e ) => {
-          this.setState({images: [...this.state.images,filesToUpload]}, function(){            
-            field.input.onChange(this.state.images); //done in callback bc setState doesn't immediately mutate state
-          });               
-        }
-      }
-      >
-        <div>Try dropping some files here, or click to select files to upload.</div>
-      </Dropzone>
-      {this.state.images.length > 0 ? <div>
-          <h2>Uploading {this.state.images.length} files...</h2>
-          <div id="imageContainer">{this.state.images.map((file) => <img key={file[0].name} className="imagePreview" src={file[0].preview} /> )}</div>
-       </div> : null}
-    </div>
-  );
-
-  }
-}
-
-class PostNew extends Component{
-  constructor(props) {
-    super(props);
-    this.state = {
-      file: 'test'
-    };
+    this.onArtChange = this.onArtChange.bind(this);
+    this.onDescriptionChange = this.onDescriptionChange.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.onImageChange = this.onImageChange.bind(this);
+    this.onDrop = this.onDrop.bind(this);
     this.getGpsInfo = this.getGpsInfo.bind(this);
   }
-  onSubmit(props) {
-    this.props.createPost3(props)
-
-  }
-
   getGpsInfo(event){
-  EXIF.getData(event.target, function(){
-    var lat = EXIF.getTag(this, "GPSLatitude").join(".");
-    var lon = EXIF.getTag(this, "GPSLongitude").join(".");
+    EXIF.getData(event.target, function(){
+      var lat = EXIF.getTag(this, "GPSLatitude").join(".");
+      var lon = EXIF.getTag(this, "GPSLongitude").join(".");
     console.log('lat inside', lat, 'lon inside', lon);
-
-    // need to get lat/lon refs for correct placement, i.e. +/-
-    // something like the below
-    
-    var latRef = EXIF.getTag(this, "GPSLatitudeRef") || "N";  
-    console.log('latRef', latRef);
-    var lonRef = EXIF.getTag(this, "GPSLongitudeRef") || "W"; 
-
-    console.log('typeof LON', typeof lon);
-    Number(lon);
-    console.log('typeof LON after parseInt', typeof lon);
-
-    console.log('lonRef', lonRef);
-    console.log('lat B4 timed', lat);
-    
-    latRef !== "N" ? lat * -1 : lat;
-
-    // lat = (lat[0] + lat[1]/60 + lat[2]/3600) * (latRef == "N" ? 1 : -1);  
-    console.log('lat divided & timed', lat);
-
-    console.log('LON B4 timed', lon);
-    console.log('lon * -1 = ', lon * -1);
-    lonRef === "W" ? (lon * -1) : lon;
-    console.log('LON timed if negative...', lon);
-    
-    // lon = (lon[0] + lon[1]/60 + lon[2]/3600) * (lonRef == "W" ? -1 : 1); 
-
-  });
-
+      // need to get lat/lon refs for correct placement, i.e. +/-
+      // something like the below
+      
+      var latRef = EXIF.getTag(this, "GPSLatitudeRef") || "N";  
+      console.log('latRef', latRef);
+      var lonRef = EXIF.getTag(this, "GPSLongitudeRef") || "W"; 
+      console.log('typeof LON', typeof lon);
+      Number(lon);
+      console.log('typeof LON after parseInt', typeof lon);
+      console.log('lonRef', lonRef);
+      console.log('lat B4 timed', lat);
+      
+      latRef !== "N" ? lat * -1 : lat;
+      // lat = (lat[0] + lat[1]/60 + lat[2]/3600) * (latRef == "N" ? 1 : -1);  
+      console.log('lat divided & timed', lat);
+      console.log('LON B4 timed', lon);
+      console.log('lon * -1 = ', lon * -1);
+      lonRef === "W" ? (lon * -1) : lon;
+      console.log('LON timed if negative...', lon);
+      
+      // lon = (lon[0] + lon[1]/60 + lon[2]/3600) * (lonRef == "W" ? -1 : 1); 
+    });
     
     // console.log('exif fn fired', EXIF.getData(event.target, function(){
     //   // need to handle the trailing zero after lat & lon are joined
     //   console.log('got EXIF latitude', EXIF.getTag(this, "GPSLatitude").join("."), 'got EXIF longitude', EXIF.getTag(this, "GPSLongitude").join("."));
     // }));
-
     /*
     console.log('exif fn fired', EXIF.getData(event.target, function(){
       // need to handle the trailing zero after lat & lon are joined
@@ -105,70 +60,59 @@ class PostNew extends Component{
     }));
     */
   }
-    render(){
-      console.log("postNew props", this.props);
-        const { handleSubmit } = this.props;                                
-        return (
-          <form id = "dropForm" className="dropzone" onSubmit = {handleSubmit(this.onSubmit.bind(this))} encType="multipart/form-data">
-            <h3>Create A New Post</h3>
-            <div>
-              <label htmlFor="title">Title</label>
-              <Field name="title" component="input" type="text" className="form-control" value="defaultValue"/>              
-              <div className="text-help">                
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="longitude">Longitude</label>
-              <Field name="longitude" component="input" type="text" className="form-control" placeholder="e.g. 40.73"/>                            
-              <div className="text-help">                
-              </div>
-            </div>     
-
-            <div>
-              <label htmlFor="latitude">Latitude</label>
-              <Field name="latitude" component="input" type="text" className="form-control" placeholder="e.g. -73.9"/>                            
-              <div className="text-help">                
-              </div>
-            </div>     
-
-            <div>
-              <label htmlFor="description">Description</label>
-              <Field name="description" component="input" type="text" className="form-control"/>                            
-              <div className="text-help">                
-              </div>
-            </div>                
-
-            <div>
-              <label htmlFor="categories">Categories</label>
-              <Field name="categories" component="input" type="text" className="form-control"/>                            
-              <div className="text-help">                
-              </div>
-            </div>    
-
-            <div>
-              <label htmlFor="images">Files</label>
-              <Field
-                name="files"                            
-                component={renderDropzoneInput}
-              />
-            </div>
-            <button type="submit" className="btn btn-primary" id="buttonNew">Submit</button>            
-          </form>
-        )
-    }
+  onArtChange(event){
+    this.setState({title: event.target.value});
+  }
+  
+  onDescriptionChange(event){
+    this.setState({description: event.target.value})
+  }
+  onImageChange(event){
+    this.setState({image: event.target.value})
+  }
+  onDrop(file){
+    // console.log('Received DropZone files: ', file);
+    var slicedArray = this.state.files.slice()
+    // console.log("slicedArray", slicedArray)
+    slicedArray.push(file[0])
+    this.setState({ files: slicedArray })
+    console.log("after drop, current state.files: ", this.state.files, 'after push slicedArray', slicedArray);
+  }
+  onFormSubmit(event){
+    
+    event.preventDefault();
+    let payload = this.state;
+    console.log("in onFormSubmit!!! with state: ", this.state, "and payload: ", payload);
+    
+    axios.post('/api/art', payload)
+    .then(function(response){
+    console.log('saved successfully')
+  });   
+  }
+  render() {
+    return (
+      <main>
+        <h1>Post Page</h1>
+        <br></br>
+        <form onSubmit={this.onFormSubmit} encType="multipart/form-data">
+          <input type="text" placeholder="Title of Artwork" value={this.state.title} onChange={this.onArtChange}/>
+            <br></br>
+            <textarea type="text" placeholder="Description" value={this.state.description} onChange={this.onDescriptionChange}/>
+            <br></br> 
+             <Dropzone value={this.state.files} onDrop={this.onDrop}>
+              <div>Try dropping some files here, or click to select files to upload.</div>
+            </Dropzone>
+            <input type="submit"/>
+            <br></br>
+            {this.state.files.length > 0 ? <div>
+                <h2>Uploading {this.state.files.length} files...</h2>
+                <div>{this.state.files.map((file, i) => <img id="file-input" onClick={this.getGpsInfo} key={i} src={file.preview} /> )}</div>
+                </div> : null }
+                
+        </form>
+      </main>
+    );
+  }
 }
-
-function mapStateToProps(state){
-    return { 
-      loc: state.loc,
-
-     }
-}
-
-PostNew = reduxForm({
-  form: 'PostsTest'  
-  // validate
-},mapStateToProps,{ createPost3 })(PostNew);
-
 export default PostNew;
+Add Comment

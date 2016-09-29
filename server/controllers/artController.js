@@ -51,7 +51,11 @@ module.exports.insertArt = function(req, res) {
     art.description = req.body.description;
     art.categories = req.body.categories;
     art.image = req.body.image;
+<<<<<<< 7eac407c562bced1dfae27aeb36c8b1df7ba886d
     art.images = imagePaths;
+=======
+    art.likes = req.body.likes;
+>>>>>>> feat(): change input form to reflect the new "likes" category
     // art.user = req.body.user; //probably find from querying db on token
 
     // art.setLocation(req.body.location);
@@ -92,7 +96,9 @@ module.exports.findArt = function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      console.log('findArt Data',data);
+
+      console.log('findArt Data======================>',data);
+
      
       const range = 0.006;
       let lngMin = req.body.longitude - range;
@@ -124,7 +130,12 @@ module.exports.findArt = function(req, res) {
       }
       result.sort(compareDistance);
       // end of sort by distance from me
+<<<<<<< 7eac407c562bced1dfae27aeb36c8b1df7ba886d
       console.log(result);
+=======
+      console.log('findArt Result======================>',result);
+
+>>>>>>> feat(): change input form to reflect the new "likes" category
   
       res.status(200).send(result);
     }

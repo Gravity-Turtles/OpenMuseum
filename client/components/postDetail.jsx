@@ -25,6 +25,15 @@ class PostDetail extends Component {
         <h1>{this.props.posts[i].title}</h1>
         <div>Images here</div>
         <div>{this.props.posts[i].description}</div>
+        <Button
+          bsStyle="primary"
+          bsSize="small"
+        >
+          Like
+        </Button>
+        <div>{this.props.posts[i].likes}</div>
+
+
 
       <div>
         <MyModal props={this.props}/>
