@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class SearchBar extends Component {
   constructor(props) {
@@ -16,7 +17,23 @@ export default class SearchBar extends Component {
 
   onFormSubmit(event) {
     event.preventDefault();
-    this.props.getGeoFromAddress(this.state.address);
+    let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + this.state.address + '&key=AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo';
+    let request = axios.get(GEOCODING);
+
+    request.then(({data}) => {
+      let geoFromSearch = {}
+      console.log("GEO DATA FROM Search=======", data);
+      if (data.results[0]) {
+        geoFromSearch.latitude = data.results[0].geometry.location.lat;
+        geoFromSearch.longitude = data.results[0].geometry.location.lng;
+        console.log("GEO DATA FROM Search=======", geoFromSearch);
+      }
+      else  {
+        console.log("Geolocation data not found");
+      }
+      this.props.fetchPostsFromSearch(geoFromSearch);
+    }).catch(console.log("no DATA at getGeoFromSearch"));
+   
   }
 
   render() {

@@ -92,7 +92,7 @@ module.exports.findArt = function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      // console.log('findArt Data',data);
+      console.log('findArt Data',data);
      
       const range = 0.006;
       let lngMin = req.body.longitude - range;
@@ -124,7 +124,7 @@ module.exports.findArt = function(req, res) {
       }
       result.sort(compareDistance);
       // end of sort by distance from me
-
+      console.log(result);
   
       res.status(200).send(result);
     }

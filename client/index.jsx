@@ -8,6 +8,7 @@ import css from './style/style.css';
 import App from './components/app';
 import FrontPage from './components/frontPage';
 import PostLists from './components/postLists';
+import PostListsFromSearch from './components/postListsFromSearch';
 import PostDetail from './components/postDetail';
 import PostNew from './components/postNew';
 import Signup from './components/signup';
@@ -25,6 +26,7 @@ const router = (
         <IndexRoute component={FrontPage} />
         <Route path="new" component={PostNew} />
         <Route path="posts" component={PostLists} />
+        <Route path="postsfromsearch" component={PostListsFromSearch} />
         <Route path="posts/:id" component={PostDetail} />
         <Route path="signup" component={Signup} />
       </Route>

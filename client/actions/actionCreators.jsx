@@ -2,6 +2,7 @@
 import axios from 'axios';
 import superagent from 'superagent';
 //var request = require('superagent')
+import { browserHistory } from 'react-router';
 
 export function fetchPosts(location) {
   console.log("inside ActionCreater fetchPosts", location);
@@ -9,9 +10,23 @@ export function fetchPosts(location) {
 
   return (dispatch) => {
     request.then(({data}) => {
-      console.log("Post=======", data)
-      dispatch({type: 'FETCH_POSTS', posts: data})
+      console.log("Post=======", data);
+      dispatch({type: 'FETCH_POSTS', posts: data});
     }).catch(console.log("no DATA at fetchPosts"));
+  }
+}
+
+export function fetchPostsFromSearch(location) {
+  console.log("inside ActionCreater fetchPostsFromSearch", location);
+  const request = axios.post('/api/findArt', location);
+
+  return (dispatch) => {
+    request.then(({data}) => {
+      console.log("Post=======", data);
+      dispatch({type: 'FETCH_POSTS', posts: data});
+      dispatch({type: 'GET_GEO_SEARCH', geoFromSearch: location});
+      browserHistory.push('/postsfromsearch');
+    }).catch(console.log("no DATA at fetchPostsFromSearch"));
   }
 }
 
@@ -71,23 +86,3 @@ const request = axios.put('/api/Art', object);
   }
 }
 
-export function getGeoFromAddress(address) {
-  let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo';
-  let request = axios.get(GEOCODING);
-
-  return (dispatch) => {
-    request.then(({data}) => {
-      let geoFromAddress = {}
-      console.log("GEO DATA FROM ADDRESS=======", data);
-      if (data.results[0]) {
-        geoFromAddress.latitude = data.results[0].geometry.location.lat;
-        geoFromAddress.longitude = data.results[0].geometry.location.lng;
-        console.log("GEO DATA FROM ADDRESS=======", geoFromAddress);
-      }
-      else  {
-        console.log("Geolocation data not found");
-      }
-      dispatch({type: 'GET_GEO_ADDRESS', geoFromAddress: geoFromAddress})
-    }).catch(console.log("no DATA at getGeoFromAddress"));
-  }    
-}
