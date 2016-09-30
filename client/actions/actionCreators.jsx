@@ -1,12 +1,12 @@
-// get Location
+// get location
 import axios from 'axios';
 import request from 'superagent';
 //var request = require('superagent')
 import { browserHistory } from 'react-router';
 
-export function fetchPosts(location) {
-  console.log("inside ActionCreater fetchPosts", location);
-  const request = axios.post('/api/findArt', location);
+export function fetchPosts(loc) {
+  console.log("inside ActionCreater fetchPosts", loc);
+  const request = axios.post('/api/findArt', loc);
 
   return (dispatch) => {
     request.then(({data}) => {
@@ -16,15 +16,15 @@ export function fetchPosts(location) {
   }
 }
 
-export function fetchPostsFromSearch(location) {
-  console.log("inside ActionCreater fetchPostsFromSearch", location);
-  const request = axios.post('/api/findArt', location);
+export function fetchPostsFromSearch(loc) {
+  console.log("inside ActionCreater fetchPostsFromSearch", loc);
+  const request = axios.post('/api/findArt', loc);
 
   return (dispatch) => {
     request.then(({data}) => {
       console.log("Post=======", data);
       dispatch({type: 'FETCH_POSTS', posts: data});
-      dispatch({type: 'GET_GEO_SEARCH', geoFromSearch: location});
+      dispatch({type: 'GET_GEO_SEARCH', geoFromSearch: loc});
       browserHistory.push('/postsfromsearch');
     }).catch(console.log("no DATA at fetchPostsFromSearch"));
   }
@@ -36,20 +36,20 @@ function getLocPromise() {
   });
 }
 export function getLocation() {
-  let loc = getLocPromise();
+  let locPromise = getLocPromise();
   return (dispatch) => {
-    loc.then((position) => {
-      let location = {};
+    locPromise.then((position) => {
+      let loc = {};
       console.log("Location=======", position)
-      location.latitude  = position.coords.latitude;
-      location.longitude = position.coords.longitude;
-      dispatch({type: 'GET_LOCATION', location})
+      loc.latitude  = position.coords.latitude;
+      loc.longitude = position.coords.longitude;
+      dispatch({type: 'GET_LOCATION', loc})
     }).catch(console.log("no DATA at getLocation"));
   }
 }
 
-export function getCityName(location) {
-  let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + location.latitude + '%2C' + location.longitude + '&key=AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo';
+export function getCityName(loc) {
+  let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + loc.latitude + '%2C' + loc.longitude + '&key=AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo';
   let request = axios.get(GEOCODING);
 
   return (dispatch) => {
@@ -112,3 +112,36 @@ export function createPost3(props) {
     })
 }
 
+
+////// ACTIONS FOR AUTH
+
+export function signinUser({ email, password }) {
+  console.log("here inside signInUser");
+  return function(dispatch) {
+    axios.post('api/signin', { email, password })
+      .then(response => {
+        dispatch({ type: 'AUTH_USER' });
+        localStorage.setItem('token', response.data.token);
+        browserHistory.push('/');
+      })
+      .catch(() => {
+        dispatch(authError('Bad Sign in Info'));
+      });
+  }
+}
+
+
+export function authError(error) {
+   console.log("Here", error);
+  return {
+    type: 'AUTH_ERROR',
+    payload: error
+  };
+}
+
+
+export function signoutUser() {
+  localStorage.removeItem('token');
+
+  return { type: 'UNAUTH_USER' };
+}

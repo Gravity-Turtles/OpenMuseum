@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import SearchBox from './searchBox'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../actions/actionCreators';
 
-export default class FrontPage extends Component {
+class FrontPage extends Component {
 
   renderCityName() {
-    console.log('inside renderCityName',this.props.location.latitude);
-    if (this.props.location.latitude) {
-     this.props.getCityName(this.props.location); 
+    console.log('inside renderCityName',this.props);
+    if (this.props.loc.latitude) {
+     this.props.getCityName(this.props.loc); 
      return this.props.cityName;  
     }  
     return this.props.cityName;
   }
 
   render() {
+    console.log('inside render ',this.props)
     return (
       <main>
         <h1>OPEN</h1>
@@ -28,3 +32,16 @@ export default class FrontPage extends Component {
     );
   }
 }
+
+function mapStateToProps(state){
+  return { 
+    loc: state.loc,
+    cityName: state.cityName
+   };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FrontPage);

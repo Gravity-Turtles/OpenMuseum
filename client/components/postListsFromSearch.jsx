@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../actions/actionCreators';
 import GoogleMap from './googleMap';
 
-export default class PostListsFromSearch extends Component {
+class PostListsFromSearch extends Component {
 
   renderPost() {
     if(this.props.posts === undefined) {
@@ -40,7 +43,6 @@ export default class PostListsFromSearch extends Component {
     }
   }
 
-
   render() {
     return (
       <main>
@@ -55,3 +57,17 @@ export default class PostListsFromSearch extends Component {
     );
   }
 }
+
+function mapStateToProps(state){
+  return { 
+    loc: state.loc,
+    geoFromSearch: state.geoFromSearch,
+    posts: state.posts
+   };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostListsFromSearch);

@@ -106,7 +106,7 @@ class PostNew extends Component{
     */
   }
     render(){
-      
+      console.log("postNew props", this.props);
         const { handleSubmit } = this.props;                                
         return (
           <form id = "dropForm" className="dropzone" onSubmit = {handleSubmit(this.onSubmit.bind(this))} encType="multipart/form-data">
@@ -161,7 +161,7 @@ class PostNew extends Component{
 
 function mapStateToProps(state){
     return { 
-      location: state.location,
+      loc: state.loc,
 
      }
 }

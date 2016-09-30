@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../actions/actionCreators';
 import GoogleMap from './googleMap';
 
-export default class PostLists extends Component {
+class PostLists extends Component {
 
   renderPost() {
     if(this.props.posts === undefined) {
@@ -21,7 +24,7 @@ export default class PostLists extends Component {
   }
 
   renderMap() {
-    if (!this.props.location.latitude) {
+    if (!this.props.loc.latitude) {
       return (
         <div> loading...</div>
       );
@@ -31,7 +34,7 @@ export default class PostLists extends Component {
       console.log("something around you");
       return (
         <div style={{height:'100%'}}>
-          <GoogleMap lat={this.props.location.latitude} lng={this.props.location.longitude} {...this.props}/>
+          <GoogleMap lat={this.props.loc.latitude} lng={this.props.loc.longitude} {...this.props}/>
         </div>
       );
     } else {
@@ -55,3 +58,16 @@ export default class PostLists extends Component {
     );
   }
 }
+
+function mapStateToProps(state){
+  return { 
+    loc: state.loc,
+    posts: state.posts
+   };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostLists);

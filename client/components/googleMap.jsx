@@ -12,8 +12,8 @@ export default class googleMap extends Component {
     this.myLatLng = {lat: this.props.lat, lng: this.props.lng};
     this.myIcon = image;
     // prevent person icon to appear on the postDetail map
-    if (this.props.location.latitude.toFixed(3) !== this.props.lat.toFixed(3) ||
-        this.props.location.longitude.toFixed(3) !== this.props.lng.toFixed(3)) {
+    if (this.props.loc.latitude.toFixed(3) !== this.props.lat.toFixed(3) ||
+        this.props.loc.longitude.toFixed(3) !== this.props.lng.toFixed(3)) {
       this.myIcon = null;
     }
 
@@ -29,9 +29,9 @@ export default class googleMap extends Component {
     });
     // markers for the art posts nearby 
     // this.markers = [];
-    this.addMarker = function(location, title, i) {
+    this.addMarker = function(loc, title, i) {
       let marker = new google.maps.Marker({
-        position: location,
+        position: loc,
         map: this.map,
         animation: google.maps.Animation.DROP,
         label: "" + i,
@@ -42,10 +42,10 @@ export default class googleMap extends Component {
     if (this.props.posts){
       for (let i = 0; i < this.props.posts.length; i++) {
         let post = this.props.posts[i];
-        let location = {lat: post.locLat, lng: post.locLong};
+        let loc = {lat: post.locLat, lng: post.locLong};
         console.log("posts locations");
         let title = post.title; 
-        this.addMarker(location, title, i + 1);
+        this.addMarker(loc, title, i + 1);
       }
     }
   }
