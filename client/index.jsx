@@ -7,12 +7,12 @@ import css from './style/style.css';
 // import components
 import MainNav from './components/mainNav';
 import Signin from './components/auth/signin';
+import Signup from './components/auth/signup';
 import FrontPage from './components/frontPage';
 import PostLists from './components/postLists';
 import PostListsFromSearch from './components/postListsFromSearch';
 import PostDetail from './components/postDetail';
 import PostNew from './components/postNew';
-import Signup from './components/auth/signup';
 
 // import react router dependencies
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
@@ -26,11 +26,11 @@ const router = (
       <Route path="/" component={MainNav}>
         <IndexRoute component={FrontPage} />
         <Route path="signin" component={Signin} />
+        <Route path="signup" component={Signup} />
         <Route path="new" component={PostNew} />
         <Route path="posts" component={PostLists} />
         <Route path="postsfromsearch" component={PostListsFromSearch} />
         <Route path="posts/:id" component={PostDetail} />
-        <Route path="signup" component={Signup} />
       </Route>
     </Router>
   </Provider>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
-import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/actionCreators';
 
 class Signin extends Component {
@@ -44,11 +43,8 @@ class Signin extends Component {
 //   return { errorMessage: state.auth.error };
 // }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(actions, dispatch);
-}
 
 export default reduxForm({
   form: 'signin',
   fields: ['email', 'password']
-}, null, mapDispatchToProps)(Signin);
+}, null, actions)(Signin);
