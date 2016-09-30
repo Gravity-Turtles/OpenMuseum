@@ -13,11 +13,11 @@ class MainNav extends Component {
   }
 
   showSearchBtn() {
-    if (!this.props.location.latitude) {
+    if (!this.props.loc.latitude) {
       return (<div> ( . . . ) </div>);
     }
     return (
-      <Link to="/posts" onClick={this.props.fetchPosts.bind(null, this.props.location)}>
+      <Link to="/posts" onClick={this.props.fetchPosts.bind(null, this.props.loc)}>
        ( Search Near Me ) 
       </Link>
     );
@@ -42,7 +42,7 @@ class MainNav extends Component {
 
 function mapStateToProps(state){
     return { 
-      location: state.location,
+      loc: state.loc,
      }
 }
 

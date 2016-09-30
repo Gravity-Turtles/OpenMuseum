@@ -4,7 +4,7 @@ import { reducer as form } from 'redux-form';
 
 import geoFromSearch from './reducerGeoFromSearch';
 import cityName from './reducerCityName';
-import location from './reducerLocation';
+import loc from './reducerLocation';
 import posts from './reducerPosts';
 import comments from './reducerComments';
 
@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
   form,
   geoFromSearch,
   cityName,
-  location, 
+  loc, 
   posts, 
   comments, 
   routing: routerReducer});

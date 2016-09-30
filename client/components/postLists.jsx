@@ -24,7 +24,7 @@ class PostLists extends Component {
   }
 
   renderMap() {
-    if (!this.props.location.latitude) {
+    if (!this.props.loc.latitude) {
       return (
         <div> loading...</div>
       );
@@ -34,7 +34,7 @@ class PostLists extends Component {
       console.log("something around you");
       return (
         <div style={{height:'100%'}}>
-          <GoogleMap lat={this.props.location.latitude} lng={this.props.location.longitude} {...this.props}/>
+          <GoogleMap lat={this.props.loc.latitude} lng={this.props.loc.longitude} {...this.props}/>
         </div>
       );
     } else {
@@ -61,7 +61,7 @@ class PostLists extends Component {
 
 function mapStateToProps(state){
   return { 
-    location: state.location,
+    loc: state.loc,
     posts: state.posts
    };
 }

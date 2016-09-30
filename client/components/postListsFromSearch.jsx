@@ -60,7 +60,7 @@ class PostListsFromSearch extends Component {
 
 function mapStateToProps(state){
   return { 
-    location: state.location,
+    loc: state.loc,
     geoFromSearch: state.geoFromSearch,
     posts: state.posts
    };

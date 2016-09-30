@@ -8,8 +8,8 @@ class FrontPage extends Component {
 
   renderCityName() {
     console.log('inside renderCityName',this.props);
-    if (this.props.location.latitude) {
-     this.props.getCityName(this.props.location); 
+    if (this.props.loc.latitude) {
+     this.props.getCityName(this.props.loc); 
      return this.props.cityName;  
     }  
     return this.props.cityName;
@@ -35,7 +35,7 @@ class FrontPage extends Component {
 
 function mapStateToProps(state){
   return { 
-    location: state.location,
+    loc: state.loc,
     cityName: state.cityName
    };
 }
