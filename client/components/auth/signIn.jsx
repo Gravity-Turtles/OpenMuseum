@@ -25,25 +25,19 @@ class Signin extends Component {
     console.log("inside signin form",this.props);
 
     return (
-      <main>
-        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-          <div>
-            <label htmlFor="email">Email: </label>
-            <Field name="email" component="input" type="text" className="form-control" />
-          </div>
-          <div>
-            <label htmlFor="password">Password </label>
-            <Field name="password" component="input" type="password" className="form-control" />
-          </div>
-          <br/>
-          { this.renderAlert() }
-          <button type="submit" className="btn btn-primary">Sign in</button>
-        </form>
+      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
         <div>
-          <strong>Don't have an account? </strong>
-          <Link className="nav-link" to="/signup">Sign Up</Link>
+          <label htmlFor="email">Email: </label>
+          <Field name="email" component="input" type="text" className="form-control" />
         </div>
-      </main>
+        <div>
+          <label htmlFor="password">Password: </label>
+          <Field name="password" component="input" type="password" className="form-control" />
+        </div>
+        <br/>
+        { this.renderAlert() }
+        <button type="submit" className="btn btn-primary">Sign in</button>
+      </form>
     );
   }
 }

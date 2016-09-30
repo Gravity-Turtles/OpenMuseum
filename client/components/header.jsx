@@ -11,7 +11,10 @@ class Header extends Component {
       </li>
     } else {
       return (
-        <Link className="nav-link" to="/signin">Sign In</Link>
+        <div>
+          <Link className="nav-link" to="/signin">Sign In</Link>
+          <Link className="nav-link" to="/signup"> | Sign Up</Link>
+        </div>
       );
     }
   }

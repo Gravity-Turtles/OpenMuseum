@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import * as actions from '../../actions/actionCreators';
@@ -35,15 +34,15 @@ class Signup extends Component {
             <Field name="email" component="input" type="text" className="form-control" />
           </div>
           <div>
-            <label htmlFor="password">Password </label>
+            <label htmlFor="password">Password: </label>
             <Field name="password" component="input" type="password" className="form-control" />
           </div>
           <div>
-            <label htmlFor="password">Confirm Password </label>
+            <label htmlFor="password">Confirm Password: </label>
             <Field name="password" component="input" type="password" className="form-control" />
           </div>
           <br/>
-          { this.renderAlert() }
+          
           <button type="submit" className="btn btn-primary">Sign up</button>
         </form>
     );
