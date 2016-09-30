@@ -11,31 +11,9 @@ import MyModal from './modal';
 class PostDetail extends Component {
 
   render() {
-    console.log('FRONT PAGE'); 
-    console.log(requireContext.keys());
-    console.log(test)
-    console.log(test2)    
-    // console.log(image);
-
-
-    
     const i = this.props.posts.findIndex((post) => post._id === this.props.params.id);
-    console.log("post index", i)
-    console.log('props object: ')
-    console.log(this.props.posts[i]);
-    console.log(this.props.posts);
+    console.log("post index", i);
 
-    //create array of images
-    let imageCollection;
-    if(this.props.posts[i].images){
-      imageCollection = this.props.posts[i].images.map((item) => {
-        return `/../../${item}`
-        })
-    }
-
-    console.log('imageCollection');
-    console.log(imageCollection);
-    console.log(imageCollection[0]);
 
     return (
       <main>
@@ -46,10 +24,6 @@ class PostDetail extends Component {
         </div>
         <h1>{this.props.posts[i].title}</h1>
         <div>Images here</div>
-
-        <div><img src = {imageCollection[0]}/> </div>        
-
-        <div><img src = '/../../uploads/1475187584213.jpg'/> </div>   
         <div>{this.props.posts[i].description}</div>
 
       <div>
@@ -74,4 +48,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);
-
