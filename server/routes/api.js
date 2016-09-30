@@ -9,9 +9,12 @@ var passport = require('../../node_modules/passport');
 
 // middleware helper to process authentication requests thru passport
 var requireAuth = passport.authenticate('jwt', { session: false });
+var requireSignin = passport.authenticate('local', { session: false});
 
 router.post("/art", ctrlArt.insertArt);
 router.post("/findArt", ctrlArt.findArt);
+router.post("/signin", ctrlAuth.signin);
+// router.post("/signin", requireSignin, ctrlAuth.signin);
 router.post("/signup", ctrlAuth.signup);
 router.post("/testauth", requireAuth, ctrlTestauth.testauth);
 

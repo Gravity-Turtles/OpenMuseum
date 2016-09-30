@@ -84,10 +84,7 @@ module.exports.insertArt = function(req, res) {
 //****** Query DB for nearby art *******//
 module.exports.findArt = function(req, res) {
   console.log("req.body in findArt", req.body);  
-/* Enable the line below for production and comment out the other line further below */
-  // Art.find({location: req.body.location}, 'location', function(err, data) {
-/* Enable the line below for testing and comment out the line above */
-  // Art.find({location: 'nearby'}, 'location', function(err, data) {
+
   Art.find({}, function(err, data) {
     if (err) {
       console.log(err);
