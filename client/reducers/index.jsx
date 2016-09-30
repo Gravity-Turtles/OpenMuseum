@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import { reducer as form } from 'redux-form';
+import authReducer from './reducerAuth';
 
 import geoFromSearch from './reducerGeoFromSearch';
 import cityName from './reducerCityName';
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   loc, 
   posts, 
   comments, 
+  auth: authReducer,
   routing: routerReducer});
 
 export default rootReducer;

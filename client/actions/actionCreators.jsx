@@ -118,23 +118,30 @@ export function createPost3(props) {
 export function signinUser({ email, password }) {
   console.log("here inside signInUser");
   return function(dispatch) {
-    // Submit email/password to the server
     axios.post('api/signin', { email, password })
       .then(response => {
-        // If request is good...
-        // - Update state to indicate user is authenticated
         dispatch({ type: 'AUTH_USER' });
-        // - Save the JWT token
         localStorage.setItem('token', response.data.token);
-        // - redirect to the route '/feature'
         browserHistory.push('/');
       })
       .catch(() => {
-        // If request is bad...
-        // - Show an error to the user
-        console.log("Here", error);
-        dispatch(authError('Bad Login Info'));
+        dispatch(authError('Bad Sign in Info'));
       });
   }
 }
 
+
+export function authError(error) {
+   console.log("Here", error);
+  return {
+    type: 'AUTH_ERROR',
+    payload: error
+  };
+}
+
+
+export function signoutUser() {
+  localStorage.removeItem('token');
+
+  return { type: 'UNAUTH_USER' };
+}

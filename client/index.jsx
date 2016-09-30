@@ -8,6 +8,7 @@ import css from './style/style.css';
 import MainNav from './components/mainNav';
 import Signin from './components/auth/signin';
 import Signup from './components/auth/signup';
+import Signout from './components/auth/signout';
 import FrontPage from './components/frontPage';
 import PostLists from './components/postLists';
 import PostListsFromSearch from './components/postListsFromSearch';
@@ -27,6 +28,7 @@ const router = (
         <IndexRoute component={FrontPage} />
         <Route path="signin" component={Signin} />
         <Route path="signup" component={Signup} />
+        <Route path="signout" component={Signout} />
         <Route path="new" component={PostNew} />
         <Route path="posts" component={PostLists} />
         <Route path="postsfromsearch" component={PostListsFromSearch} />
