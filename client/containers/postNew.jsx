@@ -49,7 +49,8 @@ class PostNew extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      file: 'test'
+      file: 'test',
+      likes: 0
     };
     this.getGpsInfo = this.getGpsInfo.bind(this);
   }
