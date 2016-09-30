@@ -5,6 +5,18 @@ import { Bootstrap } from 'react-bootstrap';
 import { Button, Modal, showModal, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import MyModal from './modal';
 
+//*******TEMP
+var requireContext = require.context("../../uploads", true, /^\.\/.*\.jpg$/);
+var test = requireContext.keys().map(requireContext);
+
+import image from '../../uploads/1475180255072.jpg';
+
+// var imageProps = ["./1475180255072.jpg","./1475180794847.jpg"]
+var imageProps = ["./1475180255072.jpg"]
+
+var test2 = imageProps.map(requireContext);
+//*******TEMP
+
 
 export default class PostDetail extends Component {
     constructor(props){
@@ -55,9 +67,31 @@ export default class PostDetail extends Component {
 
 
   render() {
-    const i = this.props.posts.findIndex((post) => post._id === this.props.params.id);
-    console.log("post index", i);
+    console.log('FRONT PAGE'); 
+    console.log(requireContext.keys());
+    console.log(test)
+    console.log(test2)    
+    // console.log(image);
 
+
+    
+    const i = this.props.posts.findIndex((post) => post._id === this.props.params.id);
+    console.log("post index", i)
+    console.log('props object: ')
+    console.log(this.props.posts[i]);
+    console.log(this.props.posts);
+
+    //create array of images
+    let imageCollection;
+    if(this.props.posts[i].images){
+      imageCollection = this.props.posts[i].images.map((item) => {
+        return `/../../${item}`
+        })
+    }
+
+    console.log('imageCollection');
+    console.log(imageCollection);
+    console.log(imageCollection[0]);
 
     return (
       <main>
@@ -68,6 +102,10 @@ export default class PostDetail extends Component {
         </div>
         <h1>{this.props.posts[i].title}</h1>
         <div>Images here</div>
+
+        <div><img src = {imageCollection[0]}/> </div>        
+
+        <div><img src = '/../../uploads/1475187584213.jpg'/> </div>   
         <div>{this.props.posts[i].description}</div>
 
       <div>
