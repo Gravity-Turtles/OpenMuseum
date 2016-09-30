@@ -14,12 +14,12 @@ exports.signin =  function(req, res, next){
   // User has already had their email and password auth'd
   // We just need to give them a token
   
-  console.log('DA req says that req.email is...', req.email);
-  console.log('DA req says that req.password is...', req.password);
-  console.log('DA req says that req.user is...', req.user);
-  // console.log('DA req says that req.user.ID is...', req.user.id);
-  console.log('here in signin');
-  res.send({ token: tokenForUser(req.user) });
+  const user = new User({
+    email: req.body.email,
+    password: req.body.password
+  });
+
+  res.send({ token: tokenForUser(user) });
 }
 
 exports.signup = function(req, res, next){
