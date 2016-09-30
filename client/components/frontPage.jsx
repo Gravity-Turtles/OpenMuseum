@@ -26,7 +26,7 @@ class FrontPage extends Component {
         <div className="theme">
           <div>graffiti</div>
           <div>mosaic</div>
-          <div>Sculpture</div>
+          <div>Sculpture</div>          
         </div>
       </main>
     );

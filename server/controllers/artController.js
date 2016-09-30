@@ -52,6 +52,11 @@ module.exports.insertArt = function(req, res) {
     art.categories = req.body.categories;
     art.image = req.body.image;
     art.images = imagePaths;
+
+    //****** TEMP ******//
+    art.locLat = 40.745694;
+    art.locLong = -73.98617749999999;
+    //****** TEMP ******//
     // art.user = req.body.user; //probably find from querying db on token
 
     // art.setLocation(req.body.location);
