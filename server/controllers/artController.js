@@ -51,11 +51,12 @@ module.exports.insertArt = function(req, res) {
     art.description = req.body.description;
     art.categories = req.body.categories;
     art.image = req.body.image;
-<<<<<<< 7eac407c562bced1dfae27aeb36c8b1df7ba886d
     art.images = imagePaths;
-=======
     art.likes = req.body.likes;
->>>>>>> feat(): change input form to reflect the new "likes" category
+     //****** TEMP ******//
+    art.locLat = 40.745694;
+    art.locLong = -73.98614749999999;
+     //****** TEMP ******//
     // art.user = req.body.user; //probably find from querying db on token
 
     // art.setLocation(req.body.location);
@@ -130,6 +131,7 @@ module.exports.findArt = function(req, res) {
       }
       result.sort(compareDistance);
       // end of sort by distance from me
+<<<<<<< HEAD
 <<<<<<< 3f96163986d5d03d7319ea867cffa9fd45ce748e
 <<<<<<< 7eac407c562bced1dfae27aeb36c8b1df7ba886d
       console.log(result);
@@ -141,6 +143,10 @@ module.exports.findArt = function(req, res) {
 
       console.log('findArt Result======================>',result);
 >>>>>>> unstaged changes
+=======
+
+      console.log('findArt Result======================>',result);
+>>>>>>> likeButton
   
       res.status(200).send(result);
     }
