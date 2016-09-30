@@ -12,6 +12,12 @@ const store = createStore(rootReducer, compose(
     window.devToolsExtension ? window.devToolsExtension() : f => f
   ));
 
+const token = localStorage.getItem('token');
+if (token) {
+  store.dispatch({type: 'AUTH_USER'});
+}
+
+
 export const history = syncHistoryWithStore(browserHistory, store);
 
 export default store;

@@ -130,6 +130,20 @@ export function signinUser({ email, password }) {
   }
 }
 
+export function signupUser({ email, password }) {
+  return function(dispatch) {
+    axios.post('api/signup', { email, password })
+      .then(response => {
+        dispatch({ type: 'AUTH_USER' });
+        localStorage.setItem('token', response.data.token);
+        browserHistory.push('/');
+      })
+      .catch(response => {
+        console.log(response);
+        dispatch(authError(response.error));
+      });
+  }
+}
 
 export function authError(error) {
    console.log("Here", error);
@@ -142,6 +156,5 @@ export function authError(error) {
 
 export function signoutUser() {
   localStorage.removeItem('token');
-
   return { type: 'UNAUTH_USER' };
 }
