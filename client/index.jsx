@@ -11,7 +11,7 @@ import FrontPage from './components/frontPage';
 import PostLists from './components/postLists';
 import PostListsFromSearch from './components/postListsFromSearch';
 import PostDetail from './components/postDetail';
-import PostNew from './containers/postNew';
+import PostNew from './components/postNew';
 import Signup from './components/auth/signup';
 
 // import react router dependencies

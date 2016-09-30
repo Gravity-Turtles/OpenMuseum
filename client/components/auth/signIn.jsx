@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
-// import * as actions from '../../actions';
+import { bindActionCreators } from 'redux';
+import * as actions from '../../actions/actionCreators';
 
 class Signin extends Component {
   handleFormSubmit({ email, password }) {
-    // Need to do something to log user in
-    // this.props.signinUser({ email, password });
+    console.log("here inside handleSubmit");
+    this.props.signinUser({ email, password });
   }
 
   // renderAlert() {
@@ -20,7 +21,7 @@ class Signin extends Component {
 
   render() {
     const { handleSubmit, fields: { email, password }} = this.props;
-    console.log("Signin page props",this.props);
+    console.log("inside signin form",this.props);
 
     return (
       <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
@@ -32,7 +33,8 @@ class Signin extends Component {
           <label>Password:</label>
           <input {...password} type="password" className="form-control" />
         </fieldset>
-        <button action="submit" className="btn btn-primary">Sign In</button>
+   
+        <button action="submit" className="btn btn-primary">Sign in</button>
       </form>
     );
   }
@@ -42,7 +44,11 @@ class Signin extends Component {
 //   return { errorMessage: state.auth.error };
 // }
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actions, dispatch);
+}
+
 export default reduxForm({
   form: 'signin',
   fields: ['email', 'password']
-})(Signin);
+}, null, mapDispatchToProps)(Signin);
