@@ -14,6 +14,7 @@ import PostLists from './components/postLists';
 import PostListsFromSearch from './components/postListsFromSearch';
 import PostDetail from './components/postDetail';
 import PostNew from './components/postNew';
+import RequireAuth from './components/auth/requireAuth';
 
 // import react router dependencies
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
@@ -29,7 +30,7 @@ const router = (
         <Route path="signin" component={Signin} />
         <Route path="signup" component={Signup} />
         <Route path="signout" component={Signout} />
-        <Route path="new" component={PostNew} />
+        <Route path="new" component={RequireAuth(PostNew)} />
         <Route path="posts" component={PostLists} />
         <Route path="postsfromsearch" component={PostListsFromSearch} />
         <Route path="posts/:id" component={PostDetail} />
