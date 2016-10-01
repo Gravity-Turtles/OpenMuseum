@@ -156,7 +156,10 @@ export function authError(error) {
     payload: error
   };
 }
-
+export function clearError() {
+   console.log("Here in clearError");
+  return { type: 'CLEAR_ERROR' };
+}
 
 export function signoutUser() {
   localStorage.removeItem('token');
