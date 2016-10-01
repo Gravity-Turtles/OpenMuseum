@@ -10,16 +10,11 @@ function tokenForUser(user){
   return jwt.encode({ sub: user.id, iat: timestamp }, config.secret);
 }
 
-exports.signin =  function(req, res, next){
+exports.signin = function(req, res, next) {
   // User has already had their email and password auth'd
   // We just need to give them a token
-  
-  const user = new User({
-    email: req.body.email,
-    password: req.body.password
-  });
-
-  res.send({ token: tokenForUser(user) });
+  console.log("Here in signin", req.user);
+  res.send({ token: tokenForUser(req.user) });
 }
 
 exports.signup = function(req, res, next){
@@ -27,7 +22,8 @@ exports.signup = function(req, res, next){
   // res.send({success:'true'});
   // console.log('req.body.email', req.body.email);
 
-  // get email and pass from req.body
+  // get name, email and pass from req.body
+  const name = req.body.name;
   const email = req.body.email;
   const password = req.body.password;
 
@@ -40,10 +36,11 @@ exports.signup = function(req, res, next){
     // if a user with an email does exist, return an error
     if(existingUser) {
       console.log("existing user");
-      return res.status(422).send({ error: 'Email address is already in use'});
+      return res.status(422).send({ error: 'Email is in use'});
     }
     // if an email with a user DOES NOT exist, create and save user record
     const user = new User({
+      name: name,
       email: email,
       password: password
     });

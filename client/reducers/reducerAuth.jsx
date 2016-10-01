@@ -8,6 +8,8 @@ export default function(state = {}, action) {
     case 'AUTH_ERROR':
       console.log('authError received in reducer', action.payload);
       return Object.assign(state, { error: action.payload });
+    case 'CLEAR_ERROR':
+      return Object.assign(state, { error: '' });
     // case FETCH_MESSAGE:
     //   return { ...state, message: action.payload };
   }

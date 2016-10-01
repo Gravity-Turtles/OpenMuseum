@@ -30,10 +30,10 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(upload.any())
 
-//Set static file location
+// Set static file location
 app.use(express.static(__dirname + '/dist'))
 
-//for
+//for page refresh problem (not perfect yet)
 app.get('*', function (request, response){
   response.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
 })
