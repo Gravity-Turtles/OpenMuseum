@@ -2,10 +2,9 @@ const router = require("express").Router();
 
 const ctrlArt = require('../controllers/artController.js');
 
-const ctrlAuth = require('../controllers/authenticationController.js');
-const ctrlTestauth = require('../controllers/testauthController.js');
-const passportService = require('../services/passport');
-const passport = require('passport');
+var ctrlAuth = require('../controllers/authenticationController.js');
+var passportService = require('../../client/services/passport');
+var passport = require('../../node_modules/passport');
 
 // middleware helper to process authentication requests thru passport
 const requireAuth = passport.authenticate('jwt', { session: false });
@@ -16,6 +15,7 @@ router.get('/', requireAuth, function(req, res) {
 });
 router.post("/art", ctrlArt.insertArt);
 router.post("/findArt", ctrlArt.findArt);
+// router.post("/signin", ctrlAuth.signin);
 router.post("/signin", requireSignin, ctrlAuth.signin);
 router.post("/signup", ctrlAuth.signup);
 
