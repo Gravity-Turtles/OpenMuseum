@@ -77,12 +77,14 @@ export function getCityName(loc) {
 export function editArt(object){
   console.log("in actions with this object: ", object)
 
-  const request = axios.put('/api/Art', object);
+  const request = axios.put('/api/Art', object, {headers: {
+    authorization: localStorage.getItem('token') }}
+    );
 
   return (dispatch) => {
     request.then(({data}) => {
       console.log("Puuuuuuuuuuuuut response yo=======", data)
-    }).catch(console.log("no DATA at fetchPosts"));
+    }).catch(console.log("failed to edit Art"));
   }
 }
 
@@ -94,7 +96,9 @@ export function createPost3(props) {
   const categories = props.categories || 'undefined';
   const description = props.description || 'undefined';
 
-  var req = request.post('api/art');
+  var req = request.post('api/art')
+    .set({headers: {
+    authorization: localStorage.getItem('token') }});
 
   if(props.files){
     props.files.forEach((file)=> {
@@ -130,9 +134,9 @@ export function signinUser({ email, password }) {
   }
 }
 
-export function signupUser({ email, password }) {
+export function signupUser({ name, email, password }) {
   return function(dispatch) {
-    axios.post('api/signup', { email, password })
+    axios.post('api/signup', { name, email, password })
       .then(response => {
         dispatch({ type: 'AUTH_USER' });
         localStorage.setItem('token', response.data.token);
@@ -152,7 +156,10 @@ export function authError(error) {
     payload: error
   };
 }
-
+export function clearError() {
+   console.log("Here in clearError");
+  return { type: 'CLEAR_ERROR' };
+}
 
 export function signoutUser() {
   localStorage.removeItem('token');
