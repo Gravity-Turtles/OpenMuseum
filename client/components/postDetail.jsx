@@ -7,7 +7,6 @@ import jquery from 'jquery';
 import { Bootstrap } from 'react-bootstrap';
 import { Button, Modal, showModal, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import MyModal from './modal';
-
 import ImageSlide from '../components/imageSlide';
 
 class PostDetail extends Component {
@@ -15,6 +14,7 @@ class PostDetail extends Component {
   render() {
     const i = this.props.posts.findIndex((post) => post._id === this.props.params.id);
     console.log("post index", i);    
+    console.log(this.props.posts[i]);
 
 
     return (

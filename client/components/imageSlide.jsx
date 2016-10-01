@@ -137,12 +137,12 @@ class ImageSlide extends React.Component {
   }
 
   render() {
+
 let imgsTranslate = this.props.props.images.map((file) =>{
   return `.${file.slice(file.indexOf('/'),file.length)}`
 })
 
 const imagesImport = imgsTranslate.map(requireContext);
-console.log('requireContext', imagesImport);
 
 let imageCollection;
 if(imagesImport){
