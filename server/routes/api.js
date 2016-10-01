@@ -19,7 +19,8 @@ router.post("/signup", ctrlAuth.signup);
 router.post("/testauth", requireAuth, ctrlTestauth.testauth);
 
 console.log("in dat router")
-router.put("/art", ctrlArt.editArt)
+router.put("/art/editArt", ctrlArt.editArt)
+router.put("/art/editLikes", ctrlArt.editLikes)
 
 
 module.exports = router;
