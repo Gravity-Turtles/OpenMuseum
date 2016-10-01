@@ -27,7 +27,8 @@ exports.signup = function(req, res, next){
   // res.send({success:'true'});
   // console.log('req.body.email', req.body.email);
 
-  // get email and pass from req.body
+  // get name, email and pass from req.body
+  const name = req.body.name;
   const email = req.body.email;
   const password = req.body.password;
 
@@ -40,10 +41,11 @@ exports.signup = function(req, res, next){
     // if a user with an email does exist, return an error
     if(existingUser) {
       console.log("existing user");
-      return res.status(422).send({ error: 'Email address is already in use'});
+      return res.status(422).send({ error: 'Email is in use'});
     }
     // if an email with a user DOES NOT exist, create and save user record
     const user = new User({
+      name: name,
       email: email,
       password: password
     });

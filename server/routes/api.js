@@ -1,22 +1,25 @@
-var router = require("express").Router();
+const router = require("express").Router();
 
-var ctrlArt = require('../controllers/artController.js');
+const ctrlArt = require('../controllers/artController.js');
 
-var ctrlAuth = require('../controllers/authenticationController.js');
-var ctrlTestauth = require('../controllers/testauthController.js');
-var passportService = require('../../client/services/passport');
-var passport = require('../../node_modules/passport');
+const ctrlAuth = require('../controllers/authenticationController.js');
+const ctrlTestauth = require('../controllers/testauthController.js');
+const passportService = require('../services/passport');
+const passport = require('passport');
 
 // middleware helper to process authentication requests thru passport
-var requireAuth = passport.authenticate('jwt', { session: false });
-var requireSignin = passport.authenticate('local', { session: false});
+const requireAuth = passport.authenticate('jwt', { session: false });
+const requireSignin = passport.authenticate('local', { session: false});
 
+router.get('/', requireAuth, function(req, res) {
+  res.send({hi: 'there'});
+});
 router.post("/art", ctrlArt.insertArt);
 router.post("/findArt", ctrlArt.findArt);
 router.post("/signin", ctrlAuth.signin);
 // router.post("/signin", requireSignin, ctrlAuth.signin);
 router.post("/signup", ctrlAuth.signup);
-router.post("/testauth", requireAuth, ctrlTestauth.testauth);
+// router.post("/testauth", requireAuth, ctrlTestauth.testauth);
 
 console.log("in dat router")
 router.put("/art", ctrlArt.editArt)
