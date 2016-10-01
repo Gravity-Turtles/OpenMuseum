@@ -30,7 +30,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(upload.any())
 
-//Set static file location
+// Set static file location
 // app.use(express.static(__dirname + '/dist'))
 
 // //for page refresh problem (not perfect yet)
