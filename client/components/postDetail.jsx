@@ -10,9 +10,61 @@ import MyModal from './modal';
 
 class PostDetail extends Component {
 
+    constructor(props){
+    super(props)
+    const i = this.props.posts.findIndex((post) => post._id === this.props.params.id);
+    console.log("impoooooooortant: ", i);
+    this.state = {
+      title: this.props.posts[i].title,
+      likes: this.props.posts[i].likes,
+      incremented: false
+    }
+    console.log('++++++this.props.posts[i].likes', this.props.posts[i].likes, "state:", this.state)
+    
+     // this.getInitialState = this.getInitialState.bind(this);
+     this.toggle = this.toggle.bind(this);
+  }
+
+  toggle(){
+    // const i = this.props.posts.findIndex((post) => post._id === this.props.params.id);
+    // console.log("post index", i);
+    // var likes = this.props.posts[i].likes;
+   
+    var currentLikes = this.state.likes;
+    console.log("current hiu props and hiu likes: ", this.props, currentLikes)
+
+    if(this.state.incremented === false){
+      console.log("currentLikes: ", currentLikes)
+      currentLikes++;
+      console.log("++CUURRRRent LIkes: ", currentLikes);
+      this.setState({ likes: currentLikes, incremented : true}, function(){
+          let payload = this.state;
+          console.log("++likes: ", this.state.likes, "++payload: ", payload);
+          this.props.editLikes(payload)
+
+      })
+      
+      
+    } else {
+      currentLikes--;
+      this.setState({likes: currentLikes, incremented :false}, function(){
+        let payload = this.state;
+        console.log("--likes: ", this.state.likes, "--payload: ", payload);
+        this.props.editLikes(payload)
+      });
+    }   
+  }
+
+
   render() {
     const i = this.props.posts.findIndex((post) => post._id === this.props.params.id);
     console.log("post index", i);
+    var likes = this.props.posts[i].likes;
+
+    var increment = function(){
+      likes++;
+      console.log('hey likes: ', likes);
+    }
 
 
     return (
@@ -28,10 +80,10 @@ class PostDetail extends Component {
         <Button
           bsStyle="primary"
           bsSize="small"
-        >
-          Like
+        onClick={this.toggle}>
+          : )
         </Button>
-        <div>{this.props.posts[i].likes}</div>
+        <div>{this.state.likes}</div>
 
 
 

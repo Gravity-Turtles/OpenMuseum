@@ -131,22 +131,7 @@ module.exports.findArt = function(req, res) {
       }
       result.sort(compareDistance);
       // end of sort by distance from me
-<<<<<<< HEAD
-<<<<<<< 3f96163986d5d03d7319ea867cffa9fd45ce748e
-<<<<<<< 7eac407c562bced1dfae27aeb36c8b1df7ba886d
-      console.log(result);
-=======
       console.log('findArt Result======================>',result);
-
->>>>>>> feat(): change input form to reflect the new "likes" category
-=======
-
-      console.log('findArt Result======================>',result);
->>>>>>> unstaged changes
-=======
-
-      console.log('findArt Result======================>',result);
->>>>>>> likeButton
   
       res.status(200).send(result);
     }
@@ -169,6 +154,23 @@ Art.update({ 'title': req.body.oldArt.title }, { title: newName, description: ne
 });
 })
 }
+
+module.exports.editLikes = function(req, res){
+  console.log('EDITING LIKES, with req.body: ', req.body)
+  Art.find({ 'title': req.body.title }, function (err, docs) {
+ console.log('DOCS', docs);
+
+var newLikes = req.body.likes;
+
+Art.update({ 'title': req.body.title }, { likes: newLikes}, function(response) {
+    console.log("updated Likes, show me that RESPONSE", response);
+
+
+});
+})
+
+}
+
 // Art.find({title: req.body.oldArt.title})
 //     .select('title description')
 //     .exec(function(res){

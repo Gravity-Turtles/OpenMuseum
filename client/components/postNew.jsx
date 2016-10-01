@@ -115,4 +115,3 @@ class PostNew extends Component {
   }
 }
 export default PostNew;
-Add Comment
