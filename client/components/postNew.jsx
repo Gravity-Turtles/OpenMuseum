@@ -119,15 +119,8 @@ class PostNew extends Component{
             </div>
 
             <div>
-              <label htmlFor="longitude">Longitude</label>
-              <Field name="longitude" component="input" type="text" className="form-control" placeholder="e.g. 40.73"/>                            
-              <div className="text-help">                
-              </div>
-            </div>     
-
-            <div>
-              <label htmlFor="latitude">Latitude</label>
-              <Field name="latitude" component="input" type="text" className="form-control" placeholder="e.g. -73.9"/>                            
+              <label htmlFor="location">Location</label>
+              <Field name="location" component="input" type="text" className="form-control" placeholder="e.g. 1216 Broadway, NYC"/>                            
               <div className="text-help">                
               </div>
             </div>     
@@ -162,13 +155,16 @@ class PostNew extends Component{
 function mapStateToProps(state){
     return { 
       loc: state.loc,
-
      }
 }
 
+// PostNew = reduxForm({
+//   form: 'PostsTest'  
+//   // validate
+// },mapStateToProps,{ createPost3 })(PostNew);
 PostNew = reduxForm({
   form: 'PostsTest'  
   // validate
-},mapStateToProps,{ createPost3 })(PostNew);
+})(PostNew);
 
-export default PostNew;
+export default connect(mapStateToProps,{ createPost3 })(PostNew);

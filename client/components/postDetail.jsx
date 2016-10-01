@@ -7,29 +7,29 @@ import jquery from 'jquery';
 import { Bootstrap } from 'react-bootstrap';
 import { Button, Modal, showModal, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import MyModal from './modal';
+import ImageSlide from '../components/imageSlide';
 
 class PostDetail extends Component {
 
   render() {
     const i = this.props.posts.findIndex((post) => post._id === this.props.params.id);
-    console.log("post index", i);
+    console.log("post index", i);    
+    console.log(this.props.posts[i]);
 
 
     return (
       <main>
+        <h1>{this.props.posts[i].title}</h1>        
         <div style={{width:'100%', height:'350px'}}>
           <div style={{height:'100%'}}>
             <GoogleMap lat={this.props.posts[i].locLat} lng={this.props.posts[i].locLong} loc={this.props.loc}/>
           </div>
-        </div>
-        <h1>{this.props.posts[i].title}</h1>
-        <div>Images here</div>
+        </div>        
+        <ImageSlide props={this.props.posts[i]}/>
         <div>{this.props.posts[i].description}</div>
-
       <div>
         <MyModal props={this.props}/>
       </div>
-
       </main>
     );
   }
@@ -48,4 +48,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);
-
