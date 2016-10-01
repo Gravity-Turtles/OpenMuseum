@@ -40,15 +40,7 @@ class FrontPage extends Component {
         <div className="theme">
           <div>graffiti</div>
           <div>mosaic</div>
-<<<<<<< HEAD
-          <div>Sculpture</div>    
-
-          <div><img src = {test2[0]}/> </div>
-
-
-=======
           <div>Sculpture</div>          
->>>>>>> 0930
         </div>
       </main>
     );
