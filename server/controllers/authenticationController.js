@@ -10,16 +10,11 @@ function tokenForUser(user){
   return jwt.encode({ sub: user.id, iat: timestamp }, config.secret);
 }
 
-exports.signin =  function(req, res, next){
+exports.signin = function(req, res, next) {
   // User has already had their email and password auth'd
   // We just need to give them a token
-  
-  const user = new User({
-    email: req.body.email,
-    password: req.body.password
-  });
-
-  res.send({ token: tokenForUser(user) });
+  console.log("Here in signin", req);
+  res.send({ token: tokenForUser(req.body) });
 }
 
 exports.signup = function(req, res, next){
