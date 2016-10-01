@@ -40,10 +40,11 @@ module.exports.insertArt = function(req, res) {
   console.log(req.body)
   console.log(req.files)
   const imagePaths = []
-  req.files.forEach(function(file){
-    imagePaths.push(file.path)
-  })
-  
+  if(req.files){
+    req.files.forEach(function(file){
+      imagePaths.push(file.path)
+    })
+  }
     var art = new Art();
     art.title = req.body.title;    
     // art.title = 'test777';        

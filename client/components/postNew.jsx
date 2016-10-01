@@ -155,13 +155,16 @@ class PostNew extends Component{
 function mapStateToProps(state){
     return { 
       loc: state.loc,
-
      }
 }
 
+// PostNew = reduxForm({
+//   form: 'PostsTest'  
+//   // validate
+// },mapStateToProps,{ createPost3 })(PostNew);
 PostNew = reduxForm({
   form: 'PostsTest'  
   // validate
-},mapStateToProps,{ createPost3 })(PostNew);
+})(PostNew);
 
-export default PostNew;
+export default connect(mapStateToProps,{ createPost3 })(PostNew);
