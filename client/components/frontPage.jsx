@@ -16,20 +16,6 @@ class FrontPage extends Component {
   }
 
   render() {    
-    console.log('inside render ',this.props)
-
-    //create array of images
-    // let imageCollection;
-    // if(this.props.posts[i].images){
-    //   imageCollection = this.props.posts[i].images.map((item) => {
-    //     return `/../../${item}`
-    //     })
-    // }
-
-    // console.log('imageCollection');
-    // console.log(imageCollection);
-    // console.log(imageCollection[0]);
-
 
     return (
       <main>
@@ -40,7 +26,7 @@ class FrontPage extends Component {
         <div className="theme">
           <div>graffiti</div>
           <div>mosaic</div>
-          <div>Sculpture</div>          
+          <div>Sculpture</div>
         </div>
       </main>
     );

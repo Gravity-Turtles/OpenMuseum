@@ -68,7 +68,6 @@ class PostDetail extends Component {
     }
 
 
-
     return (
       <main>
         <h1>{this.props.posts[i].title}</h1>        
@@ -97,7 +96,6 @@ class PostDetail extends Component {
     );
   }
 }
-
 
 function mapStateToProps(state){
   return { 

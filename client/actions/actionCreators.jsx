@@ -1,7 +1,6 @@
 // get location
 import axios from 'axios';
 import request from 'superagent';
-//var request = require('superagent')
 import { browserHistory } from 'react-router';
 
 export function fetchPosts(loc) {
