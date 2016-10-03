@@ -61,8 +61,6 @@ class PostDetail extends Component {
       likes++;
     }
 
-
-
     const {
       FacebookShareButton,
       GooglePlusShareButton,
@@ -216,7 +214,6 @@ class PostDetail extends Component {
     );
   }
 }
-
 
 function mapStateToProps(state){
   return { 
