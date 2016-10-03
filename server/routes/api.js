@@ -3,7 +3,7 @@ const router = require("express").Router();
 const ctrlArt = require('../controllers/artController.js');
 
 var ctrlAuth = require('../controllers/authenticationController.js');
-var passportService = require('../../client/services/passport');
+var passportService = require('../services/passport');
 var passport = require('../../node_modules/passport');
 
 // middleware helper to process authentication requests thru passport

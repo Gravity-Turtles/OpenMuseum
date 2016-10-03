@@ -8,7 +8,6 @@ import { Bootstrap } from 'react-bootstrap';
 import { Button, Modal, showModal, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import MyModal from './modal';
 import ImageSlide from '../components/imageSlide';
-import FacebookProvider, { Like } from 'react-facebook'; // can probably deleted this
 import { ShareButtons, ShareCounts, generateShareIcon } from 'react-share';
 
 class PostDetail extends Component {
@@ -71,6 +70,30 @@ class PostDetail extends Component {
 
 
 
+const {
+  FacebookShareButton,
+  GooglePlusShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+  PinterestShareButton,
+  VKShareButton 
+} = ShareButtons;
+
+const {
+  FacebookShareCount,
+  GooglePlusShareCount,
+  LinkedinShareCount,
+  PinterestShareCount 
+} = ShareCounts;
+
+const FacebookIcon = generateShareIcon('facebook');
+const TwitterIcon = generateShareIcon('twitter');
+const GooglePlusIcon = generateShareIcon('google');
+const LinkedinIcon = generateShareIcon('linkedin');
+const PinterestIcon = generateShareIcon('pinterest');
+const VKIcon = generateShareIcon('vk');
+
+
     return (
       <main>
         <h1>{this.props.posts[i].title}</h1>        
@@ -85,12 +108,9 @@ class PostDetail extends Component {
 
         <div>
           FB Share button here
+          <FacebookIcon size={32} round={true} />
+         
 
-          
-
-          // <FacebookProvider appID="650322325142979">
-          //   <Like href="http://www.facebook.com" colorScheme="dark" showFaces share />
-          // </FacebookProvider>
         </div>
 
         <div>Images here</div>
