@@ -16,7 +16,6 @@ class PostDetail extends Component {
     console.log("post index", i);    
     console.log(this.props.posts[i]);
 
-
     return (
       <main>
         <h1>{this.props.posts[i].title}</h1>        
@@ -27,14 +26,13 @@ class PostDetail extends Component {
         </div>        
         <ImageSlide props={this.props.posts[i]}/>
         <div>{this.props.posts[i].description}</div>
-      <div>
-        <MyModal props={this.props}/>
-      </div>
+        <div>
+          <MyModal props={this.props}/>
+        </div>
       </main>
     );
   }
 }
-
 
 function mapStateToProps(state){
   return { 
