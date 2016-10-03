@@ -67,7 +67,6 @@ class PostDetail extends Component {
       console.log('hey likes: ', likes);
     }
 
-
     return (
       <main>
         <h1>{this.props.posts[i].title}</h1>        
