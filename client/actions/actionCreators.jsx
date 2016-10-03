@@ -78,7 +78,7 @@ export function editArt(object){
   console.log("in editArt action with this object: ", object)
 
 
-  const request = axios.put('/api/Art', object, {headers: {
+  const request = axios.put('/api/art', object, {headers: {
     authorization: localStorage.getItem('token') }}
     );
 
@@ -171,7 +171,7 @@ export function signoutUser() {
 export function editLikes(object){
   console.log("in editLikes action with this object: ", object)
 
-  const request = axios.put('/api/Art/editLikes', object);
+  const request = axios.put('/api/art/editLikes', object);
 
   return (dispatch) => {
     request.then(({data}) => {
