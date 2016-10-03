@@ -75,11 +75,13 @@ export function getCityName(loc) {
 }
 
 export function editArt(object){
-  console.log("in actions with this object: ", object)
+  console.log("in editArt action with this object: ", object)
+
 
   const request = axios.put('/api/Art', object, {headers: {
     authorization: localStorage.getItem('token') }}
     );
+
 
   return (dispatch) => {
     request.then(({data}) => {
@@ -164,4 +166,16 @@ export function clearError() {
 export function signoutUser() {
   localStorage.removeItem('token');
   return { type: 'UNAUTH_USER' };
+}
+
+export function editLikes(object){
+  console.log("in editLikes action with this object: ", object)
+
+  const request = axios.put('/api/Art/editLikes', object);
+
+  return (dispatch) => {
+    request.then(({data}) => {
+      console.log("Puuuuuuuuuuuuut for edit Likes data: ", data)
+    }).catch(console.log("no DATA at fetchPosts"));
+  }
 }

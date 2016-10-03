@@ -20,7 +20,8 @@ router.post("/signin", requireSignin, ctrlAuth.signin);
 router.post("/signup", ctrlAuth.signup);
 
 console.log("in dat router")
-router.put("/art", ctrlArt.editArt)
+router.put("/art/editArt", ctrlArt.editArt)
+router.put("/art/editLikes", ctrlArt.editLikes)
 
 
 module.exports = router;
