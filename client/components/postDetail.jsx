@@ -76,14 +76,14 @@ const {
   LinkedinShareButton,
   TwitterShareButton,
   PinterestShareButton,
-  VKShareButton 
+  VKShareButton
 } = ShareButtons;
 
 const {
   FacebookShareCount,
   GooglePlusShareCount,
   LinkedinShareCount,
-  PinterestShareCount 
+  PinterestShareCount
 } = ShareCounts;
 
 const FacebookIcon = generateShareIcon('facebook');
@@ -92,7 +92,6 @@ const GooglePlusIcon = generateShareIcon('google');
 const LinkedinIcon = generateShareIcon('linkedin');
 const PinterestIcon = generateShareIcon('pinterest');
 const VKIcon = generateShareIcon('vk');
-
 
     return (
       <main>
