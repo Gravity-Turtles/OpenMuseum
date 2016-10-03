@@ -108,9 +108,7 @@ class PostNew extends Component{
 
   handleInitialize() {
     const initData = {
-    "title": "Test title",
     "location": this.props.geoFromImage,
-    "description": this.props.loc.longitude
     };
     this.props.initialize(initData);
   }
