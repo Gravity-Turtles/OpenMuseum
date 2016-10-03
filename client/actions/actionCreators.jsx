@@ -65,11 +65,11 @@ export function getCityName(loc) {
         state = value[count - 2];
         city = value[count - 3].slice(1);
         console.log("city name is: " + city);
+        dispatch({type: 'GET_CITYNAME', cityName: city})
       }
       else  {
         console.log("address not found");
       }
-      dispatch({type: 'GET_CITYNAME', cityName: city})
     }).catch(console.log("no DATA at getCityName"));
   }    
 }
@@ -77,9 +77,7 @@ export function getCityName(loc) {
 export function editArt(object){
   console.log("in actions with this object: ", object)
 
-  const request = axios.put('/api/Art', object, {headers: {
-    authorization: localStorage.getItem('token') }}
-    );
+  const request = axios.put('/api/Art', object);
 
   return (dispatch) => {
     request.then(({data}) => {
@@ -97,8 +95,8 @@ export function createPost3(props) {
   const description = props.description || 'undefined';
 
   var req = request.post('api/art')
-    .set({headers: {
-    authorization: localStorage.getItem('token') }});
+    // .set({headers: {
+    // authorization: localStorage.getItem('token') }});
 
   if(props.files){
     props.files.forEach((file)=> {
@@ -115,6 +113,27 @@ export function createPost3(props) {
         else console.log(res)
     })
 }
+
+
+export function updateLocFromImage(loc) {
+
+  console.log("updateLocFromImage called", loc);
+  let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + loc.lat + '%2C' + loc.lon + '&key=AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo';
+  let request = axios.get(GEOCODING);
+
+  return (dispatch) => {
+    request.then(({data}) => {
+      if (data.results[0]) {
+        let address = data.results[0].formatted_address ;
+        dispatch({type: 'GEO_FROM_IMAGE', payload: address})
+      }
+      else  {
+        console.log("address not found");
+      }
+    }).catch(console.log("no DATA at updateLocFromImage"));
+  }    
+}
+
 
 
 ////// ACTIONS FOR AUTH

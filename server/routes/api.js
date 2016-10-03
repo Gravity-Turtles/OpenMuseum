@@ -11,9 +11,9 @@ const passport = require('passport');
 const requireAuth = passport.authenticate('jwt', { session: false });
 const requireSignin = passport.authenticate('local', { session: false});
 
-router.get('/', requireAuth, function(req, res) {
-  res.send({hi: 'there'});
-});
+// router.get('/', requireAuth, function(req, res) {
+//   res.send({hi: 'there'});
+// });
 router.post("/art", ctrlArt.insertArt);
 router.post("/findArt", ctrlArt.findArt);
 router.post("/signin", requireSignin, ctrlAuth.signin);
