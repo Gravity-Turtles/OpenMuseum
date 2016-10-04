@@ -7,6 +7,8 @@ const Art = mongoose.model('Art');
 const googleMapsClient = require('@google/maps').createClient({
   key: 'AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo'
 });
+const jwt =  require('jwt-simple');
+const config = require('../../config');
 
 Grid.mongo = mongoose.mongo;
 mongoose.connection.on('open', function() {
@@ -103,10 +105,6 @@ module.exports.findArt = function(req, res) {
     if (err) {
       console.log(err);
     } else {
-
-      console.log('findArt Data======================>',data);
-
-     
       const range = 0.006;
       let lngMin = req.body.longitude - range;
       let lngMax = req.body.longitude + range;
@@ -137,12 +135,6 @@ module.exports.findArt = function(req, res) {
       }
       result.sort(compareDistance);
       // end of sort by distance from me
-
-
-
-      console.log('findArt Result======================>',result);
-
-
   
       res.status(200).send(result);
     }
@@ -187,6 +179,30 @@ Art.update({ 'title': req.body.title }, { likes: newLikes}, function(response) {
 //     .exec(function(res){
 //       console.log("big DATABASE REsPONSE: ", res);
 //     })
+module.exports.insertComment = function(req, res) {
+  console.log('insertComment');
+  let userID = jwt.decode(req.headers.authorization,config.secret).sub  
+  Art.findById(req.body.id, function(err, art){  
+    let comments = art.comments;    
+    comments.push(req.body.comment);    
+    Art.findByIdAndUpdate(req.body.id, {$set:{
+      comments: comments
+    }}, {new: true}, function(err,art){
+      if(err) return handleError(err);
+      res.send(art);
+    });
+  })
+}
 
+module.exports.getComments = function(req, res) {
+  console.log('GET ART CONTROLLER');
+  console.log(req.body)
 
-
+//get comments and update
+  Art.findById(req.body.id, function(err, art){
+    console.log('ART', art);
+    console.log(art.comments);
+    if(err) return handleError(err);
+    res.send(art);
+  })
+}

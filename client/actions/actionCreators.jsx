@@ -107,7 +107,7 @@ export function createPost3(props) {
     });
   }
 
-  req
+  req    
     .field('title', title)
     .field('categories', categories)
     .field('description', description)
@@ -117,6 +117,65 @@ export function createPost3(props) {
     })
 }
 
+export function saveComment(comment,id) {
+  console.log('saveComment!');
+  console.log(comment)
+  console.log(id)
+
+  // return (dispatch) => {
+  //   axios.post('../api/comments', {comment, id})
+  //   .then(response => {
+  //     console.log('response')
+  //     console.log(response);
+  //     dispatch({ 
+  //       type: 'COMMENTS',
+  //       payload: response
+  //     })       
+  //   })
+  // }
+
+  return(dispatch) => {
+    axios({
+      method: 'post',
+      url: '../api/comments',
+      data: {
+        comment: comment,
+        id: id
+      },
+      headers:{
+        authorization: localStorage.getItem('token') 
+      }
+    })
+    .then(response => {
+      console.log('response2')
+      console.log(response);
+      dispatch({ 
+        type: 'COMMENTS',
+        payload: response
+      })       
+    })
+  };
+    // .catch(() => {
+    //   dispatch(authError('Bad Sign in Info'));
+    // });
+
+}
+
+export function getComments(id) {
+  console.log('getting comments!!!!')
+  console.log(id);
+  return (dispatch) => {
+    axios.post('../api/commentsGet', {id})
+      .then(response => {
+      console.log('getComments response')
+      console.log(response);
+      dispatch({ 
+        type: 'COMMENTS',
+        payload: response
+      })       
+    })
+  }
+}
 
 ////// ACTIONS FOR AUTH
 
