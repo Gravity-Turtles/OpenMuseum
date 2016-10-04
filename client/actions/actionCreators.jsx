@@ -197,13 +197,17 @@ export function updateLocFromImage(loc) {
       }
       else {
         console.log("address not found");
-        dispatch({type: 'GEO_FROM_IMAGE', payload: address});
-
       }
     }).catch(console.log("no DATA at updateLocFromImage"));
   }    
 }
-
+export function load(data) {
+  console.log("loadCalled", data);
+  return {
+    type: 'INIT_FROM_POST',
+    payload: data
+  };
+}
 
 
 ////// ACTIONS FOR AUTH
