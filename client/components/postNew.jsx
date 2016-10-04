@@ -93,22 +93,15 @@ class PostNew extends Component{
   }
   onSubmit(props) {
     this.props.createPost3(props);
-
   }
+
   componentDidUpdate() {
-    this.handleInitialize();
-  }
-
-  handleInitialize() {
-    const initData = {
-    "location": this.props.geoFromImage,
-    };
-    this.props.initialize(initData);
+   this.props.autofill("location", this.props.geoFromImage);
   }
   
   render(){
     console.log("postNew props", this.props);
-    const { handleSubmit, title } = this.props;                                
+    const { handleSubmit } = this.props;                                
     return (
       <form id = "dropForm" className="dropzone" onSubmit = {handleSubmit(this.onSubmit.bind(this))} encType="multipart/form-data">
         <h3>Create A New Post</h3>
@@ -121,7 +114,7 @@ class PostNew extends Component{
 
         <div>
           <label htmlFor="location">Location</label>
-          <Field name="location" component="input" type="text" className="form-control"  />                             
+          <Field name="location" component="input" type="text" className="form-control" placeholder="Attach Image first, and change the address if not accurate."/>                             
           <div className="text-help">                
           </div>
         </div>     
