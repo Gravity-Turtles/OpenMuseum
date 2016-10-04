@@ -123,7 +123,7 @@ class PostNew extends Component{
 
         <div>
           <label htmlFor="location">Location</label>
-          <Field name="location" component="input" type="text" className="form-control" placeholder="Attach Image first, and change the address if not accurate."/>                             
+          <Field name="location" component="input" type="text" className="form-control" placeholder="Attach your image first."/>                             
           <div className="text-help">                
           </div>
         </div>     
