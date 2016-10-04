@@ -1,8 +1,11 @@
-export default function(state = "Change, if the address is not accurate.", action) {
+export default function(state = {}, action) {
   switch(action.type) {
-    case 'GEO_FROM_IMAGE' :
-      console.log("Got the Address from Image", action.payload);
+    case 'INIT_FROM_POST' :
+      console.log("Got the INIT DATA FROM POST", action.payload);
       return action.payload;
+    case 'GEO_FROM_IMAGE' :
+      console.log("Got the address from Image", action.payload);
+      return Object.assign(state, { location: action.payload });
     default:
       return state;
   }

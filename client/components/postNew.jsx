@@ -6,7 +6,7 @@ import Dropzone from 'react-dropzone';
 import request from 'superagent';
 import store from '../store';
 
-import { createPost3, updateLocFromImage } from '../actions/actionCreators';
+import * as actions from '../actions/actionCreators';
 
 class renderDropzoneInput extends Component{
   constructor(props) {
@@ -83,6 +83,13 @@ class renderDropzoneInput extends Component{
 
 ////////////////////////////////////////// 
 
+const data = {  // used to populate "geoFromImage" reducer when "Load" is clicked
+  title: '',
+  location: 'Attach Image first, then fix it, if not accurate',
+  description: '',
+  categories: ''
+}
+
 
 class PostNew extends Component{
   constructor(props) {
@@ -95,49 +102,39 @@ class PostNew extends Component{
     this.props.createPost3(props);
 
   }
-  componentDidUpdate() {
-    this.handleInitialize();
+  componentWillMount() {
+    this.props.initialize();
   }
 
-  handleInitialize() {
-    const initData = {
-    "location": this.props.geoFromImage,
-    };
-    this.props.initialize(initData);
-  }
+  
   
   render(){
     console.log("postNew props", this.props);
-    const { handleSubmit, title } = this.props;                                
+    const { handleSubmit, load, pristine, reset, submitting } = this.props;                                
     return (
       <form id = "dropForm" className="dropzone" onSubmit = {handleSubmit(this.onSubmit.bind(this))} encType="multipart/form-data">
         <h3>Create A New Post</h3>
         <div>
+          <button type="button" onClick={() => load(data)}>Load Data</button>
+        </div>
+        <div>
           <label htmlFor="title">Title</label>
           <Field name="title" component="input" type="text" className="form-control" />              
-          <div className="text-help">                
-          </div>
         </div>
 
         <div>
           <label htmlFor="location">Location</label>
-          <Field name="location" component="input" type="text" className="form-control"  />                             
-          <div className="text-help">                
-          </div>
+          <Field name="location" component="input" type="text" className="form-control" />                             
         </div>     
 
         <div>
           <label htmlFor="description">Description</label>
           <Field name="description" component="input" type="text" className="form-control" />                            
-          <div className="text-help">                
-          </div>
         </div>                
 
         <div>
           <label htmlFor="categories">Categories</label>
           <Field name="categories" component="input" type="text" className="form-control"/>                            
-          <div className="text-help">                
-          </div>
         </div>    
 
         <div>
@@ -156,7 +153,7 @@ class PostNew extends Component{
 function mapStateToProps(state){
   return { 
     loc: state.loc,
-    geoFromImage: state.geoFromImage
+    initialValues: state.geoFromImage
    }
 }
 
@@ -169,4 +166,4 @@ PostNew = reduxForm({
   // validate
 })(PostNew);
 
-export default connect(mapStateToProps,{ createPost3, updateLocFromImage })(PostNew);
+export default connect(mapStateToProps, actions)(PostNew);
