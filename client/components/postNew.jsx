@@ -84,14 +84,6 @@ class renderDropzoneInput extends Component{
 ////////////////////////////////////////// 
 
 
-const data = {  // used to populate "account" reducer when "Load" is clicked
-  title: '',
-  location: 'Fix, when the address is not accurate',
-  description: '',
-  categories: ''
-}
-
-
 class PostNew extends Component{
   constructor(props) {
     super(props);
@@ -100,31 +92,29 @@ class PostNew extends Component{
     };
   }
   onSubmit(props) {
-    this.props.createPost3(props)
+    this.props.createPost3(props);
 
   }
-  // componentDidUpdate() {
-  //   this.handleInitialize();
-  // }
+  componentDidUpdate() {
+    this.handleInitialize();
+  }
 
-  // handleInitialize() {
-  //   const initData = {
-  //   "title": null,
-  //   "location": this.props.geoFromImage,
-  //   };
-  //   this.props.initialize(initData);
-  // }
+  handleInitialize() {
+    const initData = {
+    "location": this.props.geoFromImage,
+    };
+    this.props.initialize(initData);
+  }
   
   render(){
-    // console.log("postNew props", this.props);
+    console.log("postNew props", this.props);
     const { handleSubmit, title } = this.props;                                
     return (
       <form id = "dropForm" className="dropzone" onSubmit = {handleSubmit(this.onSubmit.bind(this))} encType="multipart/form-data">
         <h3>Create A New Post</h3>
         <div>
           <label htmlFor="title">Title</label>
-          <Field name="title" component="input" type="text" className="form-control" onChange={(e) => {
-            console.log("value is: " + e.target.value)}} />              
+          <Field name="title" component="input" type="text" className="form-control" />              
           <div className="text-help">                
           </div>
         </div>
