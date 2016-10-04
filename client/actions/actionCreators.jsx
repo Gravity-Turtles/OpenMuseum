@@ -123,12 +123,15 @@ export function updateLocFromImage(loc) {
 
   return (dispatch) => {
     request.then(({data}) => {
-      if (data.results[0]) {
+      console.log("data", data);
+      if (data && data.results[0]) {
         let address = data.results[0].formatted_address ;
-        dispatch({type: 'GEO_FROM_IMAGE', payload: address})
+        dispatch({type: 'GEO_FROM_IMAGE', payload: address});
       }
-      else  {
+      else {
         console.log("address not found");
+        dispatch({type: 'GEO_FROM_IMAGE', payload: address});
+
       }
     }).catch(console.log("no DATA at updateLocFromImage"));
   }    

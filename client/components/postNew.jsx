@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 import Dropzone from 'react-dropzone';
 import request from 'superagent';
+import store from '../store';
 
 import { createPost3, updateLocFromImage } from '../actions/actionCreators';
 
@@ -27,13 +28,16 @@ class renderDropzoneInput extends Component{
           var geoLocFromImage = {};
           var lat = EXIF.getTag(this, "GPSLatitude");
           var lon = EXIF.getTag(this, "GPSLongitude");
+          if (lat) {
+            var latRef = EXIF.getTag(this, "GPSLatitudeRef") || "N";  
+            var lonRef = EXIF.getTag(this, "GPSLongitudeRef") || "W"; 
 
-          var latRef = EXIF.getTag(this, "GPSLatitudeRef") || "N";  
-          var lonRef = EXIF.getTag(this, "GPSLongitudeRef") || "W"; 
-
-          geoLocFromImage.lat = (lat[0] + lat[1]/60 + lat[2]/3600) * (latRef == "N" ? 1 : -1);  
-          geoLocFromImage.lon = (lon[0] + lon[1]/60 + lon[2]/3600) * (lonRef == "W" ? -1 : 1);
-          resolve(geoLocFromImage);
+            geoLocFromImage.lat = (lat[0] + lat[1]/60 + lat[2]/3600) * (latRef == "N" ? 1 : -1);  
+            geoLocFromImage.lon = (lon[0] + lon[1]/60 + lon[2]/3600) * (lonRef == "W" ? -1 : 1);
+            resolve(geoLocFromImage);
+          } else {
+            reject("no GPS data. Please type in the address.")
+          }
         });    
       });
     }
@@ -42,23 +46,11 @@ class renderDropzoneInput extends Component{
     .then((data) => {
       console.log(data);
       this.props.updateLocFromImage(data);
+    })
+    .catch((data) => {
+      console.log(data);
+      store.dispatch({type: 'GEO_FROM_IMAGE', payload: data});
     });
-
-    // var geoLocFromImage = {};
-    // EXIF.getData(event.target, function(){
-    //   var lat = EXIF.getTag(this, "GPSLatitude");
-    //   var lon = EXIF.getTag(this, "GPSLongitude");
-
-    //   var latRef = EXIF.getTag(this, "GPSLatitudeRef") || "N";  
-    //   var lonRef = EXIF.getTag(this, "GPSLongitudeRef") || "W"; 
-
-    //   geoLocFromImage.lat = (lat[0] + lat[1]/60 + lat[2]/3600) * (latRef == "N" ? 1 : -1);  
-    //   geoLocFromImage.lon = (lon[0] + lon[1]/60 + lon[2]/3600) * (lonRef == "W" ? -1 : 1);
-    //   // console.log("GPS from Image", geoLocFromImage);
-    // });
-    
-
-    
   }
 
   render(){
@@ -80,7 +72,7 @@ class renderDropzoneInput extends Component{
       </Dropzone>
       {this.state.images.length > 0 ? <div>
           <h2>Uploading {this.state.images.length} files...</h2>
-          <div id="imageContainer">{this.state.images.map((file) => <img onClick={this.getGpsInfo} key={file[0].name} className="imagePreview" src={file[0].preview} /> )}</div>
+          <div id="imageContainer">{this.state.images.map((file) => <img onLoad={this.getGpsInfo} key={file[0].name} className="imagePreview" src={file[0].preview} /> )}</div>
        </div> : null}
     </div>
   );
@@ -90,6 +82,15 @@ class renderDropzoneInput extends Component{
 
 
 ////////////////////////////////////////// 
+
+
+const data = {  // used to populate "account" reducer when "Load" is clicked
+  title: '',
+  location: 'Fix, when the address is not accurate',
+  description: '',
+  categories: ''
+}
+
 
 class PostNew extends Component{
   constructor(props) {
@@ -102,26 +103,28 @@ class PostNew extends Component{
     this.props.createPost3(props)
 
   }
-  componentDidUpdate() {
-    this.handleInitialize();
-  }
+  // componentDidUpdate() {
+  //   this.handleInitialize();
+  // }
 
-  handleInitialize() {
-    const initData = {
-    "location": this.props.geoFromImage,
-    };
-    this.props.initialize(initData);
-  }
+  // handleInitialize() {
+  //   const initData = {
+  //   "title": null,
+  //   "location": this.props.geoFromImage,
+  //   };
+  //   this.props.initialize(initData);
+  // }
   
   render(){
     // console.log("postNew props", this.props);
-    const { handleSubmit } = this.props;                                
+    const { handleSubmit, title } = this.props;                                
     return (
       <form id = "dropForm" className="dropzone" onSubmit = {handleSubmit(this.onSubmit.bind(this))} encType="multipart/form-data">
         <h3>Create A New Post</h3>
         <div>
           <label htmlFor="title">Title</label>
-          <Field name="title" component="input" type="text" className="form-control" />              
+          <Field name="title" component="input" type="text" className="form-control" onChange={(e) => {
+            console.log("value is: " + e.target.value)}} />              
           <div className="text-help">                
           </div>
         </div>
