@@ -38,9 +38,16 @@ class FrontPage extends Component {
         <h2>{this.renderCityName()}</h2>
         <SearchBox fetchPostsFromSearch={this.props.fetchPostsFromSearch}/>
         <div className="theme">
-          <div>graffiti</div>
-          <div>mosaic</div>
-          <div>Sculpture</div>          
+          <div className="themeRow">
+            <div className="themeBtn">Street Art</div>
+            <div className="themeBtn">Sclupture</div>
+            <div className="themeBtn">Architecture</div> 
+          </div>
+          <div className="themeRow">
+            <div className="themeBtn">Mosaic</div> 
+            <div className="themeBtn">Trending</div> 
+            <div className="themeBtn">Historic</div> 
+          </div>
         </div>
       </main>
     );
