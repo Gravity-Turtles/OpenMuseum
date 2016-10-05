@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/actionCreators';
 import GoogleMap from './googleMap';
 
-class PostListsFromSearch extends Component {
+class PostListsFromTheme extends Component {
 
   renderPost() {
     if(this.props.posts === undefined) {

@@ -12,6 +12,7 @@ import Signout from './components/auth/signout';
 import FrontPage from './components/frontPage';
 import PostLists from './components/postLists';
 import PostListsFromSearch from './components/postListsFromSearch';
+import PostListsFromTheme from './components/postListsFromTheme';
 import PostDetail from './components/postDetail';
 import PostNew from './components/postNew';
 import RequireAuth from './components/auth/requireAuth';
@@ -34,6 +35,7 @@ const router = (
         <Route path="new" component={RequireAuth(PostNew)} />
         <Route path="posts" component={PostLists} />
         <Route path="postsfromsearch" component={PostListsFromSearch} />
+        <Route path="postsfromtheme" component={PostListsFromTheme} />
         <Route path="posts/:id" component={PostDetail} />
         <Route path="imageSlide" component={ImageSlide} />              
       </Route>

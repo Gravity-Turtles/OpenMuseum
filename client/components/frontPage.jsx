@@ -39,14 +39,20 @@ class FrontPage extends Component {
         <SearchBox fetchPostsFromSearch={this.props.fetchPostsFromSearch}/>
         <div className="theme">
           <div className="themeRow">
-            <div className="themeBtn">Street Art</div>
-            <div className="themeBtn">Sclupture</div>
-            <div className="themeBtn">Architecture</div> 
+            <Link to="/postlistsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Street Art")}>
+              <div className="themeBtn">Street Art</div></Link>
+            <Link to="/postlistsfromtheme">
+              <div className="themeBtn">Sclupture</div></Link>
+            <Link to="/postlistsfromtheme">
+              <div className="themeBtn">Architecture</div></Link>
           </div>
           <div className="themeRow">
-            <div className="themeBtn">Mosaic</div> 
-            <div className="themeBtn">Trending</div> 
-            <div className="themeBtn">Historic</div> 
+            <Link to="/postlistsfromtheme">
+              <div className="themeBtn">Mosaic</div></Link> 
+            <Link to="/postlistsfromtheme">
+              <div className="themeBtn">Trending</div></Link> 
+            <Link to="/postlistsfromtheme">
+              <div className="themeBtn">Historic</div></Link> 
           </div>
         </div>
       </main>
