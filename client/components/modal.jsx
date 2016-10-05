@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import jquery from 'jquery';
 import { Bootstrap } from 'react-bootstrap';
-import { Button, Modal, showModal, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+import { Button, Modal, showModal, FormGroup, FormControl, ControlLabel, FieldGroup, Input } from 'react-bootstrap';
+import myDropzone from './dropzone';
+import { Field, reduxForm } from 'redux-form';
+import Dropzone from 'react-dropzone';
+
 
 export default class myModal extends Component {
     constructor(props){
@@ -10,7 +14,8 @@ export default class myModal extends Component {
       oldArt: '',
       showModal: false,
       newName: '',
-      newDescription: ''
+      newDescription: '',
+      images: []
     };
 
     this.getInitialState = this.getInitialState.bind(this)
@@ -19,7 +24,15 @@ export default class myModal extends Component {
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     this.onSubmission = this.onSubmission.bind(this);
+    this.pushImage = this.pushImage.bind(this)
   }
+
+    pushImage(image){
+      var pushable = [];
+      pushable.push(image);
+      console.log('image', image, 'pushable array', pushable);
+      this.setState({ images: pushable });
+    }
 
     getInitialState() {
     return { showModal: false };
@@ -60,6 +73,8 @@ export default class myModal extends Component {
     const i = this.props.props.posts.findIndex((post) => post._id === this.props.props.params.id);
     console.log("post index", i);
 
+    // const field = this.props
+    // const files = field.input.value;
 
     return (
       <main>
@@ -77,6 +92,8 @@ export default class myModal extends Component {
             <Modal.Title>Edit Art Listing</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+
+          
             
             <form>
               <h4>Name</h4>
@@ -87,12 +104,8 @@ export default class myModal extends Component {
               placeholder={this.props.props.posts[i].title}
               onChange={this.handleNameChange}
               />
-
-       
-
-
-
               </FormGroup>
+              
               <h4>Description</h4>
               <FormGroup>
               <FormControl
@@ -102,11 +115,24 @@ export default class myModal extends Component {
               onChange={this.handleDescriptionChange}
               />
               </FormGroup>
-            </form>
 
-         
-            
-            
+
+               
+
+            </form>
+          
+      <Dropzone                  
+        onDrop={( filesToUpload, e ) => {
+          this.setState({images: [...this.state.images,filesToUpload]}, function(){            
+            console.log('heres filesToUpload: ', filesToUpload);
+            //field.input.onChange(this.state.images); //done in callback bc setState doesn't immediately mutate state
+          });               
+        }
+      }
+      >
+        <div>Try dropping some files here, or click to select files to upload.</div>
+      </Dropzone>
+          
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.onSubmission}>Submit</Button>
