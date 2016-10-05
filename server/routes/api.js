@@ -15,13 +15,20 @@ router.get('/', requireAuth, function(req, res) {
 });
 router.post("/art", ctrlArt.insertArt);
 router.post("/findArt", ctrlArt.findArt);
-// router.post("/signin", ctrlAuth.signin);
 router.post("/signin", requireSignin, ctrlAuth.signin);
 router.post("/signup", ctrlAuth.signup);
 
 console.log("in dat router")
 router.put("/art", ctrlArt.editArt)
 router.put("/art/editLikes", ctrlArt.editLikes)
+
+
+router.get('/auth/facebook', passport.authenticate('facebook'));
+router.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/signin' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+});
 
 
 module.exports = router;

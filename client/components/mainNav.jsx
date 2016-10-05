@@ -3,7 +3,6 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/actionCreators';
-
 import Header from './header';
 
 class MainNav extends Component {
