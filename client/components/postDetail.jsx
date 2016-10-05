@@ -9,6 +9,8 @@ import { Button, Modal, showModal, FormGroup, FormControl, ControlLabel } from '
 import MyModal from './modal';
 import ImageSlide from '../components/imageSlide';
 import { ShareButtons, ShareCounts, generateShareIcon } from 'react-share';
+import myDropzone from './dropzone';
+
 
 class PostDetail extends Component {
 
@@ -200,11 +202,15 @@ class PostDetail extends Component {
         </Button>
         <div>{this.state.likes}</div>
 
-
+      
 
 
       <div>
         <MyModal props={this.props}/>
+      </div>
+
+      <div>
+        <myDropzone />
       </div>
       </main>
     );
