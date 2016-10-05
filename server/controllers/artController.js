@@ -69,7 +69,6 @@ module.exports.insertArt = function(req, res) {
 
     // art.setLocation(req.body.location);
 
-
     art.save(function(err) {
       console.log(err);      
       res.sendStatus(201);
