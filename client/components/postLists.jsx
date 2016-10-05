@@ -15,8 +15,8 @@ class PostLists extends Component {
       return ( 
         <li key={post._id}>
           <Link to={"posts/" + post._id}>
-            <strong>{post.title}</strong>
-            {post.description} {post.locLat} {post.locLong}
+            <strong>{post.title}</strong><br/>
+            {post.description}
           </Link>
         </li>
       );

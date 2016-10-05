@@ -161,14 +161,6 @@ export function updateLocFromImage(loc) {
     }).catch(console.log("no DATA at updateLocFromImage"));
   }    
 }
-export function load(data) {
-  console.log("loadCalled", data);
-  return {
-    type: 'INIT_FROM_POST',
-    payload: data
-  };
-}
-
 
 ////// ACTIONS FOR AUTH
 
