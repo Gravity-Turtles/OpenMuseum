@@ -132,6 +132,10 @@ export default class myModal extends Component {
       >
         <div>Try dropping some files here, or click to select files to upload.</div>
       </Dropzone>
+      {this.state.images.length > 0 ? <div>
+          <h2>Uploading {this.state.images.length} files...</h2>
+          <div id="imageContainer">{this.state.images.map((file) => <img key={file[0].name} className="imagePreview" src={file[0].preview} /> )}</div>
+       </div> : null}
           
           </Modal.Body>
           <Modal.Footer>
