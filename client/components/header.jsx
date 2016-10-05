@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { clearError } from '../actions/actionCreators'
+import { clearError, facebookAuthReq } from '../actions/actionCreators'
 
 class Header extends Component {
 
@@ -14,7 +14,8 @@ class Header extends Component {
       return (
         <div>
           <Link className="nav-link" to="/signin">Sign In</Link>
-          <Link className="nav-link" to="/signup" onClick={this.props.clearError}> | Sign Up</Link>
+           &nbsp;|&nbsp;<Link className="nav-link" to="/signup" onClick={this.props.clearError}>Sign Up</Link>
+           &nbsp;|&nbsp;<Link className="nav-link" onClick={this.props.facebookAuthReq}>Login with Facebook</Link>
         </div>
       );
     }
@@ -32,11 +33,14 @@ class Header extends Component {
 
 }
 
+
+
+
 function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated
   };
 }
 
-export default connect(mapStateToProps, { clearError })(Header);
+export default connect(mapStateToProps, { clearError, facebookAuthReq })(Header);
 

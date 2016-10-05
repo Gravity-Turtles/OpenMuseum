@@ -5,7 +5,7 @@ const config = require('../../config');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const LocalStrategy = require('passport-local');
-
+const FacebookStrategy = require('passport-facebook').Strategy;
 
 // create local strategy
 const localOptions = {usernameField: 'email'};
@@ -50,6 +50,26 @@ const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done){
   });
 });
 
+
+
+
+// create Facebook strategy
+const facebookOptions = {
+  clientID: 650322325142979,
+  clientSecret: '611cbd399fc90a129e236b4a7ece9db5',
+  callbackURL: "http://localhost:8888/auth/facebook/callback"
+};
+
+const facebookLogin = new FacebookStrategy(facebookOptions,
+  function(accessToken, refreshToken, profile, done) {
+    User.findOrCreate({ facebookId: profile.id }, function(err, user) {
+      if (err) { return done(err); }
+      return done(null, user);
+  });
+});
+
+
 // tell passport to use these strategies
 passport.use(jwtLogin);
 passport.use(localLogin);
+passport.use(facebookLogin);

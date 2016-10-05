@@ -179,3 +179,21 @@ export function editLikes(object){
     }).catch(console.log("no DATA at fetchPosts"));
   }
 }
+
+export function facebookAuthReq(){
+  console.log('in httpGet');
+
+  return function(dispatch) {
+    axios.get('api/auth/facebook')
+      .then(response => {
+        console.log('response.status === ', response.status);
+        console.log('passed to FB >>> > > ', response.data);
+        // dispatch({ type: 'AUTH_USER' });
+        // localStorage.setItem('token', response.data.token);
+        // browserHistory.push('/');
+      })
+      .catch(() => {
+        dispatch(authError('Bad signin info'));
+      });
+  }
+};

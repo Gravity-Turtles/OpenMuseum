@@ -35,7 +35,7 @@ const router = (
         <Route path="posts" component={PostLists} />
         <Route path="postsfromsearch" component={PostListsFromSearch} />
         <Route path="posts/:id" component={PostDetail} />
-        <Route path="imageSlide" component={ImageSlide} />              
+        <Route path="imageSlide" component={ImageSlide} />           
       </Route>
     </Router>
   </Provider>
