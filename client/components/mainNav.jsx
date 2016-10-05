@@ -28,7 +28,7 @@ class MainNav extends Component {
         {this.props.children}
         <nav className="mainNav">
           <Link to="/" className="navRow">Home</Link>
-          <div style={{"float": "left"}}>
+          <div>
             {this.showSearchBtn()}
           </div>
           <Link to="/new" className="navRow">Add New Artwork</Link>

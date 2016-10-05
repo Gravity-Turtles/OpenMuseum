@@ -3,9 +3,9 @@ import axios from 'axios';
 import request from 'superagent';
 import { browserHistory } from 'react-router';
 
-export function fetchPosts(loc) {
-  console.log("inside ActionCreater fetchPosts", loc);
-  const request = axios.post('/api/findArt', loc);
+export function fetchPosts(loc, theme) {
+  console.log("inside ActionCreater fetchPosts", loc, theme);
+  const request = axios.post('/api/findArt', loc, theme);
 
   return (dispatch) => {
     request.then(({data}) => {
@@ -28,6 +28,7 @@ export function fetchPostsFromSearch(loc) {
     }).catch(console.log("no DATA at fetchPostsFromSearch"));
   }
 }
+
 
 function getLocPromise() {
   return new Promise(function(resolve, reject) {
