@@ -5,8 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/actionCreators';
 import ImageGallery from 'react-image-gallery';
 
-const requireContext = require.context("../../uploads", true, /^\.\/.*\.jpg$/);
-
+// const requireContext = require.context("../../uploads", true, /^\.\/.*\.jpg$/);
 class ImageSlide extends React.Component {
 
   constructor(props) {
@@ -24,6 +23,7 @@ class ImageSlide extends React.Component {
       showNav: true,
       slideInterval: 2000,
       showVideo: {},
+      requireContext: require.context("../../uploads", true, /^\.\/.*\.jpg$/)
     };
   }
 
@@ -33,6 +33,11 @@ class ImageSlide extends React.Component {
       this._imageGallery.pause();
       this._imageGallery.play();
     }
+  }
+
+  componentWillMount(){
+    console.log('IMAGE SLIDE WILL MOUNT');
+    // this.setState({requireContext: require.context("../../uploads", true, /^\.\/.*\.jpg$/) })
   }
 
   _onImageClick(event) {
@@ -138,27 +143,28 @@ class ImageSlide extends React.Component {
 
   render() {
 
-let imgsTranslate = this.props.props.images.map((file) =>{
-  return `.${file.slice(file.indexOf('/'),file.length)}`
-})
-
-const imagesImport = imgsTranslate.map(requireContext);
-
-let imageCollection;
-if(imagesImport){
-  imageCollection = imagesImport.map((item) => {
-    return `/../../${item}`
+    let imgsTranslate = this.props.props.images.map((file) =>{
+      return `.${file.slice(file.indexOf('/'),file.length)}`
     })
-}
 
-let images = [];
+    const imagesImport = imgsTranslate.map(this.state.requireContext);
 
-imageCollection.forEach((image)=>{
-  images.push({
-    thumbnail: image,
-    original: image
-  })
-})
+    let imageCollection;
+    if(imagesImport){
+      imageCollection = imagesImport.map((item) => {
+        return `/../../${item}`
+        })
+    }
+
+    let images = [];
+
+    imageCollection.forEach((image)=>{
+      images.push({
+        thumbnail: image,
+        original: image
+      })
+    })
+
     return (
       <section className='app'>
         <ImageGallery
@@ -180,8 +186,7 @@ imageCollection.forEach((image)=>{
           showNav={this.state.showNav}
           slideInterval={parseInt(this.state.slideInterval)}
           slideOnThumbnailHover={this.state.slideOnThumbnailHover}
-        />
-            
+        />          
       </section>
     );
   }

@@ -12,6 +12,9 @@ import { ShareButtons, ShareCounts, generateShareIcon } from 'react-share';
 import myDropzone from './dropzone';
 
 
+import CommentBox from './commentBox';
+import CommentList from './commentList';
+
 class PostDetail extends Component {
 
     constructor(props){
@@ -25,6 +28,11 @@ class PostDetail extends Component {
     
      // this.getInitialState = this.getInitialState.bind(this);
      this.toggle = this.toggle.bind(this);
+  }
+
+  componentDidMount(){
+    this.props.getComments(this.props.params.id)
+    
   }
 
   toggle(){
@@ -54,6 +62,9 @@ class PostDetail extends Component {
 
 
   render() {
+    ////*** TEMP *****///// 
+    console.log('this.props:', this.props);
+
     const i = this.props.posts.findIndex((post) => post._id === this.props.params.id);
     var likes = this.props.posts[i].likes;
 
@@ -61,8 +72,7 @@ class PostDetail extends Component {
       likes++;
     }
 
-
-
+<<<<<<< HEAD
     const {
       FacebookShareButton,
       GooglePlusShareButton,
@@ -90,6 +100,8 @@ class PostDetail extends Component {
     let title = document.title;
     let exampleImage = this.props.posts[i];
 
+=======
+>>>>>>> comments
     return (
       <main>
         <h1>{this.props.posts[i].title}</h1>        
@@ -202,9 +214,6 @@ class PostDetail extends Component {
         </Button>
         <div>{this.state.likes}</div>
 
-      
-
-
       <div>
         <MyModal props={this.props}/>
       </div>
@@ -212,11 +221,14 @@ class PostDetail extends Component {
       <div>
         <myDropzone />
       </div>
+
+      <CommentBox props={this.props}/>
+      <CommentList />
+
       </main>
     );
   }
 }
-
 
 function mapStateToProps(state){
   return { 

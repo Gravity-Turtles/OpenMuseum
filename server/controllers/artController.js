@@ -7,6 +7,8 @@ const Art = mongoose.model('Art');
 const googleMapsClient = require('@google/maps').createClient({
   key: 'AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo'
 });
+const jwt =  require('jwt-simple');
+const config = require('../../config');
 
 Grid.mongo = mongoose.mongo;
 mongoose.connection.on('open', function() {
@@ -46,8 +48,7 @@ module.exports.insertArt = function(req, res) {
     })
   }
     var art = new Art();
-    art.title = req.body.title;    
-    // art.title = 'test777';        
+    art.title = req.body.title;              
     art.date = req.body.date;
     art.description = req.body.description;
     art.categories = req.body.categories;
@@ -55,8 +56,6 @@ module.exports.insertArt = function(req, res) {
 
 
     art.images = imagePaths;
-
-
 
     //****** TEMP ******//
     art.locLat = 40.745694;
@@ -69,24 +68,6 @@ module.exports.insertArt = function(req, res) {
     // art.user = req.body.user; //probably find from querying db on token
 
     // art.setLocation(req.body.location);
-
-//STREAM
-      // streaming to gridfs
-    //filename to store in mongodb
-
-    // var writestream = gfs.createWriteStream({
-    //     filename: 'mongo_file.txt'
-    // });
-    // fs.createReadStream('/home/etech/sourcefile.txt').pipe(writestream);
- 
-    // writestream.on('close', function (file) {
-    //     // do something with `file`
-    //     console.log(file.filename + 'Written To DB');
-    // });
-
-
-//STREAM
-
 
     art.save(function(err) {
       console.log(err);      
@@ -103,10 +84,6 @@ module.exports.findArt = function(req, res) {
     if (err) {
       console.log(err);
     } else {
-
-      console.log('findArt Data======================>',data);
-
-     
       const range = 0.006;
       let lngMin = req.body.longitude - range;
       let lngMax = req.body.longitude + range;
@@ -137,12 +114,6 @@ module.exports.findArt = function(req, res) {
       }
       result.sort(compareDistance);
       // end of sort by distance from me
-
-
-
-      console.log('findArt Result======================>',result);
-
-
   
       res.status(200).send(result);
     }
@@ -197,11 +168,31 @@ Art.update({ 'title': req.body.title }, { likes: newLikes}, function(response) {
 
 }
 
-// Art.find({title: req.body.oldArt.title})
-//     .select('title description')
-//     .exec(function(res){
-//       console.log("big DATABASE REsPONSE: ", res);
-//     })
+module.exports.insertComment = function(req, res) {  
+  let newComment = {};
+  let userID = jwt.decode(req.headers.authorization,config.secret).sub  
 
+  User.findById(userID, function(err,user){
+    if(err) return handleError(err)    
+    Art.findById(req.body.id, function(err, art){        
+      let comments = art.comments;    
+      newComment.comments = req.body.comment;
+      newComment.user = user.email;  
+      comments.push(newComment);
 
+      Art.findByIdAndUpdate(req.body.id, {$set:{
+        comments: comments
+      }}, {new: true}, function(err,art){
+        if(err) return handleError(err);
+        res.send(comments);
+      });
+    })
+  })
+}
 
+module.exports.getComments = function(req, res) {
+  Art.findById(req.body.id, function(err, art){
+    if(err) return handleError(err);
+    res.send(art.comments);
+  })
+}

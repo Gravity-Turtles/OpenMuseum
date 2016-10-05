@@ -15,6 +15,8 @@ router.get('/', requireAuth, function(req, res) {
 });
 router.post("/art", ctrlArt.insertArt);
 router.post("/findArt", ctrlArt.findArt);
+router.post("/comments", ctrlArt.insertComment);
+router.post("/commentsGet", ctrlArt.getComments);
 router.post("/signin", requireSignin, ctrlAuth.signin);
 router.post("/signup", ctrlAuth.signup);
 
