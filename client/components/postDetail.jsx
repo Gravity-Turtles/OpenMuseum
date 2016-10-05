@@ -72,7 +72,6 @@ class PostDetail extends Component {
       likes++;
     }
 
-<<<<<<< HEAD
     const {
       FacebookShareButton,
       GooglePlusShareButton,
@@ -100,8 +99,6 @@ class PostDetail extends Component {
     let title = document.title;
     let exampleImage = this.props.posts[i];
 
-=======
->>>>>>> comments
     return (
       <main>
         <h1>{this.props.posts[i].title}</h1>        
