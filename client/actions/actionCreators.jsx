@@ -16,6 +16,19 @@ export function fetchPosts(loc) {
   }
 }
 
+export function fetchPostsFromTheme(loc, theme) {
+  console.log("inside ActionCreater fetchPostsFromTheme", loc, theme);
+  loc.theme = theme;
+  const request = axios.post('/api/findArt', loc);
+
+  return (dispatch) => {
+    request.then(({data}) => {
+      console.log("Post=======", data);
+      dispatch({type: 'FETCH_POSTS', posts: data});
+    }).catch(console.log("no DATA at fetchPostsFromTheme"));
+  }
+}
+
 export function fetchPostsFromSearch(loc) {
   console.log("inside ActionCreater fetchPostsFromSearch", loc);
   const request = axios.post('/api/findArt', loc);
@@ -29,6 +42,7 @@ export function fetchPostsFromSearch(loc) {
     }).catch(console.log("no DATA at fetchPostsFromSearch"));
   }
 }
+
 
 function getLocPromise() {
   return new Promise(function(resolve, reject) {
@@ -65,11 +79,11 @@ export function getCityName(loc) {
         state = value[count - 2];
         city = value[count - 3].slice(1);
         console.log("city name is: " + city);
+        dispatch({type: 'GET_CITYNAME', cityName: city})
       }
       else  {
         console.log("address not found");
       }
-      dispatch({type: 'GET_CITYNAME', cityName: city})
     }).catch(console.log("no DATA at getCityName"));
   }    
 }
@@ -77,11 +91,7 @@ export function getCityName(loc) {
 export function editArt(object){
   console.log("in editArt action with this object: ", object)
 
-
-  const request = axios.put('/api/art', object, {headers: {
-    authorization: localStorage.getItem('token') }}
-    );
-
+  const request = axios.put('/api/Art', object);
 
   return (dispatch) => {
     request.then(({data}) => {
@@ -97,27 +107,74 @@ export function createPost3(props) {
   const title = props.title || 'undefined';
   const categories = props.categories || 'undefined';
   const description = props.description || 'undefined';
+  const address = props.location || 'undefined';
 
-  var req = request.post('api/art')
-    .set({headers: {
-    authorization: localStorage.getItem('token') }});
+  let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo';
+  let requestGeo = axios.get(GEOCODING);
 
-  if(props.files){
-    props.files.forEach((file)=> {
+  requestGeo.then(({data}) => {
+    let geoFromSearch = {}
+    console.log("GEO DATA FROM Search INSIDE CREATE POST3=======", data);
+    if (data.results[0]) {
+      console.log("HERE INSIDE DATA.RESULTS[0]")
+      geoFromSearch.latitude = data.results[0].geometry.location.lat;
+      geoFromSearch.longitude = data.results[0].geometry.location.lng;
+      console.log("GEO INSIDE CREATE POST3=======", geoFromSearch);
+    }
+    else  {
+      console.log("Geolocation data not found");
+      geoFromSearch.latitude = 'undefined';
+      geoFromSearch.longitude = 'undefined';
+    }
+    return geoFromSearch;
+  })
+  .then((geoFromSearch) => {
+    console.log(geoFromSearch);
+    var req = request.post('api/art')
+    // .set({headers: {
+    // authorization: localStorage.getItem('token') }});
+
+    if(props.files){
+      props.files.forEach((file)=> {
         req.attach(file[0].name, file[0]);
-    });
-  }
+      });
+    }
 
   req
     .field('title', title)
     .field('categories', categories)
     .field('description', description)
+    .field('latitude', geoFromSearch.latitude)
+    .field('longitude', geoFromSearch.longitude)
     .end(function(err,res){
       if(err) console.log(err)
         else console.log(res)
-    })
+    });
+  })
+  .catch(console.log("fail to CREATE POST3"));
+  
 }
 
+
+export function updateLocFromImage(loc) {
+
+  console.log("updateLocFromImage called", loc);
+  let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + loc.lat + '%2C' + loc.lon + '&key=AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo';
+  let request = axios.get(GEOCODING);
+
+  return (dispatch) => {
+    request.then(({data}) => {
+      console.log("data", data);
+      if (data && data.results[0]) {
+        let address = data.results[0].formatted_address ;
+        dispatch({type: 'GEO_FROM_IMAGE', payload: address});
+      }
+      else {
+        console.log("address not found");
+      }
+    }).catch(console.log("no DATA at updateLocFromImage"));
+  }    
+}
 
 ////// ACTIONS FOR AUTH
 
