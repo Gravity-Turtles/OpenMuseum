@@ -118,10 +118,6 @@ export function createPost3(props) {
 }
 
 export function saveComment(comment,id) {
-  console.log('saveComment!');
-  console.log(comment)
-  console.log(id)
-  
   return(dispatch) => {
     axios({
       method: 'post',
@@ -149,13 +145,9 @@ export function saveComment(comment,id) {
 }
 
 export function getComments(id) {
-  console.log('getting comments!!!!')
-  console.log(id);
   return (dispatch) => {
     axios.post('../api/commentsGet', {id})
       .then(response => {
-      console.log('getComments response')
-      console.log(response);
       dispatch({ 
         type: 'COMMENTS',
         payload: response
