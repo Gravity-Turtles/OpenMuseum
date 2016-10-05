@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 import Dropzone from 'react-dropzone';
-import request from 'superagent';
 import { createPost3 } from '../actions/actionCreators';
 class renderDropzoneInput extends Component{
   constructor(props) {

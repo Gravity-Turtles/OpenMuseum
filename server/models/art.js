@@ -13,7 +13,11 @@ var artSchema = new mongoose.Schema({
   },
   images: Array,
   user: String,
-  likes: { type: Number, default: 0 }
+  likes: { 
+    type: Number, 
+    default: 0 
+  },
+  comments: Array
 });
 
 artSchema.methods.setLocation = function(locObj){
