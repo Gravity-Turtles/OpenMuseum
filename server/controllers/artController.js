@@ -97,7 +97,7 @@ module.exports.insertArt = function(req, res) {
 
 //****** Query DB for nearby art *******//
 module.exports.findArt = function(req, res) {
-  console.log("req.body in findArt", req.body);  
+  //console.log("req.body in findArt", req.body);  
 
   Art.find({}, function(err, data) {
     if (err) {
@@ -153,17 +153,32 @@ module.exports.editArt = function(req, res){
 console.log("heeeeeeey, i'm in yoooour edit ART!!!!")
 console.log("this is the req.body: ", req.body);
 
-Art.find({ 'title': req.body.oldArt.title }, function (err, docs) {
- console.log('DOCS', docs);
+const imagePaths = []
+  if(req.files){
+    req.files.forEach(function(file){
+      imagePaths.push(file.path)
+    })
+  }
+console.log('super image paths: ', imagePaths);
+ Art.find({ '_id': req.body.oldId }, function (err, docs) {
+  console.log('DOCS[0]', docs[0], 'docs.images', docs[0].likes);
+  let oldPics = []
+  for(var i = 0; i < docs[0].images.length; i++){
+    oldPics.push(docs[0].images[i]);
+  }
+  console.log('oldPics', oldPics);
+  for(var k = 0; k < imagePaths.length; k++){
+    oldPics.push(imagePaths[k]);
+  }
+  console.log('oldPics+', oldPics);
 
 var newName = req.body.newName;
 var newDescription = req.body.newDescription;
-Art.update({ 'title': req.body.oldArt.title }, { title: newName, description: newDescription}, function(response) {
+Art.update({ '_id': req.body.oldId }, { title: newName, description: newDescription, images: oldPics}, function(response) {
     console.log("word, now show me that RESPONSE:", response);
 
-
+  })
 });
-})
 }
 
 module.exports.editLikes = function(req, res){

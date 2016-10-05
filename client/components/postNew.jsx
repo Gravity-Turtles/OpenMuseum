@@ -134,7 +134,7 @@ class PostNew extends Component{
 }
 function mapStateToProps(state){
     return { 
-      loc: state.loc,
+      loc: state.loc
      }
 }
 // PostNew = reduxForm({

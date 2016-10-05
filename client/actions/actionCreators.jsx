@@ -78,13 +78,37 @@ export function editArt(object){
   console.log("in editArt action with this object: ", object)
 
 
-  const request = axios.put('/api/art', object, {headers: {
-    authorization: localStorage.getItem('token') }}
-    );
+  // const request = axios.put('/api/art', object, {headers: {
+  //   authorization: localStorage.getItem('token') }}
+  //   );
+    const newName = object.newName || 'undefined';
+    const newDescription = object.newDescription || 'undefined';
+    const oldId = object.oldArt._id;
+
+    var req = request.put('../api/art')
+      .set({headers: {
+      authorization: localStorage.getItem('token') }});
+
+      console.log("object to be sent: ", object)
+
+    if(object.images){
+      object.images.forEach((image)=> {
+      req.attach(image[0].name, image[0]);
+    });
+    }
+
+      req
+    .field('newName', newName)
+    .field('newDescription', newDescription)
+    .field('oldId', oldId)
+    .end(function(err,res){
+      if(err) console.log(err)
+        else console.log(res)
+    })
 
 
   return (dispatch) => {
-    request.then(({data}) => {
+    req.then(({data}) => {
       console.log("Puuuuuuuuuuuuut response yo=======", data)
     }).catch(console.log("failed to edit Art"));
   }
