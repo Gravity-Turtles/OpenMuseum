@@ -3,7 +3,7 @@ var Grid = require('gridfs-stream');
 var fs = require('fs');
 
 var gracefulShutdown;
-var  dbURI = process.env.MONGODB_URI || 'mongodb://localhost/openDB';
+var  dbURI = process.env.MLAB_URI || require('./config.js');
 
 mongoose.connect(dbURI);
 

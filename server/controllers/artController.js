@@ -39,8 +39,9 @@ mongoose.connection.on('open', function() {
 
 module.exports.insertArt = function(req, res) {
   console.log('insertArt running')    
-  console.log(req.body)
-  console.log(req.files)
+  console.log("insertArt reqBody",req.body);
+  console.log("insertArt reqBody",req.body.location);
+  console.log("insertArt reqFiles",req.files);
   const imagePaths = []
   if(req.files){
     req.files.forEach(function(file){
@@ -58,8 +59,8 @@ module.exports.insertArt = function(req, res) {
     art.images = imagePaths;
 
     //****** TEMP ******//
-    art.locLat = 40.745694;
-    art.locLong = -73.98617749999999;
+    art.locLat = req.body.latitude;
+    art.locLong = req.body.longitude;
     //****** TEMP ******//
 
     art.likes = req.body.likes;
@@ -121,7 +122,6 @@ module.exports.findArt = function(req, res) {
 };
 
 module.exports.editArt = function(req, res){
-console.log("heeeeeeey, i'm in yoooour edit ART!!!!")
 console.log("this is the req.body: ", req.body);
 
 const imagePaths = []

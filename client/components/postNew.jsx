@@ -17,9 +17,6 @@ class renderDropzoneInput extends Component{
     };
     this.getGpsInfo = this.getGpsInfo.bind(this);
   }
-  onSubmit(props) {
-    this.props.createPost3(props)
-  }
 
   getGpsInfo(event){
   
@@ -61,7 +58,7 @@ class renderDropzoneInput extends Component{
     
   return (
     <div>
-      <Dropzone                  
+      <Dropzone className="dropZone"             
         onDrop={( filesToUpload, e ) => {
           this.setState({images: [...this.state.images,filesToUpload]}, function(){            
             field.input.onChange(this.state.images); //done in callback bc setState doesn't immediately mutate state
