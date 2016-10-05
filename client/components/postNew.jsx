@@ -150,7 +150,7 @@ class PostNew extends Component{
 function mapStateToProps(state){
   return { 
     loc: state.loc,
-    initialValues: state.geoFromImage
+    geoFromImage: state.geoFromImage
    }
 }
 // PostNew = reduxForm({
