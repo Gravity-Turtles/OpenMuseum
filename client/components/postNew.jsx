@@ -16,10 +16,7 @@ class renderDropzoneInput extends Component{
     };
     this.getGpsInfo = this.getGpsInfo.bind(this);
   }
-  onSubmit(props) {
-    this.props.createPost3(props)
 
-  }
   getGpsInfo(event){
   
     var getGpsFromImage = function () {
@@ -60,7 +57,7 @@ class renderDropzoneInput extends Component{
     
   return (
     <div>
-      <Dropzone                  
+      <Dropzone className="dropZone"             
         onDrop={( filesToUpload, e ) => {
           this.setState({images: [...this.state.images,filesToUpload]}, function(){            
             field.input.onChange(this.state.images); //done in callback bc setState doesn't immediately mutate state
@@ -83,14 +80,6 @@ class renderDropzoneInput extends Component{
 
 ////////////////////////////////////////// 
 
-const data = {  // used to populate "geoFromImage" reducer when "Load" is clicked
-  title: '',
-  location: 'Attach Image first, then fix it, if not accurate',
-  description: '',
-  categories: ''
-}
-
-
 class PostNew extends Component{
   constructor(props) {
     super(props);
@@ -100,31 +89,26 @@ class PostNew extends Component{
   }
   onSubmit(props) {
     this.props.createPost3(props);
-
-  }
-  componentWillMount() {
-    this.props.initialize();
   }
 
-  
+  componentDidUpdate() {
+   this.props.autofill("location", this.props.geoFromImage);
+  }
   
   render(){
     console.log("postNew props", this.props);
-    const { handleSubmit, load, pristine, reset, submitting } = this.props;                                
+    const { handleSubmit } = this.props;                                
     return (
       <form id = "dropForm" className="dropzone" onSubmit = {handleSubmit(this.onSubmit.bind(this))} encType="multipart/form-data">
         <h3>Create A New Post</h3>
-        <div>
-          <button type="button" onClick={() => load(data)}>Load Data</button>
-        </div>
         <div>
           <label htmlFor="title">Title</label>
           <Field name="title" component="input" type="text" className="form-control" />              
         </div>
 
         <div>
-          <label htmlFor="location">Location</label>
-          <Field name="location" component="input" type="text" className="form-control" />                             
+          <label htmlFor="location">Location</label>                            
+          <Field name="location" component="input" type="text" className="form-control" placeholder="Attach your image first."/>  
         </div>     
 
         <div>
