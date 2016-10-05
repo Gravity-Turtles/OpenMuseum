@@ -190,7 +190,6 @@ class PostDetail extends Component {
         </div>
       </div>
 
-        <div>Images here</div>
         <div>{this.props.posts[i].description}</div>
         <Button
           bsStyle="primary"

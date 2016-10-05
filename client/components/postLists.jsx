@@ -41,7 +41,7 @@ class PostLists extends Component {
 
       console.log("nothing around you");
       
-      return (<div> Nothing around you. </div>);
+      return (<div> No results for your search. </div>);
     }
   }
 

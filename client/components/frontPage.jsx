@@ -16,6 +16,32 @@ class FrontPage extends Component {
     return this.props.cityName;
   }
 
+  renderThemeBtns() {
+    if (this.props.loc.latitude) {
+      return (
+        <div className="theme">
+          <div className="themeRow">
+              <Link to="/posts" onClick={this.props.fetchPosts.bind(null, this.props.loc, "StreetArts")}>
+                <div className="themeBtn">StreetArts</div></Link>
+              <Link to="/posts" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Sclupture")}>
+                <div className="themeBtn">Sclupture</div></Link>
+              <Link to="/posts" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Architecture")}>
+                <div className="themeBtn">Architecture</div></Link>
+            </div>
+            <div className="themeRow">
+              <Link to="/posts" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Mosaic")}>
+                <div className="themeBtn">Mosaic</div></Link> 
+              <Link to="/posts" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Trending")}>
+                <div className="themeBtn">Trending</div></Link> 
+              <Link to="/posts" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Historic")}>
+                <div className="themeBtn">Historic</div></Link> 
+            </div>
+          </div>
+      );
+    }
+    return "";
+  }
+
   render() {    
     console.log('inside render ',this.props)
 
@@ -38,24 +64,7 @@ class FrontPage extends Component {
         <h1>MUSEUM</h1>
         <h2>{this.renderCityName()}</h2>
         <SearchBox fetchPostsFromSearch={this.props.fetchPostsFromSearch}/>
-        <div className="theme">
-          <div className="themeRow">
-            <Link to="/postsfromtheme" onClick={this.props.fetchPostsFromTheme.bind(null, this.props.loc, "StreetArts")}>
-              <div className="themeBtn">StreetArts</div></Link>
-            <Link to="/postsfromtheme">
-              <div className="themeBtn">Sclupture</div></Link>
-            <Link to="/postsfromtheme">
-              <div className="themeBtn">Architecture</div></Link>
-          </div>
-          <div className="themeRow">
-            <Link to="/postsfromtheme">
-              <div className="themeBtn">Mosaic</div></Link> 
-            <Link to="/postsfromtheme">
-              <div className="themeBtn">Trending</div></Link> 
-            <Link to="/postsfromtheme">
-              <div className="themeBtn">Historic</div></Link> 
-          </div>
-        </div>
+        {this.renderThemeBtns()}
       </main>
     );
   }
