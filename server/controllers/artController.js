@@ -97,8 +97,12 @@ module.exports.findArt = function(req, res) {
       console.log(err);
     } else {
       console.log('findArt Data',data);
-     
-      const range = 0.006;
+
+      if (!req.body.theme) {
+        const range = 0.006;
+      } else {
+        const range = 0.1;
+      }
       let lngMin = req.body.longitude - range;
       let lngMax = req.body.longitude + range;
       let latMin = req.body.latitude - range;
