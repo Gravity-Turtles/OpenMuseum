@@ -181,16 +181,26 @@ Art.update({ 'title': req.body.title }, { likes: newLikes}, function(response) {
 //     })
 module.exports.insertComment = function(req, res) {
   console.log('insertComment');
+  let newComment = {};
   let userID = jwt.decode(req.headers.authorization,config.secret).sub  
-  Art.findById(req.body.id, function(err, art){  
-    let comments = art.comments;    
-    comments.push(req.body.comment);    
-    Art.findByIdAndUpdate(req.body.id, {$set:{
-      comments: comments
-    }}, {new: true}, function(err,art){
-      if(err) return handleError(err);
-      res.send(art);
-    });
+
+  User.findById(userID, function(err,user){
+    if(err) return handleError(err)
+    console.log('USER FOUND!', user)      
+    Art.findById(req.body.id, function(err, art){        
+      let comments = art.comments;    
+      newComment.comments = req.body.comment;
+      newComment.user = user.email;  
+      comments.push(newComment);    
+      console.log('newComment');
+      console.log(newComment)
+      Art.findByIdAndUpdate(req.body.id, {$set:{
+        comments: comments
+      }}, {new: true}, function(err,art){
+        if(err) return handleError(err);
+        res.send(comments);
+      });
+    })
   })
 }
 
@@ -203,6 +213,6 @@ module.exports.getComments = function(req, res) {
     console.log('ART', art);
     console.log(art.comments);
     if(err) return handleError(err);
-    res.send(art);
+    res.send(art.comments);
   })
 }

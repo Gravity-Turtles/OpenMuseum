@@ -121,19 +121,7 @@ export function saveComment(comment,id) {
   console.log('saveComment!');
   console.log(comment)
   console.log(id)
-
-  // return (dispatch) => {
-  //   axios.post('../api/comments', {comment, id})
-  //   .then(response => {
-  //     console.log('response')
-  //     console.log(response);
-  //     dispatch({ 
-  //       type: 'COMMENTS',
-  //       payload: response
-  //     })       
-  //   })
-  // }
-
+  
   return(dispatch) => {
     axios({
       method: 'post',
@@ -154,11 +142,10 @@ export function saveComment(comment,id) {
         payload: response
       })       
     })
+    .catch(() => {
+      dispatch(authError('Bad Sign in Info'));
+    });
   };
-    // .catch(() => {
-    //   dispatch(authError('Bad Sign in Info'));
-    // });
-
 }
 
 export function getComments(id) {

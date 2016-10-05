@@ -57,6 +57,18 @@ label {
   color: red;
   padding-bottom: 5px;
 }
+/************ COMMENTS  ************/
+.commentList{
+  display: block;
+  margin-top: 5px;
+  padding: 5px;
+  border: solid;
+  border-radius: 2px;
+}
+.listItems{
+  display: inline;
+}
+
 /************ INFO PAGE  ************/
 
 
