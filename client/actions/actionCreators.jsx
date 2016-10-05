@@ -3,15 +3,28 @@ import axios from 'axios';
 import request from 'superagent';
 import { browserHistory } from 'react-router';
 
-export function fetchPosts(loc, theme) {
-  console.log("inside ActionCreater fetchPosts", loc, theme);
-  const request = axios.post('/api/findArt', loc, theme);
+export function fetchPosts(loc) {
+  console.log("inside ActionCreater fetchPosts", loc);
+  const request = axios.post('/api/findArt', loc);
 
   return (dispatch) => {
     request.then(({data}) => {
       console.log("Post=======", data);
       dispatch({type: 'FETCH_POSTS', posts: data});
     }).catch(console.log("no DATA at fetchPosts"));
+  }
+}
+
+export function fetchPostsFromTheme(loc, theme) {
+  console.log("inside ActionCreater fetchPostsFromTheme", loc, theme);
+  loc.theme = theme;
+  const request = axios.post('/api/findArt', loc);
+
+  return (dispatch) => {
+    request.then(({data}) => {
+      console.log("Post=======", data);
+      dispatch({type: 'FETCH_POSTS', posts: data});
+    }).catch(console.log("no DATA at fetchPostsFromTheme"));
   }
 }
 
