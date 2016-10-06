@@ -115,8 +115,6 @@ export function editArt(object){
     })
 
 
-  const request = axios.put('/api/Art', object);
-
   return (dispatch) => {
     req.then(({data}) => {
       console.log("Puuuuuuuuuuuuut response yo=======", data)
