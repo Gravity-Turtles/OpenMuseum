@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import image from '../assets/person.png';
-// import store from '../store';
+import store from '../store';
 
 export default class googleMap extends Component {
 
-  // shouldComponentUpdate() {
-  //   return false;
-  // }
+  shouldComponentUpdate() {
+    return false;
+  }
   
   componentDidMount() {
     console.log("props Of googleMapPage",this.props);
@@ -50,12 +50,12 @@ export default class googleMap extends Component {
       }
     }
   }
-  // componentDidUpdate() {
-  //   store.dispatch({type: 'FETCH_POSTS', posts: []});
-  // }
-  // componentWillUnmount() {
-  //   store.dispatch({type: 'FETCH_POSTS', posts: []});
-  // }
+  componentDidUpdate() {
+    store.dispatch({type: 'FETCH_POSTS', posts: []});
+  }
+  componentWillUnmount() {
+    store.dispatch({type: 'FETCH_POSTS', posts: []});
+  }
 
   render() {
     return (

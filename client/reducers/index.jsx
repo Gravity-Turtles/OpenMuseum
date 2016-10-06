@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   geoFromSearch,
   cityName,
   loc, 
-  posts, 
+  posts,
   comments, 
   auth: authReducer,
   routing: routerReducer});
