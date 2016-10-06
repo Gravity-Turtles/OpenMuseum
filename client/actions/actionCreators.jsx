@@ -137,7 +137,7 @@ export function createPost3(props) {
     .field('description', description)
     .end(function(err,res){
       if(err) console.log(err)
-        else console.log(res)
+        else browserHistory.push('/posts');
     })
 }
 

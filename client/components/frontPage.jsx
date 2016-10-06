@@ -27,6 +27,12 @@ class FrontPage extends Component {
           <div>graffiti</div>
           <div>mosaic</div>
           <div>Sculpture</div>
+          {/****** TEMP   *******/}
+          <img src = {require('../../uploads/London - 10.jpg')} /> 
+
+          {/****** TEMP   *******/}
+
+
         </div>
       </main>
     );
