@@ -8,6 +8,7 @@ import geoFromImage from './reducerGeoFromImage';
 import cityName from './reducerCityName';
 import loc from './reducerLocation';
 import posts from './reducerPosts';
+import postsCurrent from './reducerPostsCurrent';
 import comments from './reducerComments';
 
 const rootReducer = combineReducers({
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   cityName,
   loc, 
   posts,
+  postsCurrent,
   comments, 
   auth: authReducer,
   routing: routerReducer});

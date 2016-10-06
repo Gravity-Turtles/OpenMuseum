@@ -14,6 +14,7 @@ export function fetchPosts(loc, theme) {
   return (dispatch) => {
     request.then(({data}) => {
       console.log("Post=======", data);
+      dispatch({type: 'FETCH_POSTS_CURRENT', posts: data});
       dispatch({type: 'FETCH_POSTS', posts: data});
       loc.theme = ""; // reset loc.theme
     }).catch(() => {
@@ -30,6 +31,7 @@ export function fetchPostsFromSearch(loc) {
   return (dispatch) => {
     request.then(({data}) => {
       console.log("Post=======", data);
+      dispatch({type: 'FETCH_POSTS_CURRENT', posts: data});
       dispatch({type: 'FETCH_POSTS', posts: data});
       dispatch({type: 'GET_GEO_SEARCH', geoFromSearch: loc});
       browserHistory.push('/postsfromsearch');

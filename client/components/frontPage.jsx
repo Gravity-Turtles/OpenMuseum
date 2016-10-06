@@ -21,19 +21,19 @@ class FrontPage extends Component {
       return (
         <div className="theme">
           <div className="themeRow">
-              <Link to="/posts" onClick={this.props.fetchPosts.bind(null, this.props.loc, "StreetArts")}>
+              <Link to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "StreetArts")}>
                 <div className="themeBtn">StreetArts</div></Link>
-              <Link to="/posts" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Sclupture")}>
+              <Link to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Sclupture")}>
                 <div className="themeBtn">Sclupture</div></Link>
-              <Link to="/posts" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Architecture")}>
+              <Link to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Architecture")}>
                 <div className="themeBtn">Architecture</div></Link>
             </div>
             <div className="themeRow">
-              <Link to="/posts" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Mosaic")}>
+              <Link to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Mosaic")}>
                 <div className="themeBtn">Mosaic</div></Link> 
-              <Link to="/posts" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Trending")}>
+              <Link to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Trending")}>
                 <div className="themeBtn">Trending</div></Link> 
-              <Link to="/posts" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Historic")}>
+              <Link to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Historic")}>
                 <div className="themeBtn">Historic</div></Link> 
             </div>
           </div>

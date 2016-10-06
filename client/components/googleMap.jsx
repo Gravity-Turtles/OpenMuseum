@@ -4,9 +4,9 @@ import store from '../store';
 
 export default class googleMap extends Component {
 
-  shouldComponentUpdate() {
-    return false;
-  }
+  // shouldComponentUpdate() {
+  //   return false;
+  // }
   
   componentDidMount() {
     console.log("props Of googleMapPage",this.props);
@@ -20,7 +20,7 @@ export default class googleMap extends Component {
 
     this.map = new google.maps.Map(this.refs.map, {
       center: this.myLatLng,
-      zoom: 15
+      zoom: this.props.zoomSize
     });
     this.marker = new google.maps.Marker({
       position: this.myLatLng,
@@ -40,21 +40,22 @@ export default class googleMap extends Component {
       });
       // this.markers.push(marker);
     }
-    if (this.props.posts){
-      for (let i = 0; i < this.props.posts.length; i++) {
-        let post = this.props.posts[i];
+    console.log(this.props.postsCurrent);
+    if (this.props.postsCurrent){
+      for (let i = 0; i < this.props.postsCurrent.length; i++) {
+        let post = this.props.postsCurrent[i];
         let loc = {lat: post.locLat, lng: post.locLong};
-        console.log("posts locations", this.props.posts.length);
+        console.log("posts locations", this.props.postsCurrent.length);
         let title = post.title; 
         this.addMarker(loc, title, i + 1);
       }
     }
   }
-  componentDidUpdate() {
-    store.dispatch({type: 'FETCH_POSTS', posts: []});
-  }
+  // componentDidUpdate() {
+  //   store.dispatch({type: 'FETCH_POSTS_CURRENT', posts: []});
+  // }
   componentWillUnmount() {
-    store.dispatch({type: 'FETCH_POSTS', posts: []});
+    store.dispatch({type: 'FETCH_POSTS_CURRENT', posts: []});
   }
 
   render() {
