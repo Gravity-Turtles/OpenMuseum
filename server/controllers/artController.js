@@ -51,7 +51,7 @@ module.exports.insertArt = function(req, res) {
     // art.title = 'test777';        
     art.date = req.body.date;
     art.description = req.body.description;
-    art.categories = req.body.categories;
+    art.categories = req.body.categories.split(",");
     art.image = req.body.image;
 
 

@@ -99,9 +99,15 @@ export function editArt(object){
 export function createPost3(props) {
   console.log('createPost3!')  
   console.log(props)
-  
+  const categories = [];
+  for (var key in props) {
+    if (props[key] === true) {
+      categories.push(key);
+    }
+  }
+
+  console.log(categories);
   const title = props.title || 'undefined';
-  const categories = props.categories || 'undefined';
   const description = props.description || 'undefined';
   const address = props.location || 'undefined';
 
@@ -135,7 +141,6 @@ export function createPost3(props) {
         req.attach(file[0].name, file[0]);
       });
     }
-
   req
     .field('title', title)
     .field('categories', categories)
