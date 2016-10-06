@@ -32,7 +32,7 @@ export default class SearchBar extends Component {
         console.log("Geolocation data not found");
       }
       this.props.fetchPostsFromSearch(geoFromSearch);
-    }).catch(console.log("no DATA at getGeoFromSearch"));
+    }).catch(console.log("no DATA at GeoFromSearch"));
    
   }
 
@@ -42,7 +42,7 @@ export default class SearchBar extends Component {
         <input 
           placeholder="address here"
           className="form-control"
-          value={this.state.term}
+          value={this.state.address}
           onChange={this.onInputChange}
         />
         <span className="input-group-btn">
