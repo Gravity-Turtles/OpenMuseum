@@ -6,6 +6,7 @@ import Dropzone from 'react-dropzone';
 import request from 'superagent';
 import store from '../store';
 import * as actions from '../actions/actionCreators';
+import { createPost3 } from '../actions/actionCreators';
 
 class renderDropzoneInput extends Component{
   constructor(props) {

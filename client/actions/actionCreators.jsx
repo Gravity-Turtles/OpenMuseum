@@ -175,11 +175,10 @@ export function createPost3(props) {
     .field('longitude', geoFromSearch.longitude)
     .end(function(err,res){
       if(err) console.log(err)
-        else console.log(res)
+        else browserHistory.push('/posts');
     });
   })
   .catch(console.log("fail to CREATE POST3"));
-
 }
 
 export function saveComment(comment,id) {
