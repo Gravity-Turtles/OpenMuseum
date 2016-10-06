@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/actionCreators';
 import Header from './header';
 
+
 class MainNav extends Component {
 
   componentWillMount() {

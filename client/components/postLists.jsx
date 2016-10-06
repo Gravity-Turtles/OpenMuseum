@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/actionCreators';
 import GoogleMap from './googleMap';
+import store from '../store';
 
 class PostLists extends Component {
 
@@ -44,7 +45,12 @@ class PostLists extends Component {
       return (<div> No results for your search. </div>);
     }
   }
-
+    componentDidUpdate() {
+    store.dispatch({type: 'FETCH_POSTS', posts: []});
+  }
+  componentWillUnmount() {
+    store.dispatch({type: 'FETCH_POSTS', posts: []});
+  }
 
   render() {
     return (

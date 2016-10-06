@@ -5,17 +5,20 @@ import request from 'superagent';
 import { browserHistory } from 'react-router';
 
 export function fetchPosts(loc, theme) {
-  console.log("inside ActionCreater fetchPosts", loc, theme);
   if (theme) {
     loc.theme = theme;
   }
+  console.log("inside ActionCreater fetchPosts", loc, theme);
   const request = axios.post('/api/findArt', loc);
 
   return (dispatch) => {
     request.then(({data}) => {
       console.log("Post=======", data);
       dispatch({type: 'FETCH_POSTS', posts: data});
-    }).catch(console.log("no DATA at fetchPosts"));
+      loc.theme = ""; // reset loc.theme
+    }).catch(() => {
+      console.log("no DATA at fetchPosts");
+    });
   }
 }
 

@@ -43,7 +43,7 @@ class FrontPage extends Component {
   }
 
   render() {    
-    console.log('inside render ',this.props)
+    console.log('inside render ', this.props)
 
     //create array of images
     // let imageCollection;
