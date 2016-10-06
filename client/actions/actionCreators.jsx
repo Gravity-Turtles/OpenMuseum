@@ -244,26 +244,6 @@ export function updateLocFromImage(loc) {
   }    
 }
 
-export function updateLocFromImage(loc) {
-
-  console.log("updateLocFromImage called", loc);
-  let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + loc.lat + '%2C' + loc.lon + '&key=AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo';
-  let request = axios.get(GEOCODING);
-
-  return (dispatch) => {
-    request.then(({data}) => {
-      console.log("data", data);
-      if (data && data.results[0]) {
-        let address = data.results[0].formatted_address ;
-        dispatch({type: 'GEO_FROM_IMAGE', payload: address});
-      }
-      else {
-        console.log("address not found");
-      }
-    }).catch(console.log("no DATA at updateLocFromImage"));
-  }    
-}
-
 ////// ACTIONS FOR AUTH
 
 export function signinUser({ email, password }) {
