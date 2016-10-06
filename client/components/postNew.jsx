@@ -4,9 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 import Dropzone from 'react-dropzone';
 import request from 'superagent';
-
 import store from '../store';
-
 import * as actions from '../actions/actionCreators';
 
 class renderDropzoneInput extends Component{
@@ -81,14 +79,6 @@ class renderDropzoneInput extends Component{
 
 ////////////////////////////////////////// 
 
-const data = {  // used to populate "geoFromImage" reducer when "Load" is clicked
-  title: '',
-  location: 'Attach Image first, then fix it, if not accurate',
-  description: '',
-  categories: ''
-}
-
-
 class PostNew extends Component{
   constructor(props) {
     super(props);
@@ -111,18 +101,13 @@ class PostNew extends Component{
       <form id = "dropForm" className="dropzone" onSubmit = {handleSubmit(this.onSubmit.bind(this))} encType="multipart/form-data">
         <h3>Create A New Post</h3>
         <div>
-          <button type="button" onClick={() => load(data)}>Load Data</button>
-        </div>
-        <div>
           <label htmlFor="title">Title</label>
           <Field name="title" component="input" type="text" className="form-control" />              
         </div>
 
         <div>
-          <label htmlFor="location">Location</label>
-          <Field name="location" component="input" type="text" className="form-control" placeholder="Attach your image first."/>                             
-          <div className="text-help">                
-          </div>
+          <label htmlFor="location">Location</label>                            
+          <Field name="location" component="input" type="text" className="form-control" placeholder="Attach your image first."/>  
         </div>     
 
         <div>
@@ -132,8 +117,29 @@ class PostNew extends Component{
 
         <div>
           <label htmlFor="categories">Categories</label>
-          <Field name="categories" component="input" type="text" className="form-control"/>                            
-        </div>    
+          <div>
+            <div>
+              <Field name="StreetArts" id="StreetArts" component="input" type="checkbox" />
+              <span> StreetArts</span>
+            </div>
+            <div>
+              <Field name="Sclupture" id="Sclupture" component="input" type="checkbox" /> 
+              <span> Sclupture</span>  
+            </div>
+            <div>
+              <Field name="Architecture" id="Architecture" component="input" type="checkbox" /> 
+              <span> Architecture / Signage</span> 
+            </div>
+            <div>
+              <Field name="Mosaic" id="Mosaic" component="input" type="checkbox" /> 
+              <span> Mosaic</span> 
+            </div> 
+            <div>
+              <Field name="Historic" id="Historic" component="input" type="checkbox" /> 
+              <span> Historic</span>
+            </div> 
+          </div>                          
+        </div> 
 
         <div>
           <label htmlFor="images">Files</label>

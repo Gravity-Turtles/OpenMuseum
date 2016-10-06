@@ -3,30 +3,25 @@ import axios from 'axios';
 import request from 'superagent';
 import { browserHistory } from 'react-router';
 
-export function fetchPosts(loc) {
-  console.log("inside ActionCreater fetchPosts", loc);
+export function fetchPosts(loc, theme) {
+  if (theme) {
+    loc.theme = theme;
+  }
+  console.log("inside ActionCreater fetchPosts", loc, theme);
   const request = axios.post('/api/findArt', loc);
 
   return (dispatch) => {
     request.then(({data}) => {
       console.log("Post=======", data);
+      dispatch({type: 'FETCH_POSTS_CURRENT', posts: data});
       dispatch({type: 'FETCH_POSTS', posts: data});
-    }).catch(console.log("no DATA at fetchPosts"));
+      loc.theme = ""; // reset loc.theme
+    }).catch(() => {
+      console.log("no DATA at fetchPosts");
+    });
   }
 }
 
-export function fetchPostsFromTheme(loc, theme) {
-  console.log("inside ActionCreater fetchPostsFromTheme", loc, theme);
-  loc.theme = theme;
-  const request = axios.post('/api/findArt', loc);
-
-  return (dispatch) => {
-    request.then(({data}) => {
-      console.log("Post=======", data);
-      dispatch({type: 'FETCH_POSTS', posts: data});
-    }).catch(console.log("no DATA at fetchPostsFromTheme"));
-  }
-}
 
 export function fetchPostsFromSearch(loc) {
   console.log("inside ActionCreater fetchPostsFromSearch", loc);
@@ -35,6 +30,7 @@ export function fetchPostsFromSearch(loc) {
   return (dispatch) => {
     request.then(({data}) => {
       console.log("Post=======", data);
+      dispatch({type: 'FETCH_POSTS_CURRENT', posts: data});
       dispatch({type: 'FETCH_POSTS', posts: data});
       dispatch({type: 'GET_GEO_SEARCH', geoFromSearch: loc});
       browserHistory.push('/postsfromsearch');
@@ -90,6 +86,7 @@ export function getCityName(loc) {
 export function editArt(object){
   console.log("in editArt action with this object: ", object)
 
+<<<<<<< HEAD
 
   // const request = axios.put('/api/art', object, {headers: {
   //   authorization: localStorage.getItem('token') }}
@@ -120,6 +117,8 @@ export function editArt(object){
     })
 
 
+=======
+>>>>>>> doh1005_themePages
   const request = axios.put('/api/Art', object);
 
   return (dispatch) => {
@@ -132,11 +131,18 @@ export function editArt(object){
 export function createPost3(props) {
   console.log('createPost3!')  
   console.log(props)
-  
+  const categories = [];
+  for (var key in props) {
+    if (props[key] === true) {
+      categories.push(key);
+    }
+  }
+
+  console.log(categories);
   const title = props.title || 'undefined';
-  const categories = props.categories || 'undefined';
   const description = props.description || 'undefined';
   const address = props.location || 'undefined';
+<<<<<<< HEAD
 
   let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo';
   let requestGeo = axios.get(GEOCODING);
@@ -170,6 +176,40 @@ export function createPost3(props) {
     }
 
   req    
+=======
+
+  let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo';
+  let requestGeo = axios.get(GEOCODING);
+
+  requestGeo.then(({data}) => {
+    let geoFromSearch = {}
+    console.log("GEO DATA FROM Search INSIDE CREATE POST3=======", data);
+    if (data.results[0]) {
+      console.log("HERE INSIDE DATA.RESULTS[0]")
+      geoFromSearch.latitude = data.results[0].geometry.location.lat;
+      geoFromSearch.longitude = data.results[0].geometry.location.lng;
+      console.log("GEO INSIDE CREATE POST3=======", geoFromSearch);
+    }
+    else  {
+      console.log("Geolocation data not found");
+      geoFromSearch.latitude = 'undefined';
+      geoFromSearch.longitude = 'undefined';
+    }
+    return geoFromSearch;
+  })
+  .then((geoFromSearch) => {
+    console.log(geoFromSearch);
+    var req = request.post('api/art')
+    // .set({headers: {
+    // authorization: localStorage.getItem('token') }});
+
+    if(props.files){
+      props.files.forEach((file)=> {
+        req.attach(file[0].name, file[0]);
+      });
+    }
+  req
+>>>>>>> doh1005_themePages
     .field('title', title)
     .field('categories', categories)
     .field('description', description)
@@ -182,6 +222,7 @@ export function createPost3(props) {
   })
   .catch(console.log("fail to CREATE POST3"));
   
+<<<<<<< HEAD
 }
 
 export function saveComment(comment,id) {
@@ -209,6 +250,8 @@ export function saveComment(comment,id) {
       dispatch(authError('Bad Sign in Info'));
     });
   };
+=======
+>>>>>>> doh1005_themePages
 }
 
 export function getComments(id) {
@@ -221,6 +264,26 @@ export function getComments(id) {
       })       
     })
   }
+}
+
+export function updateLocFromImage(loc) {
+
+  console.log("updateLocFromImage called", loc);
+  let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + loc.lat + '%2C' + loc.lon + '&key=AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo';
+  let request = axios.get(GEOCODING);
+
+  return (dispatch) => {
+    request.then(({data}) => {
+      console.log("data", data);
+      if (data && data.results[0]) {
+        let address = data.results[0].formatted_address ;
+        dispatch({type: 'GEO_FROM_IMAGE', payload: address});
+      }
+      else {
+        console.log("address not found");
+      }
+    }).catch(console.log("no DATA at updateLocFromImage"));
+  }    
 }
 
 export function updateLocFromImage(loc) {

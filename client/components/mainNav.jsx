@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/actionCreators';
 import Header from './header';
 
+
 class MainNav extends Component {
 
   componentWillMount() {
@@ -16,7 +17,8 @@ class MainNav extends Component {
       return (<div className="navRow">. . .</div>);
     }
     return (
-      <Link to="/posts" className="navRow" onClick={this.props.fetchPosts.bind(null, this.props.loc)}>Search Near Me
+      <Link to="/posts" className="navRow" onClick={this.props.fetchPosts.bind(null, this.props.loc, "")}>
+        Search Near Me
       </Link>
     );
   }

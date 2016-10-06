@@ -27,8 +27,11 @@ h1, h2 {
   display: flex;
   justify-content: space-between;
 }
+
+.themeBtnLink {
+  width: 30%;
+}
 .themeBtn {
-  width: 33%;
   height: 30px;
   display: flex;
   align-items: center;

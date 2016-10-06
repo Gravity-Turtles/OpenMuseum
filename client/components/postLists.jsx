@@ -29,19 +29,19 @@ class PostLists extends Component {
         <div> loading...</div>
       );
     }
-    console.log("length of posts", this.props.posts.length);
-    if (this.props.posts.length) {
+    console.log("length of posts", this.props.postsCurrent.length);
+    if (this.props.postsCurrent.length) {
       console.log("something around you");
       return (
         <div style={{height:'100%'}}>
-          <GoogleMap lat={this.props.loc.latitude} lng={this.props.loc.longitude} {...this.props}/>
+          <GoogleMap lat={this.props.loc.latitude} lng={this.props.loc.longitude} zoomSize={15} {...this.props}/>
         </div>
       );
     } else {
 
       console.log("nothing around you");
       
-      return (<div> Nothing around you. </div>);
+      return (<div> No results for your search. </div>);
     }
   }
 
@@ -64,7 +64,8 @@ class PostLists extends Component {
 function mapStateToProps(state){
   return { 
     loc: state.loc,
-    posts: state.posts
+    posts: state.posts,
+    postsCurrent: state.postsCurrent
    };
 }
 
