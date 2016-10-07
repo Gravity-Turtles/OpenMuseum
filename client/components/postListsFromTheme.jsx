@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/actionCreators';
 import GoogleMap from './googleMap';
 
-class PostLists extends Component {
+class PostListsFromTheme extends Component {
 
   renderPost() {
     if(this.props.posts === undefined) {
@@ -34,7 +34,7 @@ class PostLists extends Component {
       console.log("something around you");
       return (
         <div style={{height:'100%'}}>
-          <GoogleMap lat={this.props.loc.latitude} lng={this.props.loc.longitude} zoomSize={15} {...this.props}/>
+          <GoogleMap lat={this.props.loc.latitude} lng={this.props.loc.longitude} zoomSize={12} {...this.props}/>
         </div>
       );
     } else {
@@ -44,7 +44,6 @@ class PostLists extends Component {
       return (<div> No results for your search. </div>);
     }
   }
-
 
   render() {
     return (
@@ -73,4 +72,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(actions, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostLists);
+export default connect(mapStateToProps, mapDispatchToProps)(PostListsFromTheme);

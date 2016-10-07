@@ -72,7 +72,7 @@ class PostDetail extends Component {
       likes++;
     }
 
-<<<<<<< HEAD
+
     const {
       FacebookShareButton,
       GooglePlusShareButton,
@@ -100,14 +100,12 @@ class PostDetail extends Component {
     let title = document.title;
     let exampleImage = this.props.posts[i];
 
-=======
->>>>>>> comments
     return (
       <main>
         <h1>{this.props.posts[i].title}</h1>        
         <div style={{width:'100%', height:'350px'}}>
           <div style={{height:'100%'}}>
-            <GoogleMap lat={this.props.posts[i].locLat} lng={this.props.posts[i].locLong} loc={this.props.loc}/>
+            <GoogleMap lat={this.props.posts[i].locLat} lng={this.props.posts[i].locLong} loc={this.props.loc} zoomSize={16} />
           </div>
         </div>        
         <ImageSlide props={this.props.posts[i]}/>
@@ -204,7 +202,6 @@ class PostDetail extends Component {
         </div>
       </div>
 
-        <div>Images here</div>
         <div>{this.props.posts[i].description}</div>
         <Button
           bsStyle="primary"

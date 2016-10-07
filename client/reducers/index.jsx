@@ -4,17 +4,21 @@ import { reducer as form } from 'redux-form';
 import authReducer from './reducerAuth';
 
 import geoFromSearch from './reducerGeoFromSearch';
+import geoFromImage from './reducerGeoFromImage';
 import cityName from './reducerCityName';
 import loc from './reducerLocation';
 import posts from './reducerPosts';
+import postsCurrent from './reducerPostsCurrent';
 import comments from './reducerComments';
 
 const rootReducer = combineReducers({
   form,
+  geoFromImage,
   geoFromSearch,
   cityName,
   loc, 
-  posts, 
+  posts,
+  postsCurrent,
   comments, 
   auth: authReducer,
   routing: routerReducer});

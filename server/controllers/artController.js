@@ -39,8 +39,9 @@ mongoose.connection.on('open', function() {
 
 module.exports.insertArt = function(req, res) {
   console.log('insertArt running')    
-  console.log(req.body)
-  console.log(req.files)
+  console.log("insertArt reqBody",req.body);
+  console.log("insertArt reqBody",req.body.location);
+  console.log("insertArt reqFiles",req.files);
   const imagePaths = []
   if(req.files){
     req.files.forEach(function(file){
@@ -51,15 +52,15 @@ module.exports.insertArt = function(req, res) {
     art.title = req.body.title;              
     art.date = req.body.date;
     art.description = req.body.description;
-    art.categories = req.body.categories;
+    art.categories = req.body.categories.split(",");
     art.image = req.body.image;
 
 
     art.images = imagePaths;
 
     //****** TEMP ******//
-    art.locLat = 40.745694;
-    art.locLong = -73.98617749999999;
+    art.locLat = req.body.latitude;
+    art.locLong = req.body.longitude;
     //****** TEMP ******//
 
     art.likes = req.body.likes;
@@ -78,13 +79,28 @@ module.exports.insertArt = function(req, res) {
 
 //****** Query DB for nearby art *******//
 module.exports.findArt = function(req, res) {
-  //console.log("req.body in findArt", req.body);  
+  console.log("req.body in findArt", req.body);  
+  let whatToFind = {}
+  let range = 0.006;
+  if (req.body.theme) {
+    range = 1;
+    whatToFind = {categories: req.body.theme};
+  }
+  if (req.body.theme === "Trending") {
+    whatToFind = {};
+  }
 
-  Art.find({}, function(err, data) {
+  Art.find(whatToFind, function(err, data) {
     if (err) {
       console.log(err);
     } else {
-      const range = 0.006;
+      console.log('findArt Data',data);
+      if (!req.body.theme) {
+        const range = 0.006;
+      } else {
+        const range = 0.1;
+      }
+      console.log(range);
       let lngMin = req.body.longitude - range;
       let lngMax = req.body.longitude + range;
       let latMin = req.body.latitude - range;
@@ -113,7 +129,17 @@ module.exports.findArt = function(req, res) {
         return distanceFromMe(a.locLong, a.locLat) - distanceFromMe(b.locLong, b.locLat);
       }
       result.sort(compareDistance);
-      // end of sort by distance from me
+
+
+      // sort by likes after sort by distance from me, if it's search by "Trending".
+      const compareLikes = function(a, b) {
+        return b.likes - a.likes;
+      }
+      if (req.body.theme === "Trending") {
+        result.sort(compareLikes);
+      }
+      
+      console.log('findArt Result======================>',result);
   
       res.status(200).send(result);
     }
@@ -121,7 +147,6 @@ module.exports.findArt = function(req, res) {
 };
 
 module.exports.editArt = function(req, res){
-console.log("heeeeeeey, i'm in yoooour edit ART!!!!")
 console.log("this is the req.body: ", req.body);
 
 const imagePaths = []

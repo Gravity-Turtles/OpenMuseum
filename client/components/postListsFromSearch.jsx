@@ -15,8 +15,8 @@ class PostListsFromSearch extends Component {
       return ( 
         <li key={post._id}>
           <Link to={"posts/" + post._id}>
-            <strong>{post.title}</strong>
-            {post.description} {post.locLat} {post.locLong}
+            <strong>{post.title}</strong><br/>
+            {post.description} 
           </Link>
         </li>
       );
@@ -29,12 +29,12 @@ class PostListsFromSearch extends Component {
         <div> loading...</div>
       );
     }
-    console.log("length of posts", this.props.posts.length);
-    if (this.props.posts.length) {
+    console.log("length of posts", this.props.postsCurrent.length);
+    if (this.props.postsCurrent.length) {
       console.log("something around your Search");
       return (
         <div style={{height:'100%'}}>
-          <GoogleMap lat={this.props.geoFromSearch.latitude} lng={this.props.geoFromSearch.longitude} {...this.props}/>
+          <GoogleMap lat={this.props.geoFromSearch.latitude} lng={this.props.geoFromSearch.longitude} zoomSize={15} {...this.props}/>
         </div>
       );
     } else {
@@ -62,7 +62,8 @@ function mapStateToProps(state){
   return { 
     loc: state.loc,
     geoFromSearch: state.geoFromSearch,
-    posts: state.posts
+    posts: state.posts,
+    postsCurrent: state.postsCurrent
    };
 }
 
