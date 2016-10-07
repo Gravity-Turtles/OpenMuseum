@@ -21,20 +21,20 @@ class FrontPage extends Component {
       return (
         <div className="theme">
           <div className="themeRow">
-              <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "StreetArts")}>
-                <div className="themeBtn">StreetArts</div></Link>
-              <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Sclupture")}>
-                <div className="themeBtn">Sclupture</div></Link>
+              <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "StreetArt")}>
+                <div className="themeBtn">Street Art</div></Link>
+              <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Sculpture")}>
+                <div className="themeBtn">Sculpture</div></Link>
               <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Architecture")}>
-                <div className="themeBtn">Architecture</div></Link>
+                <div className="themeBtn">Architecture / Signs</div></Link>
             </div>
             <div className="themeRow">
               <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Mosaic")}>
-                <div className="themeBtn">Mosaic</div></Link> 
+                <div className="themeBtn">Mosaics</div></Link> 
               <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Trending")}>
                 <div className="themeBtn">Trending</div></Link> 
               <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Historic")}>
-                <div className="themeBtn">Historic</div></Link> 
+                <div className="themeBtn">Historic Places</div></Link> 
             </div>
           </div>
       );

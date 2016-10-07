@@ -79,7 +79,7 @@ module.exports.insertArt = function(req, res) {
 
 //****** Query DB for nearby art *******//
 module.exports.findArt = function(req, res) {
-  console.log("req.body in findArt", req.body);  
+  console.log("req.body in findArtFIXXX!!!!!!!!!!!!!!", req.body.theme);  
   let whatToFind = {}
   let range = 0.006;
   if (req.body.theme) {
@@ -94,13 +94,7 @@ module.exports.findArt = function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      console.log('findArt Data',data);
-      if (!req.body.theme) {
-        const range = 0.006;
-      } else {
-        const range = 0.1;
-      }
-      console.log(range);
+      console.log("RANGE+++++++++++++++",range);
       let lngMin = req.body.longitude - range;
       let lngMax = req.body.longitude + range;
       let latMin = req.body.latitude - range;
@@ -135,8 +129,13 @@ module.exports.findArt = function(req, res) {
       const compareLikes = function(a, b) {
         return b.likes - a.likes;
       }
+      console.log("THEME+++++++++++++",req.body.theme);
       if (req.body.theme === "Trending") {
         result.sort(compareLikes);
+        console.log("LENGTH+++++++++++++++++",result.length);
+        if (result.length > 10) {
+          result = result.slice(0, 10);
+        }
       }
       
       console.log('findArt Result======================>',result);
