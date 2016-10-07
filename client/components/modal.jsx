@@ -55,12 +55,12 @@ export default class myModal extends Component {
     const currentArt = this.props.props.posts.findIndex((post) => post._id === this.props.props.params.id);
 
     this.setState({ newDescription: e.target.value });
-    this.setState({ oldArt: this.props.props.posts[currentArt]})
+    this.setState({ oldArt: this.props.props.posts[currentArt]});
     console.log("mah state: ", this.state);
   }
 
-  onSubmission(){
-    event.preventDefault()
+  onSubmission(event){
+    event.preventDefault();
     
     let payload = this.state;
     console.log("meee payload", payload);
