@@ -2,12 +2,27 @@
 import axios from 'axios';
 import request from 'superagent';
 import { browserHistory } from 'react-router';
+import store from '../store';
 
 export function fetchPosts(loc, theme) {
   if (theme) {
+    let term;
     loc.theme = theme;
+
+    if (theme === "StreetArt") {
+      term = "Street Art";
+    } else if (theme === "Architecture") {
+      term = "Architecture & Signs";
+    } else if (theme === "Historic") {
+      term = "Historic Places";
+    } else if (theme === "Mosaic") {
+      term = "Mosaics";
+    } else {
+      term = theme;
+    }
+    store.dispatch({type: 'THEME_TERM', payload: term});
   }
-  console.log("inside ActionCreater fetchPosts", loc, theme);
+  console.log("inside ActionCreater fetchPosts", "LOC", loc, "THEME",theme);
   const request = axios.post('/api/findArt', loc);
 
   return (dispatch) => {

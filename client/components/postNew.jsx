@@ -119,16 +119,16 @@ class PostNew extends Component{
           <label htmlFor="categories">Categories</label>
           <div>
             <div>
-              <Field name="StreetArts" id="StreetArts" component="input" type="checkbox" />
-              <span> StreetArts</span>
+              <Field name="StreetArt" id="StreetArt" component="input" type="checkbox" />
+              <span> Street Art</span>
             </div>
             <div>
-              <Field name="Sclupture" id="Sclupture" component="input" type="checkbox" /> 
-              <span> Sclupture</span>  
+              <Field name="Sculpture" id="Sculpture" component="input" type="checkbox" /> 
+              <span> Sculpture</span>  
             </div>
             <div>
               <Field name="Architecture" id="Architecture" component="input" type="checkbox" /> 
-              <span> Architecture / Signage</span> 
+              <span> Architecture / Signs</span> 
             </div>
             <div>
               <Field name="Mosaic" id="Mosaic" component="input" type="checkbox" /> 

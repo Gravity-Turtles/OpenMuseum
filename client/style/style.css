@@ -1,8 +1,11 @@
-html, body {
-  height: 100%;
+* {
   margin: 0;
   padding: 0;
 }
+html, body {
+  height: 100%;
+}
+
 #map {
   height: 100%;
 }
@@ -27,7 +30,9 @@ h1, h2 {
   display: flex;
   justify-content: space-between;
 }
-
+.mainNav {
+  margin-bottom: 30px;
+}
 .themeBtnLink {
   width: 30%;
 }
@@ -36,7 +41,28 @@ h1, h2 {
   display: flex;
   align-items: center;
 }
+.thumbNail {
+  width: 17%;
+  float: left;
+  margin-right: 30px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
 
+.listContents {
+  padding-top: 2%;
+}
+
+li {
+  width: 100%;
+  border-bottom: 1px solid #DCDCDC;
+}
+
+.clearf:after {
+  clear: both;
+  content: "";
+  display: block;
+}
 nav {
   margin-top: 30px;
 }
@@ -45,13 +71,14 @@ label {
   margin-top: 10px;
 }
 
-.searchBox, .postLists {
+.searchBox {
   margin-top: 30px;
 }
 /************ POST NEW PAGE  ************/
 .dropZone {
   height: 100px;
-  border: 1px solid dashed;
+  border: 1px solid gray;
+  border-style: dashed;
   border-radius: 5px;
   padding: 5px;
   margin-bottom: 20px;
@@ -93,7 +120,10 @@ label {
 }
 
 /************ INFO PAGE  ************/
-
+.social-share-container {
+  display: flex;
+  justify-content: space-between;
+}
 
 /*********** IMAGE SLIDE ************/
 @font-face {

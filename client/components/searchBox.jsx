@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import store from '../store';
 
 export default class SearchBar extends Component {
   constructor(props) {
@@ -16,6 +17,8 @@ export default class SearchBar extends Component {
   }
 
   onFormSubmit(event) {
+    console.log(this.state.address);
+    store.dispatch({type: 'SEARCH_TERM', payload: this.state.address});
     event.preventDefault();
     let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + this.state.address + '&key=AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo';
     let request = axios.get(GEOCODING);

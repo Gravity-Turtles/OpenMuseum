@@ -13,10 +13,13 @@ class PostListsFromSearch extends Component {
     }
     return this.props.posts.map((post) => {
       return ( 
-        <li key={post._id}>
+        <li className="clearf" key={post._id}>
           <Link to={"posts/" + post._id}>
-            <strong>{post.title}</strong><br/>
-            {post.description} 
+            <img className="thumbNail" src="http://www.museumofthecity.org/wp-content/uploads/2015/05/lv_e0410570654f3226f31b3546a0c123bbab3b2ccd.jpg" />
+            <div className="listContents">
+              <strong>{post.title}</strong><br/>
+              {post.description}
+            </div>
           </Link>
         </li>
       );
@@ -46,6 +49,7 @@ class PostListsFromSearch extends Component {
   render() {
     return (
       <main>
+        <h2>Near {this.props.searchTerm}</h2>
         <div style={{width:'100%', height:'350px'}}>
           {this.renderMap()}
         </div>
@@ -63,7 +67,8 @@ function mapStateToProps(state){
     loc: state.loc,
     geoFromSearch: state.geoFromSearch,
     posts: state.posts,
-    postsCurrent: state.postsCurrent
+    postsCurrent: state.postsCurrent,
+    searchTerm: state.searchTerm
    };
 }
 
