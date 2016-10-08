@@ -122,7 +122,7 @@ module.exports.findArt = function(req, res){
           result = result.slice(0, 10);
         }
       }
-          
+        
 ///******* GRIDFS START **********/////
       // var imageResults = {};
       // result.forEach(item => {
