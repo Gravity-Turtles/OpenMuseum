@@ -38,34 +38,68 @@ html, body {
   display: flex;
   align-items: center;
 }
-.thumbNail {
-  width: 17%;
-  float: left;
-  margin-right: 30px;
-  margin-top: 2px;
-  margin-bottom: 2px;
-}
 
-.listContents {
-  padding-top: 2%;
-}
-
-li {
-  width: 100%;
-  border-bottom: 1px solid #DCDCDC;
-}
-
-.clearf:after {
-  clear: both;
-  content: "";
-  display: block;
-}
 nav {
   margin-top: 30px;
 }
 
 label {
   margin-top: 10px;
+}
+
+
+/* COLOR SWATCH 
+
+DARK DARK GRAY: #1A1A1A;
+DARK GRAY : #A9A9A9
+LIGHT GRAY : #D3D3D3
+
+****************/
+/************ TYPOGRAPHY  ************/
+h1 {
+  font-size: 4.5rem;
+  font-weight: 800;
+}
+h1, h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.pageTitle {
+  margin-bottom: 20px;
+  font-size: 4rem;
+  font-weight: 800;
+}
+
+
+/************ FRONT PAGE  ************/
+.cityNameTitle {
+  color: #A9A9A9;
+}
+/************ SEARCHBOX  ************/
+.input-group .form-control:first-child {
+  border-radius: 0;
+}
+.input-group-btn:last-child > .btn {
+  border-radius: 0;
+}
+.form-control.frontPage {
+  height: 4.25rem;
+  background-color: black;
+  color: #D3D3D3;
+  font-size: 1.5rem;
+  font-weight: lighter;
+  border: none;
+}
+.btn.frontPage {
+  background-color: black;
+  height: 4.25rem;
+  color: #A9A9A9;
+  font-size: 3rem;
+  font-weight: bolder;
+  padding: 0 30px;
+  background-image: url(../assets/rArrow.png);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 
@@ -130,7 +164,6 @@ h1, h2 {
   height: 100px;
   border: 1px solid gray;
   border-style: dashed;
-  border-radius: 5px;
   padding: 5px;
   margin-bottom: 20px;
 }
@@ -168,6 +201,73 @@ h1, h2 {
 }
 .listItems{
   display: inline;
+}
+
+/************ POST LIST PAGE  ************/
+.gMap {
+  width: 100%;
+  height: 350px;
+  margin-bottom: 10px;
+}
+.thumbNail {
+  position: relative;
+  width: 14%;
+  height: 0;
+  padding-bottom: 14%;
+  float: left;
+  margin-right: 30px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-left: -7px;
+  overflow: hidden;
+  border-radius: 50% 50%;
+}
+.thumbImg {
+  width: 100%;
+  vertical-align: center;
+}
+.listContents {
+  padding-top: 2%;
+}
+
+li {
+  width: 100%;
+  border-bottom: 1px solid #DCDCDC;
+}
+.listTitle {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #1A1A1A;
+}
+.listText {
+  font-size: 1.5rem;
+  color: #A9A9A9;
+}
+
+.clearf:after {
+  clear: both;
+  content: "";
+  display: block;
+}
+
+.custumNum {
+  margin-left: 0;
+  padding-right: 0;
+  list-style-type: none;
+}
+
+.custumNum li {
+    counter-increment: step-counter;
+}
+.custumNum li::before {
+    content: counter(step-counter);
+    margin-right: 5px;
+    font-size: 7rem;
+    color: #D3D3D3;
+    font-weight: 800;
+    float: left;
+    margin-right: 40px;
+    line-height: 1.2;
 }
 
 /************ INFO PAGE  ************/
