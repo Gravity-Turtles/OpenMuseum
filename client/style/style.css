@@ -102,6 +102,54 @@ h1, h2 {
   background-size: cover;
 }
 
+
+/* COLOR SWATCH 
+
+DARK GRAY : #A9A9A9
+LIGHT GRAY : #D3D3D3
+****************/
+/************ TYPOGRAPHY  ************/
+h1 {
+  font-size: 4.5rem;
+  font-weight: 800;
+}
+h1, h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+
+/************ FRONT PAGE  ************/
+.cityNameTitle {
+  color: #A9A9A9;
+}
+/************ SEARCHBOX  ************/
+.input-group .form-control:first-child {
+  border-radius: 0;
+}
+.input-group-btn:last-child > .btn {
+  border-radius: 0;
+}
+.form-control {
+  height: 4.25rem;
+  background-color: black;
+  color: #D3D3D3;
+  font-size: 1.5rem;
+  font-weight: lighter;
+  border: none;
+}
+.btn {
+  background-color: black;
+  height: 4.25rem;
+  color: #A9A9A9;
+  font-size: 3rem;
+  font-weight: bolder;
+  padding: 0 30px;
+  background-image: url(../assets/rArrow.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .searchBox {
   margin-top: 3.5rem;
   width: 100%;
