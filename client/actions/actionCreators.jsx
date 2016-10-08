@@ -62,8 +62,7 @@ export function getLocation() {
   let locPromise = getLocPromise();
   return (dispatch) => {
     locPromise.then((position) => {
-      let loc = {};
-      console.log("Location=======", position)
+      let loc = {};      
       loc.latitude  = position.coords.latitude;
       loc.longitude = position.coords.longitude;
       dispatch({type: 'GET_LOCATION', loc})
@@ -137,16 +136,13 @@ export function editArt(object){
 }
 
 export function createPost3(props) {
-  console.log('createPost3!')  
-  console.log(props)
   const categories = [];
   for (var key in props) {
     if (props[key] === true) {
       categories.push(key);
     }
   }
-
-  console.log(categories);
+  
   const title = props.title || 'undefined';
   const description = props.description || 'undefined';
   const address = props.location || 'undefined';
