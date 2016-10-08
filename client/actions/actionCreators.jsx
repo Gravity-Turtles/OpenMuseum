@@ -22,7 +22,6 @@ export function fetchPosts(loc, theme) {
   }
 }
 
-
 export function fetchPostsFromSearch(loc) {
   console.log("inside ActionCreater fetchPostsFromSearch", loc);
   const request = axios.post('/api/findArt', loc);

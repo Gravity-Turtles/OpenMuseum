@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/actionCreators';
 import ImageGallery from 'react-image-gallery';
 
-// const requireContext = require.context("../../uploads", true, /^\.\/.*\.jpg$/);
 class ImageSlide extends React.Component {
 
   constructor(props) {
@@ -22,8 +21,8 @@ class ImageSlide extends React.Component {
       showGalleryPlayButton: true,
       showNav: true,
       slideInterval: 2000,
-      showVideo: {},
-      requireContext: require.context("../../uploads", true, /^\.\/.*\.jpg$/)
+      showVideo: {}
+      // requireContext: require.context("../../uploads", true, /^\.\/.*\.jpg$/)
     };
   }
 
@@ -142,10 +141,6 @@ class ImageSlide extends React.Component {
   }
 
   render() {
-    console.log('this.props.props')
-    console.log(this.props.props)
-    console.log(this.props.props.images)
-
     // let imgsTranslate = this.props.props.images.map((file) =>{
     //   return `.${file.slice(file.indexOf('/'),file.length)}`
     // })
@@ -168,30 +163,20 @@ class ImageSlide extends React.Component {
     //   })
     // })
 
-    let images3 = [];
+    let images2 = [];
 
     this.props.props.images.forEach((image)=>{
-      images3.push({
+      images2.push({
         thumbnail: `/${image}`,
         original: `/${image}`
       })
     })
 
-    // console.log('images3')
-    // console.log(images3)
-
-    // let images2 = [
-    //   {
-    //     thumbnail:'/uploads/1475180255072.jpg',
-    //     original:'/uploads/1475180255072.jpg'
-    //   }
-    // ]
-
     return (
       <section className='app'>             
         <ImageGallery
           ref={i => this._imageGallery = i}
-          items={images3}
+          items={images2}
           lazyLoad={false}
           onClick={this._onImageClick.bind(this)}
           onImageLoad={this._onImageLoad}
@@ -213,7 +198,6 @@ class ImageSlide extends React.Component {
     );
   }
 }
-
 
 function mapStateToProps(state){
   return { 

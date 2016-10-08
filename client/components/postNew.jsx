@@ -17,8 +17,7 @@ class renderDropzoneInput extends Component{
     this.getGpsInfo = this.getGpsInfo.bind(this);
   }
 
-  getGpsInfo(event){
-  
+  getGpsInfo(event){  
     var getGpsFromImage = function () {
       return new Promise(function(resolve, reject) {
         EXIF.getData(event.target, function(){
@@ -76,9 +75,6 @@ class renderDropzoneInput extends Component{
 
   }
 }
-
-
-////////////////////////////////////////// 
 
 class PostNew extends Component{
   constructor(props) {
@@ -160,10 +156,7 @@ function mapStateToProps(state){
     geoFromImage: state.geoFromImage
    }
 }
-// PostNew = reduxForm({
-//   form: 'PostsTest'  
-//   // validate
-// },mapStateToProps,{ createPost3 })(PostNew);
+
 PostNew = reduxForm({
   form: 'PostsTest'  
   // validate
