@@ -12,12 +12,17 @@ class PostListsFromSearch extends Component {
       return <div>loading</div>;
     }
     return this.props.posts.map((post) => {
+      let thumbPic;
+      if(post.images[0]) thumbPic = `/${post.images[0]}`
+      else thumbPic = '/uploads/default.jpg' 
+
       return ( 
         <li className="clearf" key={post._id}>
           <Link to={"posts/" + post._id}>
-            <img className="thumbNail" src="http://www.museumofthecity.org/wp-content/uploads/2015/05/lv_e0410570654f3226f31b3546a0c123bbab3b2ccd.jpg" />
+            <div className="thumbNail"><img className="thumbImg" src= {thumbPic} /></div>
             <div className="listContents">
-              <strong>{post.title}</strong><br/>
+              <div className="listTitle">{post.title}</div>
+              <div className="listText">{post.description.split(" ").slice(0, 9).join(" ") + "..."}</div>
             </div>
           </Link>
         </li>
@@ -48,11 +53,11 @@ class PostListsFromSearch extends Component {
   render() {
     return (
       <main>
-        <h2>Near {this.props.searchTerm}</h2>
-        <div style={{width:'100%', height:'350px'}}>
+        <h2 className="pageTitle">Near {this.props.searchTerm}</h2>
+        <div className="gMap">
           {this.renderMap()}
         </div>
-        <ol className="postLists">
+        <ol className="postLists custumNum">
           {this.renderPost()}
         </ol>
         
