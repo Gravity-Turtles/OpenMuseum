@@ -47,7 +47,7 @@ class FrontPage extends Component {
 
     return (
       <main>
-        <h1>OPEN</h1>
+        <h1>OPEN</h1>        
         <h1>MUSEUM</h1>
         <h2>{this.renderCityName()}</h2>
         <SearchBox fetchPostsFromSearch={this.props.fetchPostsFromSearch}/>
@@ -57,12 +57,6 @@ class FrontPage extends Component {
           <div>graffiti</div>
           <div>mosaic</div>
           <div>Sculpture</div>
-          {/****** TEMP   *******/}
-          <img src = {require('../../uploads/London - 10.jpg')} /> 
-
-          {/****** TEMP   *******/}
-
-
         </div>
       </main>
     );

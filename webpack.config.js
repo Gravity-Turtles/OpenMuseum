@@ -8,7 +8,7 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 
 module.exports = {
   entry: [
-    './client/index.jsx'
+    './client/index.jsx'    
   ],
   output: {
     path: __dirname + '/dist',

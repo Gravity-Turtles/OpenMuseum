@@ -142,34 +142,56 @@ class ImageSlide extends React.Component {
   }
 
   render() {
+    console.log('this.props.props')
+    console.log(this.props.props)
+    console.log(this.props.props.images)
 
-    let imgsTranslate = this.props.props.images.map((file) =>{
-      return `.${file.slice(file.indexOf('/'),file.length)}`
-    })
+    // let imgsTranslate = this.props.props.images.map((file) =>{
+    //   return `.${file.slice(file.indexOf('/'),file.length)}`
+    // })
 
-    const imagesImport = imgsTranslate.map(this.state.requireContext);
+    // const imagesImport = imgsTranslate.map(this.state.requireContext);
 
-    let imageCollection;
-    if(imagesImport){
-      imageCollection = imagesImport.map((item) => {
-        return `/../../${item}`
-        })
-    }
+    // let imageCollection;
+    // if(imagesImport){
+    //   imageCollection = imagesImport.map((item) => {
+    //     return `/../../${item}`
+    //     })
+    // }
 
-    let images = [];
+    // let images = [];
 
-    imageCollection.forEach((image)=>{
-      images.push({
-        thumbnail: image,
-        original: image
+    // imageCollection.forEach((image)=>{
+    //   images.push({
+    //     thumbnail: image,
+    //     original: image
+    //   })
+    // })
+
+    let images3 = [];
+
+    this.props.props.images.forEach((image)=>{
+      images3.push({
+        thumbnail: `/${image}`,
+        original: `/${image}`
       })
     })
 
+    // console.log('images3')
+    // console.log(images3)
+
+    // let images2 = [
+    //   {
+    //     thumbnail:'/uploads/1475180255072.jpg',
+    //     original:'/uploads/1475180255072.jpg'
+    //   }
+    // ]
+
     return (
-      <section className='app'>
+      <section className='app'>             
         <ImageGallery
           ref={i => this._imageGallery = i}
-          items={images}
+          items={images3}
           lazyLoad={false}
           onClick={this._onImageClick.bind(this)}
           onImageLoad={this._onImageLoad}
