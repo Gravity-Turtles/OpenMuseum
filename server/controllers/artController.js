@@ -42,8 +42,7 @@ module.exports.insertArt = function(req, res) {
     })
   }
     var art = new Art();
-    art.title = req.body.title;              
-    art.date = req.body.date;
+    art.title = req.body.title;                  
     art.description = req.body.description;
     art.categories = req.body.categories.split(",");
     art.image = req.body.image;
