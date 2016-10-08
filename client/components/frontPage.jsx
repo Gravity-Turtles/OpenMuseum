@@ -42,9 +42,7 @@ class FrontPage extends Component {
     return "";
   }
 
-  render() {    
-    console.log('inside render ', this.props)
-
+  render() {        
     return (
       <main>
         <h1>OPEN</h1>        
