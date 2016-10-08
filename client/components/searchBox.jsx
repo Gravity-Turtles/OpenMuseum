@@ -51,6 +51,7 @@ export default class SearchBar extends Component {
         />
         <span className="input-group-btn">
           <button type="submit" className="btn frontPage btn-secondary"> </button>
+          <button type="submit" className="btn btn-secondary"> </button>
         </span>
       </form>
     )
