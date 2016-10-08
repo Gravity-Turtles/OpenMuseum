@@ -17,6 +17,8 @@ export function fetchPosts(loc, theme) {
       term = "Historic Places";
     } else if (theme === "Mosaic") {
       term = "Mosaics";
+    } else if (theme === "Sculpture") {
+      term = "Sculptures";
     } else {
       term = theme;
     }

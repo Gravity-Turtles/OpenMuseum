@@ -22,7 +22,6 @@ class PostLists extends Component {
             <img className="thumbNail" src= {thumbPic} />
             <div className="listContents">
               <strong>{post.title}</strong><br/>
-              {post.description}
             </div>
           </Link>
         </li>

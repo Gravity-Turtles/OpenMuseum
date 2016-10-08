@@ -11,9 +11,9 @@ class FrontPage extends Component {
     console.log('inside renderCityName',this.props);
     if (this.props.loc.latitude) {
      this.props.getCityName(this.props.loc); 
-     return this.props.cityName;  
+     return this.props.cityName.toUpperCase();  
     }  
-    return this.props.cityName;
+    return this.props.cityName.toUpperCase();
   }
 
   renderThemeBtns() {
@@ -45,9 +45,8 @@ class FrontPage extends Component {
   render() {        
     return (
       <main>
-        <h1>OPEN</h1>        
-        <h1>MUSEUM</h1>
-        <h2>{this.renderCityName()}</h2>
+        <h1>OPEN MUSEUM</h1>
+        <h1 className="cityNameTitle">{this.renderCityName()}</h1>
         <SearchBox fetchPostsFromSearch={this.props.fetchPostsFromSearch}/>
         {this.renderThemeBtns()}
       </main>

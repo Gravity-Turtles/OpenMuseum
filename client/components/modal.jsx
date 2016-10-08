@@ -96,7 +96,7 @@ export default class myModal extends Component {
           
             
             <form>
-              <h4>Name</h4>
+              <h4>Title</h4>
               <FormGroup>
               <FormControl
               type="text"
