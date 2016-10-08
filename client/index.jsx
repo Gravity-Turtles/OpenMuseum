@@ -36,7 +36,7 @@ const router = (
         <Route path="posts" component={PostLists} />
         <Route path="postsfromsearch" component={PostListsFromSearch} />
         <Route path="postsfromtheme" component={PostListsFromTheme} />
-        <Route path="posts/:id" component={PostDetail} />
+        <Route path="posts/:id" component={RequireAuth(PostDetail)} />
         <Route path="imageSlide" component={ImageSlide} />           
       </Route>
     </Router>
