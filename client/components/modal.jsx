@@ -5,16 +5,23 @@ import { Button, Modal, showModal, FormGroup, FormControl, ControlLabel, FieldGr
 import myDropzone from './dropzone';
 import { Field, reduxForm } from 'redux-form';
 import Dropzone from 'react-dropzone';
+import { browserHistory } from 'react-router';
 
 
 export default class myModal extends Component {
+
+
+
     constructor(props){
      super(props)
+     const i = this.props.props.posts.findIndex((post) => post._id === this.props.props.params.id);
+
     this.state = {
+
       oldArt: '',
       showModal: false,
-      newName: '',
-      newDescription: '',
+      newName: this.props.props.posts[i].title,
+      newDescription: this.props.props.posts[i].description,
       images: []
     };
 
@@ -65,6 +72,9 @@ export default class myModal extends Component {
     let payload = this.state;
     console.log("meee payload", payload);
     this.props.props.editArt(payload);
+    //this.close();
+    this.setState({ showModal: false })
+    browserHistory.push('/')
 
   }
 

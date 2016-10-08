@@ -72,6 +72,7 @@ class PostDetail extends Component {
       likes++;
     }
 
+
     const {
       FacebookShareButton,
       GooglePlusShareButton,
