@@ -109,7 +109,7 @@ class PostNew extends Component{
 
         <div>
           <label htmlFor="description">Description</label>
-          <Field name="description" component="input" type="text" className="form-control" />                            
+          <Field name="description" component="textarea" className="form-control" />                            
         </div>                
 
         <div>
