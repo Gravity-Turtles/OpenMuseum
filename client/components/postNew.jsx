@@ -6,6 +6,7 @@ import Dropzone from 'react-dropzone';
 import request from 'superagent';
 import store from '../store';
 import * as actions from '../actions/actionCreators';
+import { createPost3 } from '../actions/actionCreators';
 
 class renderDropzoneInput extends Component{
   constructor(props) {
@@ -16,8 +17,7 @@ class renderDropzoneInput extends Component{
     this.getGpsInfo = this.getGpsInfo.bind(this);
   }
 
-  getGpsInfo(event){
-  
+  getGpsInfo(event){  
     var getGpsFromImage = function () {
       return new Promise(function(resolve, reject) {
         EXIF.getData(event.target, function(){
@@ -75,9 +75,6 @@ class renderDropzoneInput extends Component{
 
   }
 }
-
-
-////////////////////////////////////////// 
 
 class PostNew extends Component{
   constructor(props) {
@@ -159,10 +156,7 @@ function mapStateToProps(state){
     geoFromImage: state.geoFromImage
    }
 }
-// PostNew = reduxForm({
-//   form: 'PostsTest'  
-//   // validate
-// },mapStateToProps,{ createPost3 })(PostNew);
+
 PostNew = reduxForm({
   form: 'PostsTest'  
   // validate

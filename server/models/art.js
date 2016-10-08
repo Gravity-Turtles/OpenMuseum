@@ -12,6 +12,7 @@ var artSchema = new mongoose.Schema({
     contentType: String 
   },
   images: Array,
+  imagesDB: Array,
   user: String,
   likes: { 
     type: Number, 

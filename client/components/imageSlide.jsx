@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/actionCreators';
 import ImageGallery from 'react-image-gallery';
 
-// const requireContext = require.context("../../uploads", true, /^\.\/.*\.jpg$/);
 class ImageSlide extends React.Component {
 
   constructor(props) {
@@ -22,8 +21,8 @@ class ImageSlide extends React.Component {
       showGalleryPlayButton: true,
       showNav: true,
       slideInterval: 2000,
-      showVideo: {},
-      requireContext: require.context("../../uploads", true, /^\.\/.*\.jpg$/)
+      showVideo: {}
+      // requireContext: require.context("../../uploads", true, /^\.\/.*\.jpg$/)
     };
   }
 
@@ -142,34 +141,42 @@ class ImageSlide extends React.Component {
   }
 
   render() {
+    // let imgsTranslate = this.props.props.images.map((file) =>{
+    //   return `.${file.slice(file.indexOf('/'),file.length)}`
+    // })
 
-    let imgsTranslate = this.props.props.images.map((file) =>{
-      return `.${file.slice(file.indexOf('/'),file.length)}`
-    })
+    // const imagesImport = imgsTranslate.map(this.state.requireContext);
 
-    const imagesImport = imgsTranslate.map(this.state.requireContext);
+    // let imageCollection;
+    // if(imagesImport){
+    //   imageCollection = imagesImport.map((item) => {
+    //     return `/../../${item}`
+    //     })
+    // }
 
-    let imageCollection;
-    if(imagesImport){
-      imageCollection = imagesImport.map((item) => {
-        return `/../../${item}`
-        })
-    }
+    // let images = [];
 
-    let images = [];
+    // imageCollection.forEach((image)=>{
+    //   images.push({
+    //     thumbnail: image,
+    //     original: image
+    //   })
+    // })
 
-    imageCollection.forEach((image)=>{
-      images.push({
-        thumbnail: image,
-        original: image
+    let images2 = [];
+
+    this.props.props.images.forEach((image)=>{
+      images2.push({
+        thumbnail: `/${image}`,
+        original: `/${image}`
       })
     })
 
     return (
-      <section className='app'>
+      <section className='app'>             
         <ImageGallery
           ref={i => this._imageGallery = i}
-          items={images}
+          items={images2}
           lazyLoad={false}
           onClick={this._onImageClick.bind(this)}
           onImageLoad={this._onImageLoad}
@@ -191,7 +198,6 @@ class ImageSlide extends React.Component {
     );
   }
 }
-
 
 function mapStateToProps(state){
   return { 

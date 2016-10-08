@@ -42,12 +42,10 @@ class FrontPage extends Component {
     return "";
   }
 
-  render() {    
-    console.log('inside render ', this.props)
-
+  render() {        
     return (
       <main>
-        <h1>OPEN</h1>
+        <h1>OPEN</h1>        
         <h1>MUSEUM</h1>
         <h2>{this.renderCityName()}</h2>
         <SearchBox fetchPostsFromSearch={this.props.fetchPostsFromSearch}/>
