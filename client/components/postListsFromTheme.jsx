@@ -38,7 +38,7 @@ class PostListsFromTheme extends Component {
       console.log("something around you");
       return (
         <div style={{height:'100%'}}>
-          <GoogleMap lat={this.props.loc.latitude} lng={this.props.loc.longitude} zoomSize={12} {...this.props}/>
+          <GoogleMap lat={this.props.loc.latitude} lng={this.props.loc.longitude} zoomSize={13} {...this.props}/>
         </div>
       );
     } else {
