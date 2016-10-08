@@ -24,7 +24,7 @@ class FrontPage extends Component {
               <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "StreetArt")}>
                 <div className="themeBtn">Street Art</div></Link>
               <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Sculpture")}>
-                <div className="themeBtn">Sculpture</div></Link>
+                <div className="themeBtn">Sculptures</div></Link>
               <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Architecture")}>
                 <div className="themeBtn">Architecture / Signs</div></Link>
             </div>

@@ -12,10 +12,14 @@ class PostLists extends Component {
       return <div>loading</div>;
     }
     return this.props.posts.map((post) => {
+      let thumbPic;
+      if(post.images[0]) thumbPic = `/${post.images[0]}`
+      else thumbPic = '/uploads/default.jpg'            
+          
       return ( 
         <li className="clearf" key={post._id}>
           <Link to={"posts/" + post._id}>
-            <img className="thumbNail" src="http://www.museumofthecity.org/wp-content/uploads/2015/05/lv_e0410570654f3226f31b3546a0c123bbab3b2ccd.jpg" />
+            <img className="thumbNail" src= {thumbPic} />
             <div className="listContents">
               <strong>{post.title}</strong><br/>
               {post.description}
