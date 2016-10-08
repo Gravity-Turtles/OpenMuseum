@@ -60,7 +60,7 @@ export default class myModal extends Component {
   }
 
   onSubmission(){
-    event.preventDefault()
+    event.preventDefault();
     
     let payload = this.state;
     console.log("meee payload", payload);
