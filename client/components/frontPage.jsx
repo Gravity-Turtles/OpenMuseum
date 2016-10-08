@@ -11,9 +11,9 @@ class FrontPage extends Component {
     console.log('inside renderCityName',this.props);
     if (this.props.loc.latitude) {
      this.props.getCityName(this.props.loc); 
-     return this.props.cityName;  
+     return this.props.cityName.toUpperCase();  
     }  
-    return this.props.cityName;
+    return this.props.cityName.toUpperCase();
   }
 
   renderThemeBtns() {
@@ -24,7 +24,7 @@ class FrontPage extends Component {
               <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "StreetArt")}>
                 <div className="themeBtn">Street Art</div></Link>
               <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Sculpture")}>
-                <div className="themeBtn">Sculpture</div></Link>
+                <div className="themeBtn">Sculptures</div></Link>
               <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Architecture")}>
                 <div className="themeBtn">Architecture / Signs</div></Link>
             </div>
@@ -47,9 +47,8 @@ class FrontPage extends Component {
 
     return (
       <main>
-        <h1>OPEN</h1>
-        <h1>MUSEUM</h1>
-        <h2>{this.renderCityName()}</h2>
+        <h1>OPEN MUSEUM</h1>
+        <h1 className="cityNameTitle">{this.renderCityName()}</h1>
         <SearchBox fetchPostsFromSearch={this.props.fetchPostsFromSearch}/>
         {this.renderThemeBtns()}
       </main>
