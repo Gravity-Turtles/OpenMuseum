@@ -50,12 +50,6 @@ class FrontPage extends Component {
         <h2>{this.renderCityName()}</h2>
         <SearchBox fetchPostsFromSearch={this.props.fetchPostsFromSearch}/>
         {this.renderThemeBtns()}
-        <SearchBox getGeoFromSearch={this.props.getGeoFromSearch} fetchPostsFromSearch={this.props.fetchPostsFromSearch}/>
-        <div className="theme">
-          <div>graffiti</div>
-          <div>mosaic</div>
-          <div>Sculpture</div>
-        </div>
       </main>
     );
   }
