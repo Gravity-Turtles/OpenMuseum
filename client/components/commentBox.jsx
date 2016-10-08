@@ -21,8 +21,7 @@ class CommentBox extends Component {
     this.setState({ comment : ''})
   }
 
-  render(){
-    console.log('id and comment', this.props, this.state.comment);
+  render(){    
     return (
       <form onSubmit={this.handleSubmit.bind(this)} className="comment_box">
         <h3> Add a comment </h3>
