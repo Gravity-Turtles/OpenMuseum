@@ -45,12 +45,12 @@ export default class SearchBar extends Component {
       <form onSubmit={this.onFormSubmit} className="input-group searchBox">
         <input 
           placeholder="Search by Address"
-          className="form-control"
+          className="form-control frontPage"
           value={this.state.address}
           onChange={this.onInputChange}
         />
         <span className="input-group-btn">
-          <button type="submit" className="btn btn-secondary"> </button>
+          <button type="submit" className="btn frontPage btn-secondary"> </button>
         </span>
       </form>
     )

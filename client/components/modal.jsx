@@ -149,7 +149,7 @@ export default class myModal extends Component {
 
             </form>
           
-      <Dropzone                  
+      <Dropzone className="dropZone"               
         onDrop={( filesToUpload, e ) => {
           this.setState({images: [...this.state.images,filesToUpload]}, function(){            
             console.log('heres filesToUpload: ', filesToUpload);
