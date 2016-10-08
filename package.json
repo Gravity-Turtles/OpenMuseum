@@ -6,7 +6,10 @@
   "scripts": {
     "start": "webpack-dev-server",
     "production": "webpack -p",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "webpack-watch": "webpack -w",
+    "express-server": "nodemon ./server",
+    "dev": "concurrent --kill-others \"npm run webpack-watch\" \"npm run express-server\""
   },
   "repository": {
     "type": "git",
@@ -26,6 +29,7 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.16.0",
     "commitizen": "^2.8.6",
+    "concurrently": "^3.1.0",
     "cz-conventional-changelog": "^1.2.0",
     "eslint": "^3.5.0",
     "eslint-config-airbnb": "^11.1.0",

@@ -2,6 +2,7 @@
 const mongoose = require('mongoose');
 const Grid = require('gridfs-stream');
 const fs = require('fs');
+const path = require('path');
 const User = mongoose.model('User');
 const Art = mongoose.model('Art');
 const googleMapsClient = require('@google/maps').createClient({
@@ -9,12 +10,13 @@ const googleMapsClient = require('@google/maps').createClient({
 });
 const jwt =  require('jwt-simple');
 const config = require('../../config');
+Grid.mongo = mongoose.mongo;  
+var gfs = Grid(mongoose.connection.db);   
 
-Grid.mongo = mongoose.mongo;
-mongoose.connection.on('open', function() {
-  console.log('open');
-  var gfs = Grid(mongoose.connection);
-});
+// mongoose.connection.on('open', function() {
+//   console.log('open');
+//   var gfs = Grid(mongoose.connection);
+// });
 //******** uncomment out this section when adding authentication ******//
 // module.exports.profileRead = function(req, res) {
 
@@ -38,10 +40,41 @@ mongoose.connection.on('open', function() {
 //****** Insert New Art *******//
 
 module.exports.insertArt = function(req, res) {
-  console.log('insertArt running')    
+  console.log('insertArt running')
   console.log("insertArt reqBody",req.body);
   console.log("insertArt reqBody",req.body.location);
-  console.log("insertArt reqFiles",req.files);
+  console.log("insertArt reqFiles",req.files);    
+
+  //********** TEST START ************//
+
+
+  // loop through and write to DB
+  // store IDs in an array 
+
+  let imagesDB = [];
+  let readStream; 
+  if(req.files){
+    req.files.forEach(function(file){      
+      let filePath = `${file.path}`        
+      //create write stream
+      let writeStream = gfs.createWriteStream({
+        filename: file.filename
+      })      
+      let readStream = fs.createReadStream(filePath);
+      readStream.pipe(writeStream)
+
+      imagesDB.push(file.filename);
+
+      writeStream.on('close', function (file){
+      // do something with `file`
+        console.log(file.filename + 'Written To DB');
+      });
+    })
+  }
+
+  console.log('IMAGES DB', imagesDB);
+
+  //********** TEST END ************//
   const imagePaths = []
   if(req.files){
     req.files.forEach(function(file){
@@ -57,7 +90,7 @@ module.exports.insertArt = function(req, res) {
 
 
     art.images = imagePaths;
-
+    art.imagesDB = imagesDB;
     //****** TEMP ******//
     art.locLat = req.body.latitude;
     art.locLong = req.body.longitude;
@@ -73,13 +106,12 @@ module.exports.insertArt = function(req, res) {
     art.save(function(err) {
       console.log(err);      
       res.sendStatus(201);
-    });  
+    });    
 };
 
 
 //****** Query DB for nearby art *******//
-module.exports.findArt = function(req, res) {
-  console.log("req.body in findArt", req.body);  
+module.exports.findArt = function(req, res) {    
   let whatToFind = {}
   let range = 0.006;
   if (req.body.theme) {
@@ -93,8 +125,7 @@ module.exports.findArt = function(req, res) {
   Art.find(whatToFind, function(err, data) {
     if (err) {
       console.log(err);
-    } else {
-      console.log('findArt Data',data);
+    } else {      
       if (!req.body.theme) {
         const range = 0.006;
       } else {
@@ -130,24 +161,40 @@ module.exports.findArt = function(req, res) {
       }
       result.sort(compareDistance);
 
-
       // sort by likes after sort by distance from me, if it's search by "Trending".
       const compareLikes = function(a, b) {
         return b.likes - a.likes;
       }
       if (req.body.theme === "Trending") {
         result.sort(compareLikes);
-      }
-      
-      console.log('findArt Result======================>',result);
+      }    
   
+///******* TEST START **********/////
+      // console.log('data',data);
+      // console.log('result', result);
+      // var imageResults = {};
+      // result.forEach(item => {
+      //   item.imagesDB.forEach((image,index) =>{
+      //     //get chunks based on image name
+      //     //stream results into array
+      //     //add array to result body
+      //     //send back result        
+      //     var readStream = gfs.createReadStream({
+      //       filename: image
+      //     })
+      //     readStream.pipe(imageResults)
+      //     console.log('imageResults', imageResults);
+      //   })
+      // })
+
+      
+///******* TEST END **********/////
       res.status(200).send(result);
     }
   });
 };
 
 module.exports.editArt = function(req, res){
-console.log("this is the req.body: ", req.body);
 
 const imagePaths = []
   if(req.files){
@@ -155,37 +202,29 @@ const imagePaths = []
       imagePaths.push(file.path)
     })
   }
-console.log('super image paths: ', imagePaths);
- Art.find({ '_id': req.body.oldId }, function (err, docs) {
-  console.log('DOCS[0]', docs[0], 'docs.images', docs[0].likes);
+ Art.find({ '_id': req.body.oldId }, function (err, docs) {  
   let oldPics = []
   for(var i = 0; i < docs[0].images.length; i++){
     oldPics.push(docs[0].images[i]);
-  }
-  console.log('oldPics', oldPics);
+  }  
   for(var k = 0; k < imagePaths.length; k++){
     oldPics.push(imagePaths[k]);
-  }
-  console.log('oldPics+', oldPics);
+  }  
 
 var newName = req.body.newName;
 var newDescription = req.body.newDescription;
-Art.update({ '_id': req.body.oldId }, { title: newName, description: newDescription, images: oldPics}, function(response) {
-    console.log("word, now show me that RESPONSE:", response);
+Art.update({ '_id': req.body.oldId }, { title: newName, description: newDescription, images: oldPics}, function(response) {    
 
   })
 });
 }
 
-module.exports.editLikes = function(req, res){
-  console.log('EDITING LIKES, with req.body: ', req.body)
-  Art.find({ 'title': req.body.title }, function (err, docs) {
- console.log('DOCS', docs);
+module.exports.editLikes = function(req, res){  
+  Art.find({ 'title': req.body.title }, function (err, docs) { 
 
 var newLikes = req.body.likes;
 
-Art.update({ 'title': req.body.title }, { likes: newLikes}, function(response) {
-    console.log("updated Likes, show me that RESPONSE", response);
+Art.update({ 'title': req.body.title }, { likes: newLikes}, function(response) {    
 
 
 });

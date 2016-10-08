@@ -47,16 +47,11 @@ class FrontPage extends Component {
 
     return (
       <main>
-        <h1>OPEN</h1>
+        <h1>OPEN</h1>        
         <h1>MUSEUM</h1>
         <h2>{this.renderCityName()}</h2>
         <SearchBox fetchPostsFromSearch={this.props.fetchPostsFromSearch}/>
         {this.renderThemeBtns()}
-
-        {/****** TEMP   *******/}
-          <img src = {require('../../uploads/London - 10.jpg')} /> 
-
-        {/****** TEMP   *******/}
       </main>
     );
   }
