@@ -88,9 +88,9 @@ class PostNew extends Component{
   onSubmit(props) {
     event.preventDefault();
     this.props.createPost3(props);
-    console.log('after createPost3')
-    browserHistory.push('/')
-    console.log('afterpush')
+    console.log('after createPost3');
+    browserHistory.push('/');
+    console.log('afterpush');
   }
 
   componentDidUpdate() {
@@ -101,63 +101,65 @@ class PostNew extends Component{
     console.log("postNew props", this.props);
     const { handleSubmit } = this.props;                                
     return (
-      <form id = "dropForm" className="dropzone" onSubmit = {handleSubmit(this.onSubmit.bind(this))} encType="multipart/form-data">
-        <h3>Create A New Post</h3>
-        <div>
-          <label htmlFor="title">Title</label>
-          <Field name="title" component="input" type="text" className="form-control" />              
-        </div>
 
-        <div>
-          <label htmlFor="location">Location*</label>                            
-          <Field name="location" component="input" type="text" className="form-control" placeholder="Attach your image first."/>  
-        </div>     
-
-        <div>
-          <label htmlFor="artist">Artist</label>                            
-          <Field name="artist" component="input" type="text" className="form-control" placeholder=""/>  
-        </div>     
-
-        <div>
-          <label htmlFor="description">Description</label>
-          <Field name="description" component="input" type="text" className="form-control" />                            
-        </div>                
-
-        <div>
-          <label htmlFor="categories">Categories</label>
+      <div className="oneColPageWrapper">
+        <form id = "dropForm" className="dropzone" onSubmit = {handleSubmit(this.onSubmit.bind(this))} encType="multipart/form-data">
+          <h3>Create A New Post</h3>
           <div>
-            <div>
-              <Field name="StreetArt" id="StreetArt" component="input" type="checkbox" />
-              <span> Street Art</span>
-            </div>
-            <div>
-              <Field name="Sculpture" id="Sculpture" component="input" type="checkbox" /> 
-              <span> Sculpture</span>  
-            </div>
-            <div>
-              <Field name="Architecture" id="Architecture" component="input" type="checkbox" /> 
-              <span> Architecture / Signs</span> 
-            </div>
-            <div>
-              <Field name="Mosaic" id="Mosaic" component="input" type="checkbox" /> 
-              <span> Mosaic</span> 
-            </div> 
-            <div>
-              <Field name="Historic" id="Historic" component="input" type="checkbox" /> 
-              <span> Historic</span>
-            </div> 
-          </div>                          
-        </div> 
+            <label htmlFor="title">Title</label>
+            <Field name="title" component="input" type="text" className="form-control" />              
+          </div>
+          
+          <div>
+            <label htmlFor="artist">Artist</label>                            
+            <Field name="artist" component="input" type="text" className="form-control" placeholder=""/>  
+          </div>     
 
-        <div>
-          <label htmlFor="images">Files</label>
-          <Field updateLocFromImage={this.props.updateLocFromImage}
-            name="files"                            
-            component={renderDropzoneInput}
-          />
-        </div>
-        <button type="submit" className="btn btn-primary" id="buttonNew">Submit</button>            
-      </form>
+          <div>
+            <label htmlFor="description">Description</label>
+            <Field name="description" component="textarea" className="form-control" />                            
+          </div>                
+          <div>
+            <label htmlFor="categories">Categories</label>
+            <div>
+              <div>
+                <Field name="StreetArt" id="StreetArt" component="input" type="checkbox" />
+                <span> Street Art</span>
+              </div>
+              <div>
+                <Field name="Sculpture" id="Sculpture" component="input" type="checkbox" /> 
+                <span> Sculpture</span>  
+              </div>
+              <div>
+                <Field name="Architecture" id="Architecture" component="input" type="checkbox" /> 
+                <span> Architecture / Sign</span> 
+              </div>
+              <div>
+                <Field name="Mosaic" id="Mosaic" component="input" type="checkbox" /> 
+                <span> Mosaic</span> 
+              </div> 
+              <div>
+                <Field name="Historic" id="Historic" component="input" type="checkbox" /> 
+                <span> Historic</span>
+              </div> 
+            </div>                          
+          </div> 
+
+          <div>
+            <label htmlFor="location">Location</label>                            
+            <Field name="location" component="input" type="text" className="form-control" placeholder="Attach your image first."/>  
+          </div> 
+
+          <div>
+            <label htmlFor="images">Files</label>
+            <Field updateLocFromImage={this.props.updateLocFromImage}
+              name="files"                            
+              component={renderDropzoneInput}
+            />
+          </div>
+          <button type="submit" className="btn btn-primary" id="buttonNew">Submit</button>            
+        </form>
+      </div>
     )
   }
 }

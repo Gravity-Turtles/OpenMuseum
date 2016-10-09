@@ -5,9 +5,9 @@ const fs = require('fs');
 const path = require('path');
 const User = mongoose.model('User');
 const Art = mongoose.model('Art');
-const googleMapsClient = require('@google/maps').createClient({
-  key: 'AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo'
-});
+// const googleMapsClient = require('@google/maps').createClient({
+//   key: 'AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo'
+// });
 const jwt =  require('jwt-simple');
 const config = require('../../config');
 Grid.mongo = mongoose.mongo;  
@@ -51,6 +51,7 @@ module.exports.insertArt = function(req, res) {
     //****** TEMP ******//
     art.locLat = req.body.latitude;
     art.locLong = req.body.longitude;
+    art.address = req.body.address;
     //****** TEMP ******//
     art.likes = req.body.likes;
     art.artist = req.body.artist;
@@ -63,7 +64,7 @@ module.exports.insertArt = function(req, res) {
 
 module.exports.findArt = function(req, res){    
   let whatToFind = {}
-  let range = 0.006;
+  let range = 0.007;
   if (req.body.theme) {
     range = 1;
     whatToFind = {categories: req.body.theme};
@@ -75,11 +76,6 @@ module.exports.findArt = function(req, res){
     if (err) {
       console.log(err);
     } else {      
-      if (!req.body.theme) {
-        const range = 0.006;
-      } else {
-        const range = 0.1;
-      }
       console.log(range);
       let lngMin = req.body.longitude - range;
       let lngMax = req.body.longitude + range;

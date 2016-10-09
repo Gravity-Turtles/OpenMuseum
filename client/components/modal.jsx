@@ -81,9 +81,8 @@ export default class myModal extends Component {
     console.log("meee payload", payload);
     this.props.props.editArt(payload);
     //this.close();
-    this.setState({ showModal: false })
-    browserHistory.push('/')
-
+    this.setState({ showModal: false });
+    browserHistory.push('/');
   }
 
 
@@ -114,7 +113,7 @@ export default class myModal extends Component {
           
             
             <form>
-              <h4>Name</h4>
+              <h4>Title</h4>
               <FormGroup>
               <FormControl
               type="text"
@@ -149,7 +148,7 @@ export default class myModal extends Component {
 
             </form>
           
-      <Dropzone                  
+      <Dropzone className="dropZone"               
         onDrop={( filesToUpload, e ) => {
           this.setState({images: [...this.state.images,filesToUpload]}, function(){            
             console.log('heres filesToUpload: ', filesToUpload);

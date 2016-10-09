@@ -8,7 +8,7 @@ import GoogleMap from './googleMap';
 class PostLists extends Component {
 
   componentWillMount() {
-    this.props.fetchPosts(this.props.loc, "")
+    this.props.fetchPosts(this.props.loc, "");
   }
   
   renderPost() {
@@ -23,10 +23,10 @@ class PostLists extends Component {
       return ( 
         <li className="clearf" key={post._id}>
           <Link to={"posts/" + post._id}>
-            <img className="thumbNail" src= {thumbPic} />
+            <div className="thumbNail"><img className="thumbImg" src= {thumbPic} /></div>
             <div className="listContents">
-              <strong>{post.title}</strong><br/>
-              {post.description}
+              <div className="listTitle">{post.title}</div>
+              <div className="listText">{post.description.split(" ").slice(0, 9).join(" ") + "..."}</div>
             </div>
           </Link>
         </li>
@@ -60,8 +60,8 @@ class PostLists extends Component {
   render() {
     return (
       <main>
-        <h2>Near You</h2>
-        <div style={{width:'100%', height:'350px'}}>
+        <h2 className="pageTitle">Near You</h2>
+        <div className="gMap">
           {this.renderMap()}
         </div>
         <ol className="postLists custumNum">
