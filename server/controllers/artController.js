@@ -5,9 +5,9 @@ const fs = require('fs');
 const path = require('path');
 const User = mongoose.model('User');
 const Art = mongoose.model('Art');
-const googleMapsClient = require('@google/maps').createClient({
-  key: 'AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo'
-});
+// const googleMapsClient = require('@google/maps').createClient({
+//   key: 'AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo'
+// });
 const jwt =  require('jwt-simple');
 const config = require('../../config');
 Grid.mongo = mongoose.mongo;  

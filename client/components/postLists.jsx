@@ -8,7 +8,7 @@ import GoogleMap from './googleMap';
 class PostLists extends Component {
 
   componentWillMount() {
-    this.props.fetchPosts(this.props.loc, "")
+    this.props.fetchPosts(this.props.loc, "");
   }
   
   renderPost() {
