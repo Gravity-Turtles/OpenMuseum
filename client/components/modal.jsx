@@ -17,11 +17,11 @@ export default class myModal extends Component {
      const i = this.props.props.posts.findIndex((post) => post._id === this.props.props.params.id);
 
     this.state = {
-
       oldArt: this.props.props.posts[i],
       showModal: false,
       newName: this.props.props.posts[i].title,
       newDescription: this.props.props.posts[i].description,
+      newArtist: this.props.props.posts[i].artist,
       images: []
     };
 
@@ -30,6 +30,7 @@ export default class myModal extends Component {
     this.open = this.open.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+    this.handleArtistChange = this.handleArtistChange.bind(this);
     this.onSubmission = this.onSubmission.bind(this);
     this.pushImage = this.pushImage.bind(this);
     this.removePhoto = this.removePhoto.bind(this);
@@ -59,18 +60,16 @@ export default class myModal extends Component {
     this.setState({ showModal: true });
   }
 
-   handleNameChange(e) {
-
+  handleNameChange(e) {
     this.setState({ newName: e.target.value});
-    
-    console.log("mah state: ", this.state);
   }
 
   handleDescriptionChange(e) {
+    this.setState({ newDescription: e.target.value });       
+  }
 
-    this.setState({ newDescription: e.target.value });
-   
-    console.log("mah state: ", this.state);
+  handleArtistChange(e) {    
+    this.setState({ newArtist: e.target.value });       
   }
 
   onSubmission(event){
@@ -122,6 +121,16 @@ export default class myModal extends Component {
               value={this.state.newName}
               placeholder={this.props.props.posts[i].title}
               onChange={this.handleNameChange}
+              />
+              </FormGroup>
+
+              <h4>Artist</h4>
+              <FormGroup>
+              <FormControl
+              type="text"
+              value={this.state.newArtist}
+              placeholder={this.props.props.posts[i].artist}
+              onChange={this.handleArtistChange}
               />
               </FormGroup>
               
