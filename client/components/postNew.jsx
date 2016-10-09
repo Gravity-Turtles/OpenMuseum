@@ -109,8 +109,13 @@ class PostNew extends Component{
         </div>
 
         <div>
-          <label htmlFor="location">Location</label>                            
+          <label htmlFor="location">Location*</label>                            
           <Field name="location" component="input" type="text" className="form-control" placeholder="Attach your image first."/>  
+        </div>     
+
+        <div>
+          <label htmlFor="artist">Artist</label>                            
+          <Field name="artist" component="input" type="text" className="form-control" placeholder=""/>  
         </div>     
 
         <div>
