@@ -14,10 +14,10 @@ class Header extends Component {
       )
     } else {
       return (
-        <div>
-          <Link className="nav-link" to="/signin">Sign In</Link>
-           &nbsp;|&nbsp;<Link className="nav-link" to="/signup" onClick={this.props.clearError}>Sign Up</Link>
-           &nbsp;|&nbsp;<Link className="nav-link" onClick={this.props.facebookAuthReq}>Login with Facebook</Link>
+        <div className="headerBtns">
+          <div className="headerBtn"><Link to="/signin">Sign In</Link></div>
+          <div className="headerBtn"><Link to="/signup" onClick={this.props.clearError}>Sign Up</Link></div>
+          <div className="headerBtn hide"><Link onClick={this.props.facebookAuthReq}>Login with Facebook</Link></div>
         </div>
       );
     }
@@ -25,18 +25,14 @@ class Header extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-light">
-        <div className="nav navbar-nav">
-          {this.renderLinks()}
-        </div>
-      </nav>
+      <div className="headerBar">
+        <div className="headerTitle"><span>OPEN MUSEUM</span></div>
+        {this.renderLinks()}
+      </div>
     );
   }
 
 }
-
-
-
 
 function mapStateToProps(state) {
   return {
