@@ -68,6 +68,9 @@ h1, h2 {
 }
 
 
+/************ HEADER  ************/
+
+
 /************ MAIN NAV  ************/
 .mainNav {
   color: #D3D3D3;
@@ -83,31 +86,58 @@ h1, h2 {
   height: 5.5rem;
 }
 .mainNav a {
-  color: #D3D3D3;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  justify-content: center;
+  color: #808080;
+  font-weight: bold;
+
+}
+.mainBtn a:hover, .mainBtn:hover {
+  background-color: tomato;
+  color: white;
+  background-image: url(../assets/lArrow_transparent.png), url(../assets/rArrow_transparent.png);
+  background-repeat: no-repeat, no-repeat;
+  background-size: 7%, 7%;
+  background-position: 27% center, 73% center;
+}
+
+.sideBtn.addNew a:hover, .sideBtn.addNew:hover {
+  background-color: black;
 }
 .mainNav a:hover {
   text-decoration: none;
 }
 .mainBtn {
   width: 65%;
-  background-color: black;
+  background-color: #e6e6e6;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
+
+
 .sideBtn {
   width: 20%;
-  padding: 0 30px;
-  background-color: #F2F2F2;
+  background-color: #e6e6e6;
   display: flex;
   align-items: center;
   justify-content: center;
   border-top: 1px solid #D3D3D3;
 }
-.mainNav .sideBtn a {
-  color: #1A1A1A;
-  text-decoration: none;
+
+.home.sideBtn:hover {
+  background-color: black;
+  background-image: url(../assets/rArrow.png);
+  background-repeat: no-repeat;
+  background-size: 30%;
+  background-position: 5% center;
 }
+
 /************ FRONT PAGE  ************/
 
 .theme a {
