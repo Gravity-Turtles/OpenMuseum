@@ -101,7 +101,6 @@ class PostNew extends Component{
     console.log("postNew props", this.props);
     const { handleSubmit } = this.props;                                
     return (
-
       <div className="oneColPageWrapper">
         <form id = "dropForm" className="dropzone" onSubmit = {handleSubmit(this.onSubmit.bind(this))} encType="multipart/form-data">
           <h3>Create A New Post</h3>
@@ -114,7 +113,6 @@ class PostNew extends Component{
             <label htmlFor="artist">Artist</label>                            
             <Field name="artist" component="input" type="text" className="form-control" placeholder=""/>  
           </div>     
-
           <div>
             <label htmlFor="description">Description</label>
             <Field name="description" component="textarea" className="form-control" />                            
