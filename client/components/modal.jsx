@@ -18,7 +18,7 @@ export default class myModal extends Component {
 
     this.state = {
 
-      oldArt: '',
+      oldArt: this.props.props.posts[i],
       showModal: false,
       newName: this.props.props.posts[i].title,
       newDescription: this.props.props.posts[i].description,
@@ -31,18 +31,24 @@ export default class myModal extends Component {
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     this.onSubmission = this.onSubmission.bind(this);
-    this.pushImage = this.pushImage.bind(this)
+    this.pushImage = this.pushImage.bind(this);
+    this.removePhoto = this.removePhoto.bind(this);
   }
 
-    pushImage(image){
-      var pushable = [];
-      pushable.push(image);
-      console.log('image', image, 'pushable array', pushable);
-      this.setState({ images: pushable });
-    }
+  pushImage(image){
+      
+    var pushable = [];
+    pushable.push(image);
+    console.log('image', image, 'pushable array', pushable);
+    this.setState({ images: pushable });
+  }
 
-    getInitialState() {
-    return { showModal: false };
+  removePhoto(photo){
+    console.log("Removing!!!!!!!!!!!!!!!", photo);
+  }
+
+  getInitialState() {
+  return { showModal: false };
   }
 
   close() {
@@ -54,27 +60,30 @@ export default class myModal extends Component {
   }
 
    handleNameChange(e) {
+
     this.setState({ newName: e.target.value});
+    
     console.log("mah state: ", this.state);
   }
 
   handleDescriptionChange(e) {
-    const currentArt = this.props.props.posts.findIndex((post) => post._id === this.props.props.params.id);
 
     this.setState({ newDescription: e.target.value });
-    this.setState({ oldArt: this.props.props.posts[currentArt]});
+   
     console.log("mah state: ", this.state);
   }
 
   onSubmission(event){
     event.preventDefault();
-    
+
+    const currentArt = this.props.props.posts.findIndex((post) => post._id === this.props.props.params.id);
+    this.setState({ oldArt: this.props.props.posts[currentArt]});
     let payload = this.state;
     console.log("meee payload", payload);
     this.props.props.editArt(payload);
     //this.close();
-    this.setState({ showModal: false })
-    browserHistory.push('/')
+    this.setState({ showModal: false });
+    browserHistory.push('/');
 
   }
 
@@ -144,7 +153,7 @@ export default class myModal extends Component {
       </Dropzone>
       {this.state.images.length > 0 ? <div>
           <h2>Uploading {this.state.images.length} files...</h2>
-          <div id="imageContainer">{this.state.images.map((file) => <img key={file[0].name} className="imagePreview" src={file[0].preview} /> )}</div>
+          <div id="imageContainer">{this.state.images.map((file) => <img key={file[0].name} className="imagePreview" src={file[0].preview} onClick={this.removePhoto(file[0])}/> )}   </div>
        </div> : null}
           
           </Modal.Body>
