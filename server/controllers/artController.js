@@ -51,6 +51,7 @@ module.exports.insertArt = function(req, res) {
     //****** TEMP ******//
     art.locLat = req.body.latitude;
     art.locLong = req.body.longitude;
+    art.address = req.body.address;
     //****** TEMP ******//
     art.likes = req.body.likes;
 

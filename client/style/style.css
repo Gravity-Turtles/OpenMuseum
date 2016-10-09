@@ -8,36 +8,32 @@ html, body {
   font-family: 'Avenir','Helvetica Neue', Helvetica, Arial, sans-serif; 
 }
 
+.childPage {
+  margin-top: 5rem;
+  margin-bottom: 10rem;
+}
+
 #map {
   height: 100%;
 }
 
-#wrapper {
-  width: 55%;
+.oneColPageWrapper {
+  width: 90%;
+  max-width: 768px;
+  margin: 0 auto;
+}
+.halfColPageWrapper {
+  width: 60%;
+  max-width: 500px;
   margin: 0 auto;
 }
 
-.theme {
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
 
-
-.themeRow, .mainNav {
+.themeRow {
   display: flex;
   justify-content: space-between;
 }
-.mainNav {
-  margin-bottom: 30px;
-}
-.themeBtnLink {
-  width: 30%;
-}
-.themeBtn {
-  height: 30px;
-  display: flex;
-  align-items: center;
-}
+
 
 nav {
   margin-top: 30px;
@@ -53,11 +49,12 @@ label {
 DARK DARK GRAY: #1A1A1A;
 DARK GRAY : #A9A9A9
 LIGHT GRAY : #D3D3D3
+LIGHT LIGHT : #F2F2F2;
 
 ****************/
 /************ TYPOGRAPHY  ************/
 h1 {
-  font-size: 4.5rem;
+  font-size: 5rem;
   font-weight: 800;
 }
 h1, h2 {
@@ -71,9 +68,93 @@ h1, h2 {
 }
 
 
+/************ MAIN NAV  ************/
+.mainNav {
+  color: #D3D3D3;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.9rem;
+  font-weight: lighter;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 5.5rem;
+}
+.mainNav a {
+  color: #D3D3D3;
+}
+.mainNav a:hover {
+  text-decoration: none;
+}
+.mainBtn {
+  width: 65%;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sideBtn {
+  width: 20%;
+  padding: 0 30px;
+  background-color: #F2F2F2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #D3D3D3;
+}
+.mainNav .sideBtn a {
+  color: #1A1A1A;
+  text-decoration: none;
+}
 /************ FRONT PAGE  ************/
+
+.theme a {
+  color: #A9A9A9;
+  text-decoration: none
+}
+.theme li:hover {
+  background-color: black;
+  background-image: url(../assets/rArrow.png);
+  background-repeat: no-repeat;
+  background-size: 20%;
+  background-position: 103% center;
+  color: #D3D3D3;
+}
+.themeBtnLink {
+  width: 30%;
+}
+.themeBtn {
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
 .cityNameTitle {
   color: #A9A9A9;
+}
+
+.themeBox {
+  width: 100%;
+}
+
+.theme {
+  list-style-type: none;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  font-size: 1.9rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.theme li {
+  min-width: 45%;
+  padding: 10px 10px;
+  margin-bottom: 5rem;
+
+  border-bottom: 1px solid #DCDCDC;
 }
 /************ SEARCHBOX  ************/
 .input-group .form-control:first-child {
@@ -83,28 +164,29 @@ h1, h2 {
   border-radius: 0;
 }
 .form-control.frontPage {
-  height: 4.25rem;
+  height: 5rem;
   background-color: black;
   color: #D3D3D3;
-  font-size: 1.5rem;
+  font-size: 1.9rem;
   font-weight: lighter;
   border: none;
 }
 .btn.frontPage {
   background-color: black;
-  height: 4.25rem;
+  height: 5rem;
   color: #A9A9A9;
   font-size: 3rem;
   font-weight: bolder;
   padding: 0 30px;
   background-image: url(../assets/rArrow.png);
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 115%;
+  background-position: 10% center;
 }
 
 
 .searchBox {
-  margin-top: 3.5rem;
+  margin-top: 7rem;
   width: 100%;
 }
 
@@ -183,8 +265,10 @@ h1, h2 {
   padding-top: 2%;
 }
 
-li {
+.postLists li {
   width: 100%;
+  max-width: 768px;
+  min-width: 414px;
   border-bottom: 1px solid #DCDCDC;
 }
 .listTitle {
@@ -219,7 +303,7 @@ li {
     color: #D3D3D3;
     font-weight: 800;
     float: left;
-    margin-right: 40px;
+    margin-right: 30px;
     line-height: 1.2;
 }
 

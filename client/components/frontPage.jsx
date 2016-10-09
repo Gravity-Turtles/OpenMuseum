@@ -19,24 +19,38 @@ class FrontPage extends Component {
   renderThemeBtns() {
     if (this.props.loc.latitude) {
       return (
-        <div className="theme">
-          <div className="themeRow">
-              <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "StreetArt")}>
-                <div className="themeBtn">Street Art</div></Link>
-              <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Sculpture")}>
-                <div className="themeBtn">Sculptures</div></Link>
-              <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Architecture")}>
-                <div className="themeBtn">Architecture / Signs</div></Link>
-            </div>
-            <div className="themeRow">
-              <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Mosaic")}>
-                <div className="themeBtn">Mosaics</div></Link> 
-              <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Trending")}>
-                <div className="themeBtn">Trending</div></Link> 
-              <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Historic")}>
-                <div className="themeBtn">Historic Places</div></Link> 
-            </div>
-          </div>
+        <ul className="theme">
+          <li>
+            <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "StreetArt")}>
+              <div className="themeBtn">Street Art</div>
+            </Link>
+          </li>
+          <li>
+            <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Sculpture")}>
+              <div className="themeBtn">Sculptures</div>
+            </Link>
+          </li>
+          <li>
+            <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Architecture")}>
+              <div className="themeBtn">Architecture / Signs</div>
+            </Link>
+          </li>
+          <li>
+            <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Mosaic")}>
+              <div className="themeBtn">Mosaics</div>
+            </Link> 
+          </li>
+          <li>
+            <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Historic")}>
+              <div className="themeBtn">Historic Places</div>
+            </Link> 
+          </li>
+          <li>
+            <Link className="themeBtnLink" to="/postsfromtheme" onClick={this.props.fetchPosts.bind(null, this.props.loc, "Trending")}>
+              <div className="themeBtn">Trending</div>
+            </Link> 
+          </li>
+        </ul>
       );
     }
     return "";
@@ -44,11 +58,11 @@ class FrontPage extends Component {
 
   render() {        
     return (
-      <main>
+      <main className="oneColPageWrapper">
         <h1>OPEN MUSEUM</h1>
         <h1 className="cityNameTitle">{this.renderCityName()}</h1>
         <SearchBox fetchPostsFromSearch={this.props.fetchPostsFromSearch}/>
-        {this.renderThemeBtns()}
+        <div className="themeBox">{this.renderThemeBtns()}</div>
       </main>
     );
   }

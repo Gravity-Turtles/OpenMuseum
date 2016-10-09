@@ -17,9 +17,9 @@ class MainNav extends Component {
       return (<div className="navRow">. . .</div>);
     }
     return (
-      <Link to="/posts" className="navRow" onClick={this.props.fetchPosts.bind(null, this.props.loc, "")}>
+        <Link to="/posts" onClick={this.props.fetchPosts.bind(null, this.props.loc, "")}>
         Search Near Me
-      </Link>
+        </Link>
     );
   }
 
@@ -27,13 +27,11 @@ class MainNav extends Component {
     return (
       <main>
         <div><Header /></div>
-        {this.props.children}
+        <div className="childPage">{this.props.children}</div>
         <nav className="mainNav">
-          <Link to="/" className="navRow">Home</Link>
-          <div>
-            {this.showSearchBtn()}
-          </div>
-          <Link to="/new" className="navRow">Add New Artwork</Link>
+          <div className="sideBtn"><Link to="/">Lobby</Link></div>
+          <div className="mainBtn">{this.showSearchBtn()}</div>
+          <div className="sideBtn"><Link to="/new">Add New Art</Link></div>
         </nav>
       </main>
     );

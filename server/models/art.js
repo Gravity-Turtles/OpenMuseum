@@ -4,6 +4,7 @@ var artSchema = new mongoose.Schema({
   title: String,
   locLat: Number,
   locLong: Number,  
+  address: String,
   date: { 
     type: String, 
     default: Date.now
