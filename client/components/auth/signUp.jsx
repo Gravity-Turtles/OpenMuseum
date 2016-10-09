@@ -29,6 +29,7 @@ class Signup extends Component {
   render() {
     const { handleSubmit } = this.props;
     return (
+      <div className="halfColPageWrapper">
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <div>
             <label htmlFor="name">Name: </label>
@@ -50,6 +51,7 @@ class Signup extends Component {
           { this.renderAlert() }
           <button type="submit" className="btn btn-primary">Sign up</button>
         </form>
+      </div>
     );
   }
 }

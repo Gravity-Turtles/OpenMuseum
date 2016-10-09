@@ -83,7 +83,6 @@ export default class myModal extends Component {
     //this.close();
     this.setState({ showModal: false });
     browserHistory.push('/');
-
   }
 
 

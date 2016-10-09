@@ -108,8 +108,8 @@ export function editArt(object){
     const newArtist = object.newArtist || 'Unknown';
 
     var req = request.put('../api/art')
-      .set({headers: {
-      authorization: localStorage.getItem('token') }});
+      // .set({headers: {
+      // authorization: localStorage.getItem('token') }});
 
       console.log("object to be sent: ", object)
 
@@ -183,6 +183,7 @@ export function createPost3(props) {
     .field('latitude', geoFromSearch.latitude)
     .field('longitude', geoFromSearch.longitude)
     .field('artist', artist)
+    .field('address', address)
     .end(function(err,res){
       if(err) console.log(err)
         else browserHistory.push('/posts')          
