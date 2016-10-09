@@ -96,15 +96,14 @@ export function getCityName(loc) {
   }    
 }
 
-export function editArt(object){
-  console.log("in editArt action with this object: ", object)
-
+export function editArt(object){  
   // const request = axios.put('/api/art', object, {headers: {
   //   authorization: localStorage.getItem('token') }}
   //   );
     const newName = object.newName || 'undefined';
     const newDescription = object.newDescription || 'undefined';
     const oldId = object.oldArt._id;
+    const newArtist = object.newArtist || 'Unknown';
 
     var req = request.put('../api/art')
       .set({headers: {
@@ -122,6 +121,7 @@ export function editArt(object){
     .field('newName', newName)
     .field('newDescription', newDescription)
     .field('oldId', oldId)
+    .field('newArtist', newArtist)
     .end(function(err,res){
       if(err) console.log(err)
         else console.log(res)
@@ -129,13 +129,12 @@ export function editArt(object){
 
 
   return (dispatch) => {
-    req.then(({data}) => {
-      console.log("Puuuuuuuuuuuuut response yo=======", data)
+    req.then(({data}) => {      
     }).catch(console.log("failed to edit Art"));
   }
 }
 
-export function createPost3(props) {
+export function createPost3(props) {  
   const categories = [];
   for (var key in props) {
     if (props[key] === true) {
@@ -146,18 +145,16 @@ export function createPost3(props) {
   const title = props.title || 'undefined';
   const description = props.description || 'undefined';
   const address = props.location || 'undefined';
+  const artist = props.artist || 'undefined';
 
   let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo';
   let requestGeo = axios.get(GEOCODING);
 
   requestGeo.then(({data}) => {
-    let geoFromSearch = {}
-    console.log("GEO DATA FROM Search INSIDE CREATE POST3=======", data);
-    if (data.results[0]) {
-      console.log("HERE INSIDE DATA.RESULTS[0]")
+    let geoFromSearch = {}    
+    if (data.results[0]) {      
       geoFromSearch.latitude = data.results[0].geometry.location.lat;
-      geoFromSearch.longitude = data.results[0].geometry.location.lng;
-      console.log("GEO INSIDE CREATE POST3=======", geoFromSearch);
+      geoFromSearch.longitude = data.results[0].geometry.location.lng;      
     }
     else  {
       console.log("Geolocation data not found");
@@ -183,6 +180,7 @@ export function createPost3(props) {
     .field('description', description)
     .field('latitude', geoFromSearch.latitude)
     .field('longitude', geoFromSearch.longitude)
+    .field('artist', artist)
     .end(function(err,res){
       if(err) console.log(err)
         else browserHistory.push('/posts')          

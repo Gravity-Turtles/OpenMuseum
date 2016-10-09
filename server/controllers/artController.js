@@ -53,6 +53,7 @@ module.exports.insertArt = function(req, res) {
     art.locLong = req.body.longitude;
     //****** TEMP ******//
     art.likes = req.body.likes;
+    art.artist = req.body.artist;
 
     art.save(function(err) {
       console.log(err);      
@@ -112,11 +113,9 @@ module.exports.findArt = function(req, res){
       // sort by likes after sort by distance from me, if it's search by "Trending".
       const compareLikes = function(a, b) {
         return b.likes - a.likes;
-      }
-      console.log("THEME+++++++++++++",req.body.theme);
+      }      
       if (req.body.theme === "Trending") {
-        result.sort(compareLikes);
-        console.log("LENGTH+++++++++++++++++",result.length);
+        result.sort(compareLikes);        
         if (result.length > 10) {
           result = result.slice(0, 10);
         }
@@ -156,11 +155,15 @@ module.exports.editArt = function(req, res){
     }  
     let newName = req.body.newName;
     let newDescription = req.body.newDescription;
+    let newArtist = req.body.newArtist;
     Art.update({
         '_id': req.body.oldId 
       }, 
       { 
-        title: newName, description: newDescription, images: oldPics
+        title: newName, 
+        description: newDescription, 
+        images: oldPics,
+        artist: newArtist
       }, function(err,art){    
         if(err) console.log('editArt error:', err);    
         else res.send(art);

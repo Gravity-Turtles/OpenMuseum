@@ -2,6 +2,10 @@ var mongoose = require( 'mongoose' );
 
 var artSchema = new mongoose.Schema({
   title: String,
+  artist: {
+    type: String,
+    default: 'Unknown'
+  },
   locLat: Number,
   locLong: Number,  
   date: { 
