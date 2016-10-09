@@ -81,8 +81,8 @@ export default class myModal extends Component {
     console.log("meee payload", payload);
     this.props.props.editArt(payload);
     //this.close();
-    this.setState({ showModal: false })
-    browserHistory.push('/')
+    this.setState({ showModal: false });
+    browserHistory.push('/');
 
   }
 
