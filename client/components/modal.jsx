@@ -83,8 +83,7 @@ export default class myModal extends Component {
     this.props.props.editArt(payload);
     //this.close();
     this.setState({ showModal: false });
-    browserHistory.push('/');
-
+    browserHistory.push('/posts') ;
   }
 
 

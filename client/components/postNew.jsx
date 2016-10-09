@@ -131,7 +131,7 @@ class PostNew extends Component{
             </div>
             <div>
               <Field name="Architecture" id="Architecture" component="input" type="checkbox" /> 
-              <span> Architecture / Signs</span> 
+              <span> Architecture / Sign</span> 
             </div>
             <div>
               <Field name="Mosaic" id="Mosaic" component="input" type="checkbox" /> 

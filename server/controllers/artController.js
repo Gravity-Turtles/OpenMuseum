@@ -62,7 +62,7 @@ module.exports.insertArt = function(req, res) {
 
 module.exports.findArt = function(req, res){    
   let whatToFind = {}
-  let range = 0.006;
+  let range = 0.007;
   if (req.body.theme) {
     range = 1;
     whatToFind = {categories: req.body.theme};
@@ -74,11 +74,6 @@ module.exports.findArt = function(req, res){
     if (err) {
       console.log(err);
     } else {      
-      if (!req.body.theme) {
-        const range = 0.006;
-      } else {
-        const range = 0.1;
-      }
       console.log(range);
       let lngMin = req.body.longitude - range;
       let lngMax = req.body.longitude + range;
