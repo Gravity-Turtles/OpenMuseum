@@ -319,8 +319,15 @@ h1, h2 {
   display: block;
   margin-top: 5px;
   padding: 5px;
-  border: solid;
-  border-radius: 2px;
+  margin-top: 3px;
+  border-bottom: 1px solid #D3D3D3;
+}
+.comment_list {
+  margin-top: 20px;
+}
+.commentTextBox {
+  width: 100%;
+  margin-bottom: 10px;
 }
 .listItems{
   display: inline;
