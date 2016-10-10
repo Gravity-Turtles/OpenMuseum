@@ -137,7 +137,7 @@ export function createPost3(props) {
   const title = props.title || 'undefined';
   const description = props.description || 'undefined';
   const address = props.location || 'undefined';
-  const artist = props.artist || 'undefined';
+  const artist = props.artist || 'Unknown';
 
   let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo';
   let requestGeo = axios.get(GEOCODING);

@@ -19,10 +19,10 @@ class PostListsFromSearch extends Component {
       return ( 
         <li className="clearf" key={post._id}>
           <Link to={"posts/" + post._id}>
-            <div className="thumbNail"><img className="thumbImg" src= {thumbPic} /></div>
+            <div className="thumbNail" style={{"background-image":"url(" +thumbPic + ")"}}></div>
             <div className="listContents">
               <div className="listTitle">{post.title}</div>
-              <div className="listText">{post.description.split(" ").slice(0, 9).join(" ") + "..."}</div>
+              <div className="listText">{post.description.split(" ").slice(0, 4).join(" ") + "..."}</div>
             </div>
           </Link>
         </li>
@@ -46,20 +46,22 @@ class PostListsFromSearch extends Component {
       );
     } else {
       console.log("nothing around your Search");
-      return (<div> Nothing around your Search. </div>);
+      return (<div> No results for your search. </div>);
     }
   }
 
   render() {
     return (
       <main>
-        <h2 className="pageTitle">Near {this.props.searchTerm}</h2>
         <div className="gMap">
+          <h2 className="pageTitle twoColPage">Near {this.props.searchTerm}</h2>
           {this.renderMap()}
         </div>
-        <ol className="postLists custumNum">
-          {this.renderPost()}
-        </ol>
+        <div className="listBox twoColPage">
+          <ol className="postLists custumNum">
+            {this.renderPost()}
+          </ol>
+        </div>
         
       </main>
     );

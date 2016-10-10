@@ -25,7 +25,7 @@ class Signin extends Component {
     console.log("inside signin form",this.props);
 
     return (
-      <div className="halfColPageWrapper">
+      <div className="halfColPage">
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <div>
             <label htmlFor="email">Email: </label>

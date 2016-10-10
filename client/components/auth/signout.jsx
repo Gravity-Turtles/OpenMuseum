@@ -8,7 +8,7 @@ class Signout extends Component {
   }
 
   render() {
-    return <div>See you again</div>;
+    return <div className="oneColPage"><h1 className="mainTitle">Thanks for Visiting.</h1></div>;
   }
 }
 
