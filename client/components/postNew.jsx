@@ -23,7 +23,7 @@ const validate = values => {
   //   errors.description = 'Required'
   // } 
   if (!values.location) {
-    errors.description = '*Required'
+    errors.location = '*Required'
   } 
   return errors
 }
