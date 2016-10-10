@@ -23,13 +23,11 @@ export function fetchPosts(loc, theme) {
       term = theme;
     }
     store.dispatch({type: 'THEME_TERM', payload: term});
-  }
-  console.log("inside ActionCreater fetchPosts", "LOC", loc, "THEME",theme);
+  }  
   const request = axios.post('/api/findArt', loc);
 
   return (dispatch) => {
-    request.then(({data}) => {
-      console.log("Post=======", data);
+    request.then(({data}) => {      
       dispatch({type: 'FETCH_POSTS_CURRENT', posts: data});
       dispatch({type: 'FETCH_POSTS', posts: data});
       loc.theme = ""; // reset loc.theme
@@ -39,13 +37,11 @@ export function fetchPosts(loc, theme) {
   }
 }
 
-export function fetchPostsFromSearch(loc) {
-  console.log("inside ActionCreater fetchPostsFromSearch", loc);
+export function fetchPostsFromSearch(loc) {  
   const request = axios.post('/api/findArt', loc);
 
   return (dispatch) => {
-    request.then(({data}) => {
-      console.log("Post=======", data);
+    request.then(({data}) => {      
       dispatch({type: 'FETCH_POSTS_CURRENT', posts: data});
       dispatch({type: 'FETCH_POSTS', posts: data});
       dispatch({type: 'GET_GEO_SEARCH', geoFromSearch: loc});
@@ -77,8 +73,7 @@ export function getCityName(loc) {
   let request = axios.get(GEOCODING);
 
   return (dispatch) => {
-    request.then(({data}) => {
-      console.log("CITYNAME=======", data)
+    request.then(({data}) => {      
       let count, country, state, city;
       if (data.results[0]) {
         let address = data.results[0].formatted_address ;
@@ -87,8 +82,7 @@ export function getCityName(loc) {
         count = value.length;
         country = value[count - 1];
         state = value[count - 2];
-        city = value[count - 3].slice(1);
-        console.log("city name is: " + city);
+        city = value[count - 3].slice(1);        
         dispatch({type: 'GET_CITYNAME', cityName: city})
       }
       else  {
@@ -110,7 +104,6 @@ export function editArt(object){
     var req = request.put('../api/art')
       // .set({headers: {
       // authorization: localStorage.getItem('token') }});
-
       console.log("object to be sent: ", object)
 
     if(object.images){
@@ -119,7 +112,7 @@ export function editArt(object){
     });
     }
 
-      req
+    req
     .field('newName', newName)
     .field('newDescription', newDescription)
     .field('oldId', oldId)
@@ -128,8 +121,6 @@ export function editArt(object){
       if(err) console.log(err)
         else console.log(res)
     })
-
-
   return (dispatch) => {
     req.then(({data}) => {      
     }).catch(console.log("failed to edit Art"));
@@ -165,8 +156,7 @@ export function createPost3(props) {
     }
     return geoFromSearch;
   })
-  .then((geoFromSearch) => {
-    console.log(geoFromSearch);
+  .then((geoFromSearch) => {    
     var req = request.post('api/art')
     // .set({headers: {
     // authorization: localStorage.getItem('token') }});
@@ -206,8 +196,6 @@ export function saveComment(comment,id) {
       }
     })
     .then(response => {
-      console.log('response2')
-      console.log(response);
       dispatch({ 
         type: 'COMMENTS',
         payload: response
@@ -232,9 +220,7 @@ export function getComments(id) {
   }
 }
 
-export function updateLocFromImage(loc) {
-
-  console.log("updateLocFromImage called", loc);
+export function updateLocFromImage(loc) {  
   let GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + loc.lat + '%2C' + loc.lon + '&key=AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo';
   let request = axios.get(GEOCODING);
 
@@ -254,8 +240,7 @@ export function updateLocFromImage(loc) {
 
 ////// ACTIONS FOR AUTH
 
-export function signinUser({ email, password }) {
-  console.log("here inside signInUser");
+export function signinUser({ email, password }) {  
   return function(dispatch) {
     axios.post('api/signin', { email, password })
       .then(response => {
@@ -284,15 +269,13 @@ export function signupUser({ name, email, password }) {
   }
 }
 
-export function authError(error) {
-   console.log("Here", error);
+export function authError(error) {   
   return {
     type: 'AUTH_ERROR',
     payload: error
   };
 }
-export function clearError() {
-   console.log("Here in clearError");
+export function clearError() {   
   return { type: 'CLEAR_ERROR' };
 }
 
@@ -301,9 +284,7 @@ export function signoutUser() {
   return { type: 'UNAUTH_USER' };
 }
 
-export function editLikes(object){
-  console.log("in editLikes action with this object: ", object)
-
+export function editLikes(object){  
   const request = axios.put('/api/art/editLikes', object);
 
   return (dispatch) => {

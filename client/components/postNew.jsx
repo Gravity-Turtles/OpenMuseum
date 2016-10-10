@@ -9,7 +9,6 @@ import * as actions from '../actions/actionCreators';
 import { createPost3 } from '../actions/actionCreators';
 import { browserHistory } from 'react-router';
 
-
 class renderDropzoneInput extends Component{
   constructor(props) {
     super(props);
@@ -114,7 +113,6 @@ class PostNew extends Component{
             <label htmlFor="artist">Artist</label>                            
             <Field name="artist" component="input" type="text" className="form-control" placeholder=""/>  
           </div>     
-
           <div>
             <label htmlFor="description">Description</label>
             <Field name="description" component="textarea" className="form-control" />                            
