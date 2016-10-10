@@ -8,8 +8,8 @@ class Header extends Component {
   renderLinks() {
     if (this.props.authenticated) {
       return (
-        <div>
-          <Link className="nav-link" to="/signout">Sign Out</Link>
+        <div className="headerBtns">
+          <Link className="headerBtn" to="/signout">Sign Out</Link>
         </div>
       )
     } else {
@@ -26,7 +26,7 @@ class Header extends Component {
   render() {
     return (
       <div className="headerBar">
-        <div className="headerTitle"><span>OPEN MUSEUM</span></div>
+        <div className="headerTitle"><Link to="/">OPEN MUSEUM</Link></div>
         {this.renderLinks()}
       </div>
     );

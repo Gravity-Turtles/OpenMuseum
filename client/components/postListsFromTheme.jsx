@@ -20,10 +20,10 @@ class PostListsFromTheme extends Component {
       return ( 
         <li className="clearf" key={post._id}>
           <Link to={"posts/" + post._id}>
-            <div className="thumbNail"><img className="thumbImg" src= {thumbPic} /></div>
+            <div className="thumbNail" style={{"background-image":"url(" +thumbPic + ")"}}></div>
             <div className="listContents">
               <div className="listTitle">{post.title}</div>
-              <div className="listText">{post.description.split(" ").slice(0, 9).join(" ") + "..."}</div>
+              <div className="listText">{post.description.split(" ").slice(0, 4).join(" ") + "..."}</div>
             </div>
           </Link>
         </li>
@@ -56,13 +56,15 @@ class PostListsFromTheme extends Component {
   render() {
     return (
       <main>
-        <h2 className="pageTitle">{this.props.themeTerm} in {this.props.cityName}</h2>
         <div className="gMap">
+          <h2 className="pageTitle twoColPage">{this.props.themeTerm} in {this.props.cityName}</h2>
           {this.renderMap()}
         </div>
-        <ol className="postLists custumNum">
-          {this.renderPost()}
-        </ol>
+        <div className="listBox twoColPage">
+          <ol className="postLists custumNum">
+            {this.renderPost()}
+          </ol>
+        </div>
         
       </main>
     );

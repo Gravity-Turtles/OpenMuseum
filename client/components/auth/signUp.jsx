@@ -29,7 +29,7 @@ class Signup extends Component {
   render() {
     const { handleSubmit } = this.props;
     return (
-      <div className="halfColPageWrapper">
+      <div className="halfColPage">
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <div>
             <label htmlFor="name">Name: </label>
