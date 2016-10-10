@@ -123,10 +123,10 @@ class PostDetail extends Component {
           <div className="detailBox">
             <h2 className="pageTitle">{this.props.posts[i].title}</h2>
             <p>{this.props.posts[i].description}</p>
-            <div>Artist: {this.props.posts[i].artist}</div>
-            <div>Post Date: {time}</div>
-            <div>Categories: {this.props.posts[i].categories.join(', ')}</div>
-            <div>Address: {this.props.posts[i].address}</div>
+            <div><strong>Artist: </strong>{this.props.posts[i].artist}</div>
+            <div><strong>Post Date: </strong>{time}</div>
+            <div><strong>Categories: </strong>{this.props.posts[i].categories.join(', ')}</div>
+            <div><strong>Address: </strong>{this.props.posts[i].address}</div>
 
           <div className="editBtn">
             <MyModal props={this.props}/>
@@ -193,7 +193,7 @@ class PostDetail extends Component {
           </GooglePlusShareButton>
         </div>
       </div>
-      <CommentBox props={this.props}/>
+      <CommentBox className="commentBox" props={this.props}/>
       <CommentList />
 
     </div>
