@@ -6,8 +6,8 @@ import css from './style/style.css';
 
 // import components
 import MainNav from './components/mainNav';
-import Signin from './components/auth/signin';
-import Signup from './components/auth/signup';
+import Signin from './components/auth/signIn';
+import Signup from './components/auth/signUp';
 import Signout from './components/auth/signout';
 import FrontPage from './components/frontPage';
 import PostLists from './components/postLists';

@@ -72,11 +72,13 @@ export default class myModal extends Component {
     this.setState({ newArtist: e.target.value });       
   }
 
+
   onSubmission(event){
     event.preventDefault();
 
     const currentArt = this.props.props.posts.findIndex((post) => post._id === this.props.props.params.id);
     this.setState({ oldArt: this.props.props.posts[currentArt]});
+
     let payload = this.state;
     console.log("meee payload", payload);
     this.props.props.editArt(payload);
