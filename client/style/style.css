@@ -8,6 +8,10 @@ html, body {
   font-family: 'Avenir','Helvetica Neue', Helvetica, Arial, sans-serif; 
 }
 
+a, a:hover {
+  text-decoration: none;
+}
+
 .childPage {
   padding-top: 10rem;
   margin-bottom: 10rem;
@@ -17,12 +21,19 @@ html, body {
   height: 100%;
 }
 
-.oneColPageWrapper {
+.oneColPage {
   width: 90%;
   max-width: 768px;
   margin: 0 auto;
 }
-.halfColPageWrapper {
+
+.twoColPage {
+  width: 90%;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.halfColPage {
   width: 60%;
   max-width: 500px;
   margin: 0 auto;
@@ -89,6 +100,11 @@ h1, h2 {
   display: flex;
   align-items: center;
 }
+.headerTitle a {
+  color: #1A1A1A;
+  text-decoration: none;
+}
+
 .headerBtns {
   width: 40%;
   display: flex;
@@ -266,7 +282,6 @@ h1, h2 {
   border: 1px solid gray;
   border-style: dashed;
   padding: 5px;
-  margin-bottom: 20px;
 }
 
 #imageContainer{
@@ -292,8 +307,12 @@ h1, h2 {
   color: red;
   padding-bottom: 5px;
 }
+
 .errorMessage{
   color:red;
+}
+.locationInput {
+  margin-bottom: 20px;
 }
 /************ COMMENTS  ************/
 .commentList{
@@ -307,11 +326,19 @@ h1, h2 {
   display: inline;
 }
 
-/************ POST LIST PAGE  ************/
+/************ POST LIST PAGE  *****************************/
 .gMap {
   width: 100%;
-  height: 350px;
-  margin-bottom: 10px;
+  height: 400px;
+  padding-top: 8rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: white;
+  z-index: 50;
+}
+.listBox {
+  margin-top: 390px;
 }
 .thumbNail {
   position: relative;
@@ -325,20 +352,27 @@ h1, h2 {
   margin-left: -7px;
   overflow: hidden;
   border-radius: 50% 50%;
+  background-size: cover;
+  background-position: center;
 }
-.thumbImg {
-  width: 100%;
-  vertical-align: center;
-}
+
 .listContents {
   padding-top: 2%;
 }
 
+.postLists {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+
+}
 .postLists li {
-  width: 100%;
+  width: 47%;
   max-width: 768px;
   min-width: 414px;
   border-bottom: 1px solid #DCDCDC;
+  margin-bottom: 20px;
 }
 .listTitle {
   font-size: 2.5rem;
@@ -378,8 +412,43 @@ h1, h2 {
 
 /************ INFO PAGE  ************/
 .social-share-container {
+  width: 40%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+.imageSlide {
+  padding-bottom: 1rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid #D3D3D3;
+}
+.details {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #D3D3D3;
+}
+.detailBox {
+  width: 55%;
+}
+.gMapSmall {
+  width: 40%;
+  height: 300px;
+}
+.editBtn {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.likeBtn {
+  display: flex;
+  align-items: center;
+}
+.likesNum {
+  color: #A9A9A9;
+  font-weight: bold;
+  font-size: 3rem;
+  margin-right: 10px;
 }
 
 /*********** IMAGE SLIDE ************/
@@ -548,7 +617,9 @@ h1, h2 {
   left: 0;
   position: absolute;
   top: 0;
-  width: 100%; }
+  width: 100%; 
+  max-height: 600px;
+}
   .image-gallery-slide.center {
     position: relative; }
   .image-gallery-slide img {

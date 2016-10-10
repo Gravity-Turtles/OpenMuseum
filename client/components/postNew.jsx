@@ -127,7 +127,8 @@ class PostNew extends Component{
   render(){    
     const { handleSubmit } = this.props;                                
     return (
-      <div className="oneColPageWrapper">
+
+      <div className="oneColPage">
         <form id = "dropForm" className="dropzone" onSubmit = {handleSubmit(this.onSubmit.bind(this))} encType="multipart/form-data">
           <h3>Create A New Post</h3>
           <div>
@@ -167,19 +168,17 @@ class PostNew extends Component{
               </div> 
             </div>                          
           </div> 
-
           <div>
-            <label htmlFor="location">Location</label>                            
-            <Field name="location" component="input" type="text" className="form-control" placeholder="Attach your image first."/>  
-          </div> 
-
-          <div>
-            <label htmlFor="images">Files</label>
+            <label htmlFor="images">Image Files</label>
             <Field updateLocFromImage={this.props.updateLocFromImage}
               name="files"                            
               component={renderDropzoneInput}
             />
           </div>
+          <div className="locationInput">
+            <label htmlFor="location">Location</label>                            
+            <Field name="location" component="input" type="text" className="form-control" placeholder="Attach your image first."/>  
+          </div> 
           <button type="submit" className="btn btn-primary" id="buttonNew">Submit</button>            
         </form>
       </div>

@@ -58,7 +58,7 @@ class FrontPage extends Component {
 
   render() {        
     return (
-      <main className="oneColPageWrapper">
+      <main className="oneColPage">
         <h1 className="mainTitle">OPEN MUSEUM</h1>
         <h1 className="cityNameTitle">{this.renderCityName()}</h1>
         <SearchBox fetchPostsFromSearch={this.props.fetchPostsFromSearch}/>
