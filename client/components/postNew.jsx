@@ -9,7 +9,6 @@ import * as actions from '../actions/actionCreators';
 import { createPost3 } from '../actions/actionCreators';
 import { browserHistory } from 'react-router';
 
-
 class renderDropzoneInput extends Component{
   constructor(props) {
     super(props);
