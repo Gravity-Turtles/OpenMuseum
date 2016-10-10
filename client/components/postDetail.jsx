@@ -72,7 +72,7 @@ class PostDetail extends Component {
       likes++;
     }
 
-<<<<<<< HEAD
+
     const {
       FacebookShareButton,
       GooglePlusShareButton,
@@ -100,47 +100,78 @@ class PostDetail extends Component {
     let title = document.title;
     let exampleImage = this.props.posts[i];
 
-=======
->>>>>>> comments
+
+    // Date converter //
+    let a = new Date(Number(this.props.posts[i].date));
+    let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    let year = a.getFullYear();
+    let month = months[a.getMonth()];
+    let date = a.getDate();
+    // let hour = a.getHours();
+    // let min = a.getMinutes();
+    // let sec = a.getSeconds();
+    let time = month + '.' + date + '.' + year;
+
     return (
-      <main>
-        <h1>{this.props.posts[i].title}</h1>        
-        <div style={{width:'100%', height:'350px'}}>
+      <div className="twoColPage">
+        <div className="imageSlide">
+          <ImageSlide props={this.props.posts[i]}/>
+        </div>
+
+        <div className="details">  
+
+          <div className="detailBox">
+            <h2 className="pageTitle">{this.props.posts[i].title}</h2>
+            <p>{this.props.posts[i].description}</p>
+            <div><strong>Artist: </strong>{this.props.posts[i].artist}</div>
+            <div><strong>Post Date: </strong>{time}</div>
+            <div><strong>Categories: </strong>{this.props.posts[i].categories.join(', ')}</div>
+            <div><strong>Address: </strong>{this.props.posts[i].address}</div>
+
+          <div className="editBtn">
+            <MyModal props={this.props}/>
+          </div>
+
+          <div>
+            <myDropzone />
+          </div>
+
+        </div>
+
+        <div className="gMapSmall">
           <div style={{height:'100%'}}>
-            <GoogleMap lat={this.props.posts[i].locLat} lng={this.props.posts[i].locLong} loc={this.props.loc}/>
+            <GoogleMap lat={this.props.posts[i].locLat} lng={this.props.posts[i].locLong} loc={this.props.loc} zoomSize={16} />
           </div>
-        </div>        
-        <ImageSlide props={this.props.posts[i]}/>
-        
-        <h1>{this.props.posts[i].title}</h1>
+        </div>  
 
-        <div className="social-share-container">
-          <div className="social-network">
-            <FacebookShareButton
-              url={shareUrl}
-              title={title}
-              className="social-share-button">
-              <FacebookIcon size={32} round />
-            </FacebookShareButton>
+      </div>
+      <div className="social-share-container">
+        <div className="likeBtn">
+          <span className="likesNum">{this.state.likes} </span>
+          <Button
+            bsStyle="primary"
+            bsSize="small"
+            onClick={this.toggle}>
+            : )
+          </Button>
+        </div>
 
-            <FacebookShareCount
-              url={shareUrl}
-              className="social-share-count">
-              {count => count}
-            </FacebookShareCount>
-          </div>
-
-          <div className="social-network">
-          <TwitterShareButton
+        <div className="social-network">
+          <FacebookShareButton
             url={shareUrl}
             title={title}
             className="social-share-button">
-            <TwitterIcon size={32} round />
-          </TwitterShareButton>
+            <FacebookIcon size={32} round />
+          </FacebookShareButton>
+        </div>
 
-          <div className="social-share-count">
-            &nbsp;
-          </div>
+        <div className="social-network">
+        <TwitterShareButton
+          url={shareUrl}
+          title={title}
+          className="social-share-button">
+          <TwitterIcon size={32} round />
+        </TwitterShareButton>
         </div>
 
         <div className="social-network">
@@ -152,9 +183,6 @@ class PostDetail extends Component {
             className="social-share-button">
             <PinterestIcon size={32} round />
           </PinterestShareButton>
-
-          <PinterestShareCount url={String(window.location)}
-            className="social-share-count" />
         </div>
 
         <div className="social-network">
@@ -163,69 +191,12 @@ class PostDetail extends Component {
             className="social-share-button">
             <GooglePlusIcon size={32} round />
           </GooglePlusShareButton>
-
-          <GooglePlusShareCount
-            url={shareUrl}
-            className="social-share-count">
-            {count => count}
-          </GooglePlusShareCount>
-        </div>
-
-        <div className="social-network">
-          <LinkedinShareButton
-            url={shareUrl}
-            title={title}
-            windowWidth={750}
-            windowHeight={600}
-            className="social-share-button">
-            <LinkedinIcon size={32} round />
-          </LinkedinShareButton>
-
-          <LinkedinShareCount
-            url={shareUrl}
-            className="social-share-count">
-            {count => count}
-          </LinkedinShareCount>
-        </div>
-
-        
-        <div className="social-network">
-          <VKShareButton
-            url={shareUrl}
-            windowWidth={660}
-            windowHeight={460}
-            className="social-share-button">
-            <VKIcon size={32} round />
-          </VKShareButton>
-
-          <div className="social-share-count">
-            &nbsp;
-          </div>
         </div>
       </div>
-
-        <div>Images here</div>
-        <div>{this.props.posts[i].description}</div>
-        <Button
-          bsStyle="primary"
-          bsSize="small"
-          onClick={this.toggle}>
-          : )
-        </Button>
-        <div>{this.state.likes}</div>
-
-      <div>
-        <MyModal props={this.props}/>
-      </div>
-
-      <div>
-        <myDropzone />
-      </div>
-
-      <CommentBox props={this.props}/>
+      <CommentBox className="commentBox" props={this.props}/>
       <CommentList />
 
-      </main>
+    </div>
     );
   }
 }

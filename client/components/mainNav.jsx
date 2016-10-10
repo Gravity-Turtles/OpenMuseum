@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/actionCreators';
 import Header from './header';
 
+
 class MainNav extends Component {
 
   componentWillMount() {
@@ -13,12 +14,12 @@ class MainNav extends Component {
 
   showSearchBtn() {
     if (!this.props.loc.latitude) {
-      return (<div> ( . . . ) </div>);
+      return (<div className="navRow">. . .</div>);
     }
     return (
-      <Link to="/posts" onClick={this.props.fetchPosts.bind(null, this.props.loc)}>
-       ( Search Near Me ) 
-      </Link>
+        <Link to="/posts" onClick={this.props.fetchPosts.bind(null, this.props.loc, "")}>
+        SEARCH NEAR ME
+        </Link>
     );
   }
 
@@ -26,13 +27,11 @@ class MainNav extends Component {
     return (
       <main>
         <div><Header /></div>
-        {this.props.children}
-        <nav>
-          <Link to="/" style={{"float": "left"}}> ( Home ) </Link>
-          <div style={{"float": "left"}}>
-            {this.showSearchBtn()}
-          </div>
-          <Link to="/new" style={{"float": "left"}}> ( Add New Artwork ) </Link>
+        <div className="childPage">{this.props.children}</div>
+        <nav className="mainNav">
+          <div className="sideBtn home"><Link to="/">LOBBY</Link></div>
+          <div className="mainBtn">{this.showSearchBtn()}</div>
+          <div className="sideBtn addNew"><Link to="/new">ADD NEW ART</Link></div>
         </nav>
       </main>
     );

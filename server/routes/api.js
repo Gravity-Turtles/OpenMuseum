@@ -10,9 +10,9 @@ var passport = require('../../node_modules/passport');
 const requireAuth = passport.authenticate('jwt', { session: false });
 const requireSignin = passport.authenticate('local', { session: false});
 
-router.get('/', requireAuth, function(req, res) {
-  res.send({hi: 'there'});
-});
+// router.get('/', requireAuth, function(req, res) {
+//   res.send({hi: 'there'});
+// });
 router.post("/art", ctrlArt.insertArt);
 router.post("/findArt", ctrlArt.findArt);
 router.post("/comments", ctrlArt.insertComment);

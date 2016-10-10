@@ -8,7 +8,7 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 
 module.exports = {
   entry: [
-    './client/index.jsx'
+    './client/index.jsx'    
   ],
   output: {
     path: __dirname + '/dist',
@@ -28,9 +28,9 @@ module.exports = {
       },
     // CSS
       { 
-        test: /\.s?css$/, 
-        include: path.join(__dirname, 'client'),
-        loaders: ["style", "css", "sass"]
+        test: /\.css$/, 
+        include: path.resolve(__dirname, 'client'),
+        loaders: ["style", "css"]
       },
       { 
         test: /\.(png|jpg)$/, 

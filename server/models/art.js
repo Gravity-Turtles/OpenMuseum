@@ -2,9 +2,17 @@ var mongoose = require( 'mongoose' );
 
 var artSchema = new mongoose.Schema({
   title: String,
+  artist: {
+    type: String,
+    default: 'Unknown'
+  },
   locLat: Number,
   locLong: Number,  
-  date: Date,
+  address: String,
+  date: { 
+    type: String, 
+    default: Date.now
+  },
   description: String,    
   categories: Array,
   image: { 
@@ -12,6 +20,7 @@ var artSchema = new mongoose.Schema({
     contentType: String 
   },
   images: Array,
+  imagesDB: Array,
   user: String,
   likes: { 
     type: Number, 

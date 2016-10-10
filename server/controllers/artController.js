@@ -2,45 +2,39 @@
 const mongoose = require('mongoose');
 const Grid = require('gridfs-stream');
 const fs = require('fs');
+const path = require('path');
 const User = mongoose.model('User');
 const Art = mongoose.model('Art');
-const googleMapsClient = require('@google/maps').createClient({
-  key: 'AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo'
-});
+// const googleMapsClient = require('@google/maps').createClient({
+//   key: 'AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo'
+// });
 const jwt =  require('jwt-simple');
 const config = require('../../config');
+Grid.mongo = mongoose.mongo;  
+var gfs = Grid(mongoose.connection.db);   
 
-Grid.mongo = mongoose.mongo;
-mongoose.connection.on('open', function() {
-  console.log('open');
-  var gfs = Grid(mongoose.connection);
-});
-//******** uncomment out this section when adding authentication ******//
-// module.exports.profileRead = function(req, res) {
+module.exports.insertArt = function(req, res) { 
+  //********** GRIDFS START ************//
+  // let imagesDB = [];
+  // let readStream; 
+  // if(req.files){
+  //   req.files.forEach(function(file){      
+  //     let filePath = `${file.path}`        
+  //     //create write stream
+  //     let writeStream = gfs.createWriteStream({
+  //       filename: file.filename
+  //     })      
+  //     let readStream = fs.createReadStream(filePath);
+  //     readStream.pipe(writeStream)
 
-//********* Every secured page will have to go through this check **********//
+  //     imagesDB.push(file.filename);
 
-//**** need to add some error handling for if payloadId provided but not found
-//   if (!req.payload._id) {
-//     res.status(401).json({
-//       "message" : "UnauthorizedError: private profile"
-//     });
-//   } else {
-//     User
-//       .findById(req.payload._id)
-//       .exec(function(err, user) {
-//         res.status(200).json(user);
-//       });
-//   }
-
-// };
-
-//****** Insert New Art *******//
-
-module.exports.insertArt = function(req, res) {
-  console.log('insertArt running')    
-  console.log(req.body)
-  console.log(req.files)
+  //     writeStream.on('close', function (file){      
+  //       console.log(file.filename + 'Written To DB');
+  //     });
+  //   })
+  // }
+  //********** GRIDFS END ************//
   const imagePaths = []
   if(req.files){
     req.files.forEach(function(file){
@@ -48,43 +42,41 @@ module.exports.insertArt = function(req, res) {
     })
   }
     var art = new Art();
-    art.title = req.body.title;              
-    art.date = req.body.date;
+    art.title = req.body.title;                  
     art.description = req.body.description;
-    art.categories = req.body.categories;
+    art.categories = req.body.categories.split(",");
     art.image = req.body.image;
-
-
     art.images = imagePaths;
-
+    // art.imagesDB = imagesDB; //for gridFS
     //****** TEMP ******//
-    art.locLat = 40.745694;
-    art.locLong = -73.98617749999999;
+    art.locLat = req.body.latitude;
+    art.locLong = req.body.longitude;
+    art.address = req.body.address;
     //****** TEMP ******//
-
     art.likes = req.body.likes;
-
-
-    // art.user = req.body.user; //probably find from querying db on token
-
-    // art.setLocation(req.body.location);
+    art.artist = req.body.artist;
 
     art.save(function(err) {
       console.log(err);      
       res.sendStatus(201);
-    });  
+    });    
 };
 
-
-//****** Query DB for nearby art *******//
-module.exports.findArt = function(req, res) {
-  //console.log("req.body in findArt", req.body);  
-
-  Art.find({}, function(err, data) {
+module.exports.findArt = function(req, res){    
+  let whatToFind = {}
+  let range = 0.007;
+  if (req.body.theme) {
+    range = 1;
+    whatToFind = {categories: req.body.theme};
+  }
+  if (req.body.theme === "Trending") {
+    whatToFind = {};
+  }
+  Art.find(whatToFind, function(err, data) {
     if (err) {
       console.log(err);
-    } else {
-      const range = 0.006;
+    } else {      
+      console.log(range);
       let lngMin = req.body.longitude - range;
       let lngMax = req.body.longitude + range;
       let latMin = req.body.latitude - range;
@@ -113,59 +105,76 @@ module.exports.findArt = function(req, res) {
         return distanceFromMe(a.locLong, a.locLat) - distanceFromMe(b.locLong, b.locLat);
       }
       result.sort(compareDistance);
-      // end of sort by distance from me
-  
+
+      // sort by likes after sort by distance from me, if it's search by "Trending".
+      const compareLikes = function(a, b) {
+        return b.likes - a.likes;
+      }      
+      if (req.body.theme === "Trending") {
+        result.sort(compareLikes);        
+        if (result.length > 10) {
+          result = result.slice(0, 10);
+        }
+      }
+        
+///******* GRIDFS START **********/////
+      // var imageResults = {};
+      // result.forEach(item => {
+      //   item.imagesDB.forEach((image,index) =>{              
+      //     var readStream = gfs.createReadStream({
+      //       filename: image
+      //     })
+      //     readStream.pipe(res) // needs fixing
+      //     console.log('imageResults', imageResults);
+      //   })
+      // })      
+///******* GRIDFS END **********/////
       res.status(200).send(result);
     }
   });
 };
 
 module.exports.editArt = function(req, res){
-console.log("heeeeeeey, i'm in yoooour edit ART!!!!")
-console.log("this is the req.body: ", req.body);
-
-const imagePaths = []
-  if(req.files){
-    req.files.forEach(function(file){
-      imagePaths.push(file.path)
-    })
-  }
-console.log('super image paths: ', imagePaths);
- Art.find({ '_id': req.body.oldId }, function (err, docs) {
-  console.log('DOCS[0]', docs[0], 'docs.images', docs[0].likes);
-  let oldPics = []
-  for(var i = 0; i < docs[0].images.length; i++){
-    oldPics.push(docs[0].images[i]);
-  }
-  console.log('oldPics', oldPics);
-  for(var k = 0; k < imagePaths.length; k++){
-    oldPics.push(imagePaths[k]);
-  }
-  console.log('oldPics+', oldPics);
-
-var newName = req.body.newName;
-var newDescription = req.body.newDescription;
-Art.update({ '_id': req.body.oldId }, { title: newName, description: newDescription, images: oldPics}, function(response) {
-    console.log("word, now show me that RESPONSE:", response);
-
-  })
-});
+  const imagePaths = []
+    if(req.files){
+      req.files.forEach(function(file){
+        imagePaths.push(file.path)
+      })
+    }
+   Art.find({ '_id': req.body.oldId }, function (err, docs) {  
+    let oldPics = []
+    for(let i = 0; i < docs[0].images.length; i++){
+      oldPics.push(docs[0].images[i]);
+    }  
+    for(let k = 0; k < imagePaths.length; k++){
+      oldPics.push(imagePaths[k]);
+    }  
+    let newName = req.body.newName;
+    let newDescription = req.body.newDescription;
+    let newArtist = req.body.newArtist;
+    Art.update({
+        '_id': req.body.oldId 
+      }, 
+      { 
+        title: newName, 
+        description: newDescription, 
+        images: oldPics,
+        artist: newArtist
+      }, function(err,art){    
+        if(err) console.log('editArt error:', err);    
+        else res.send(art);
+      })
+  });
 }
 
-module.exports.editLikes = function(req, res){
-  console.log('EDITING LIKES, with req.body: ', req.body)
-  Art.find({ 'title': req.body.title }, function (err, docs) {
- console.log('DOCS', docs);
-
-var newLikes = req.body.likes;
-
-Art.update({ 'title': req.body.title }, { likes: newLikes}, function(response) {
-    console.log("updated Likes, show me that RESPONSE", response);
-
-
-});
-})
-
+module.exports.editLikes = function(req, res){  
+  Art.find({ 'title': req.body.title }, function (err, docs) { 
+    let newLikes = req.body.likes;
+    Art.update({ 'title': req.body.title }, { likes: newLikes}, function(err,art) {    
+      if(err) console.log('editLikes error:', err);    
+      else res.send(art);
+    });
+  })
 }
 
 module.exports.insertComment = function(req, res) {  
@@ -173,8 +182,8 @@ module.exports.insertComment = function(req, res) {
   let userID = jwt.decode(req.headers.authorization,config.secret).sub  
 
   User.findById(userID, function(err,user){
-    if(err) return handleError(err)    
-    Art.findById(req.body.id, function(err, art){        
+    if(err) console.log('insertComment error:', err);    
+    else{ Art.findById(req.body.id, function(err, art){     
       let comments = art.comments;    
       newComment.comments = req.body.comment;
       newComment.user = user.email;  
@@ -183,16 +192,16 @@ module.exports.insertComment = function(req, res) {
       Art.findByIdAndUpdate(req.body.id, {$set:{
         comments: comments
       }}, {new: true}, function(err,art){
-        if(err) return handleError(err);
-        res.send(comments);
+        if(err) console.log('insertComment error:', err);    
+        else res.send(comments);
       });
-    })
+    })}
   })
 }
 
 module.exports.getComments = function(req, res) {
   Art.findById(req.body.id, function(err, art){
-    if(err) return handleError(err);
-    res.send(art.comments);
+    if(err) console.log('getComments error:', err);    
+    else res.send(art.comments);
   })
 }

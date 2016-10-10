@@ -12,11 +12,18 @@ class PostListsFromSearch extends Component {
       return <div>loading</div>;
     }
     return this.props.posts.map((post) => {
+      let thumbPic;
+      if(post.images[0]) thumbPic = `/${post.images[0]}`
+      else thumbPic = '/uploads/default.jpg' 
+
       return ( 
-        <li key={post._id}>
+        <li className="clearf" key={post._id}>
           <Link to={"posts/" + post._id}>
-            <strong>{post.title}</strong>
-            {post.description} {post.locLat} {post.locLong}
+            <div className="thumbNail" style={{"background-image":"url(" +thumbPic + ")"}}></div>
+            <div className="listContents">
+              <div className="listTitle">{post.title}</div>
+              <div className="listText">{post.description.split(" ").slice(0, 4).join(" ") + "..."}</div>
+            </div>
           </Link>
         </li>
       );
@@ -29,29 +36,32 @@ class PostListsFromSearch extends Component {
         <div> loading...</div>
       );
     }
-    console.log("length of posts", this.props.posts.length);
-    if (this.props.posts.length) {
+    console.log("length of posts", this.props.postsCurrent.length);
+    if (this.props.postsCurrent.length) {
       console.log("something around your Search");
       return (
         <div style={{height:'100%'}}>
-          <GoogleMap lat={this.props.geoFromSearch.latitude} lng={this.props.geoFromSearch.longitude} {...this.props}/>
+          <GoogleMap lat={this.props.geoFromSearch.latitude} lng={this.props.geoFromSearch.longitude} zoomSize={15} {...this.props}/>
         </div>
       );
     } else {
       console.log("nothing around your Search");
-      return (<div> Nothing around your Search. </div>);
+      return (<div> No results for your search. </div>);
     }
   }
 
   render() {
     return (
       <main>
-        <div style={{width:'100%', height:'350px'}}>
+        <div className="gMap">
+          <h2 className="pageTitle twoColPage">Near {this.props.searchTerm}</h2>
           {this.renderMap()}
         </div>
-        <ol className="postLists">
-          {this.renderPost()}
-        </ol>
+        <div className="listBox twoColPage">
+          <ol className="postLists custumNum">
+            {this.renderPost()}
+          </ol>
+        </div>
         
       </main>
     );
@@ -62,7 +72,9 @@ function mapStateToProps(state){
   return { 
     loc: state.loc,
     geoFromSearch: state.geoFromSearch,
-    posts: state.posts
+    posts: state.posts,
+    postsCurrent: state.postsCurrent,
+    searchTerm: state.searchTerm
    };
 }
 
