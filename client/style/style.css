@@ -292,6 +292,9 @@ h1, h2 {
   color: red;
   padding-bottom: 5px;
 }
+.errorMessage{
+  color:red;
+}
 /************ COMMENTS  ************/
 .commentList{
   display: block;

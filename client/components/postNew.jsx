@@ -9,7 +9,34 @@ import * as actions from '../actions/actionCreators';
 import { createPost3 } from '../actions/actionCreators';
 import { browserHistory } from 'react-router';
 
+const validate = values => {  
+  const errors = {}
+  if (!values.title) {
+    errors.title = '*Required'
+  } else if (values.title.length > 25) {
+    errors.title = 'Must be 25 characters or less'
+  }
+  // if (!values.artist) {
+  //   errors.artist = 'Required'
+  // } 
+  // if (!values.description) {
+  //   errors.description = 'Required'
+  // } 
+  if (!values.location) {
+    errors.location = '*Required'
+  } 
+  return errors
+}
 
+const renderField = ({ input, label, type, meta: { touched, error } }) => (
+  <div>
+    <label>{label}</label>
+    <div>
+      <input {...input} placeholder={label} type={type} className="form-control"/>
+      {touched && error && <span className = "errorMessage">{error}</span>}
+    </div>
+  </div>
+)
 class renderDropzoneInput extends Component{
   constructor(props) {
     super(props);
@@ -97,27 +124,23 @@ class PostNew extends Component{
    this.props.autofill("location", this.props.geoFromImage);
   }
   
-  render(){
-    console.log("postNew props", this.props);
+  render(){    
     const { handleSubmit } = this.props;                                
     return (
-
       <div className="oneColPageWrapper">
         <form id = "dropForm" className="dropzone" onSubmit = {handleSubmit(this.onSubmit.bind(this))} encType="multipart/form-data">
           <h3>Create A New Post</h3>
           <div>
             <label htmlFor="title">Title</label>
-            <Field name="title" component="input" type="text" className="form-control" />              
-          </div>
-          
+            <Field name="title" component={renderField} type="text" className="form-control" />              
+          </div>          
           <div>
             <label htmlFor="artist">Artist</label>                            
-            <Field name="artist" component="input" type="text" className="form-control" placeholder=""/>  
+            <Field name="artist" component={renderField} type="text" className="form-control" placeholder=""/>  
           </div>     
-
           <div>
             <label htmlFor="description">Description</label>
-            <Field name="description" component="textarea" className="form-control" />                            
+            <Field name="description" component={renderField} className="form-control" />                            
           </div>                
           <div>
             <label htmlFor="categories">Categories</label>
@@ -171,8 +194,8 @@ function mapStateToProps(state){
 }
 
 PostNew = reduxForm({
-  form: 'PostsTest'  
-  // validate
+  form: 'PostsTest',  
+  validate
 })(PostNew);
 
 export default connect(mapStateToProps, actions)(PostNew);
