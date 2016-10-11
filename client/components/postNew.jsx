@@ -113,7 +113,7 @@ class PostNew extends Component{
     };
   }
   onSubmit(props) {
-    event.preventDefault();
+    
     this.props.createPost3(props);
     console.log('after createPost3');
     browserHistory.push('/');
